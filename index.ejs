@@ -1,0 +1,25 @@
+<div class='row'>
+    <br>
+    <div class='col-md-2 col-sm-3 text-center'>
+        Sign In
+        <form name'signInForm'
+        action='/auth/signIn'
+            method='post'>
+            User Name: <input name="userName"
+            id="userName"> <br/>
+            Password: <input type="password" id="password"> <br/>
+            <input type="submit" value="Sign In">
+            </form>
+    </div>
+    <div class='col-md-10 col-sm-9'>
+        Sign Up
+        <form name='signUpForm'
+            action='/auth/signUp'
+            method='post'>
+            <input name='userName' id='userName'>
+            <input name='password' id='password'>
+            <input name='submit' value='sign up'>
+            
+        </form>
+    </div>
+</div>
