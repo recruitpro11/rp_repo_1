@@ -3,7 +3,7 @@ extends layout
 block content
   .container
     //Below means the button has a method for posting, and when its hit it'll go to the contacts route and execute the send method there
-    form(method'post', action='/contact')
+    form(method'post', action='/contact/send')
       h1 Contact HS
       .form-group
         label Name

@@ -4,6 +4,9 @@ var nodemailer = require('nodemailer');
 
 //'/' here is the root of the about. If below was inside index.js we'd put /about here
 router.get('/', function(req, res, next) {
+
+  console.log('HS get called');
+
   res.render('contact',{title: 'Contact'});
 });
 
@@ -12,28 +15,33 @@ router.get('/', function(req, res, next) {
  * and we want them to go to contact/sent route
  * below basically says go to the given directoy and run the give nfunctions
 */
-router.post('/contact', function(req, res, next) {
+//router.post('/',function(req, res, next) {
+router.get('/send',function(req,res,next) {
+console.log('HS post called');
+
 	var transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true,
 		auth: {
-			user: 'xpertscatch@gmail.com',
-			pass: 'sheff1eld'}
+			user: 'recruitpro11@gmail.com',
+			pass: 'MahdiMashhadHooman'}
 	});
 
 	var mailOptions = {
-		from: 'xperts cathc <xpertscatch@gmail.com',
-		to: 'houman_sh2001@hotmail',
+		from: 'xperts cathc <recruitpro11@gmail.com>',
+		to: 'houman_sh2001@hotmail.com',
 		subject: 'bulshit subbmission',
 		text: 'You have a new submission with details... Name: '+req.body.name+ ' Email: '+req.body.email+ ' Message: '+req.body.message 
 	};
 
 	transporter.sendMail(mailOptions, function(error, info) {
-		console.log('hs here2');
 		if(error){
 			console.log(error);
-			res.redirect('/index');
+			res.redirect('/');
 		} else {
 			console.log('Message Sent' + info.response);
- 			res.redirect('/index');
+ 			res.redirect('/');
 
 		}
 	});
