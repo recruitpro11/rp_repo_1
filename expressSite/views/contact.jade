@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .container
+    //Below means the button has a method for posting, and when its hit it'll go to the contacts route and execute the send method there
+    form(method'post', action='/contact')
+      h1 Contact HS
+      .form-group
+        label Name
+          input.form.control(type='text',name='name',placeholder='Enter your shitty name here')
+      .form-group
+        label Email
+          input.form.control(type='text',name='Email',placeholder='Enter your shitty Email here')
+      .form-group
+        label Message
+          input.form.control(type='text',name='Message',placeholder='Enter your shitty Message here')
+
+      button.btn.btn-default(type='submit') Submit
