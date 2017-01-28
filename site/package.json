@@ -1,0 +1,11 @@
+{
+  "name": "hsHttpServingServer",
+  "version": "1.0.0",
+  "description": "me",
+  "main": "hsHttpServingServer.js",
+  "scripts": {
+    "start": "node hsHttpServingServer.js"
+  },
+  "author": "hooman shariati",
+  "license": "ISC"
+}
