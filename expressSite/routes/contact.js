@@ -1,6 +1,11 @@
 var express = require('express');
-var router = express.Router();
+var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
+
+var router = express.Router();
+var bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
 //'/' here is the root of the about. If below was inside index.js we'd put /about here
 router.get('/', function(req, res, next) {
@@ -13,27 +18,47 @@ router.get('/', function(req, res, next) {
 
 /*post requests by this page
  * and we want them to go to contact/sent route
- * below basically says go to the given directoy and run the give nfunctions
+ * node that since the router we are in is registerd at /contact, 
+ * /send in this file means /contact/send  
 */
-//router.post('/',function(req, res, next) {
-router.get('/send',function(req,res,next) {
+router.post('/send',function(req, res, next) {
+//router.get('/send',function(req,res,next) {
 console.log('HS post called');
 
-	var transporter = nodemailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 465,
-                secure: true,
-		auth: {
-			user: 'recruitpro11@gmail.com',
-			pass: 'MahdiMashhadHooman'}
-	});
+console.log(req.body.Name);
+console.log(req.body.Email);
+console.log(req.body.Message);
 
+	var transporter = nodemailer.createTransport({
+                host: 'smtp-mail.outlook.com',
+                secureConnection: false,
+                port: 587,
+                tls: {
+                        ciphers: 'SSLv3'
+                }, 
+		auth: {
+			user: 'expertscatch@outlook.com',
+			pass: 'sheff1eld'}
+                });
+
+
+
+/*	var transporter = nodemailer.createTransport("SMTP", {
+ 	   	service: "hotmail",
+   		 auth: {
+        		user: "houman_sh2001@hotmail.com",
+        		pass: "2545570hooman"
+   		 }
+	});
+*/
 	var mailOptions = {
-		from: 'xperts cathc <recruitpro11@gmail.com>',
+		from: '<expertscatch@outlook.com>',
 		to: 'houman_sh2001@hotmail.com',
 		subject: 'bulshit subbmission',
-		text: 'You have a new submission with details... Name: '+req.body.name+ ' Email: '+req.body.email+ ' Message: '+req.body.message 
+		text: 'You have a new submission with details... Name: '+req.body.Name+ ' Email: '+req.body.Email+ ' Message: '+req.body.Message 
 	};
+
+//console.log(mailOptions);
 
 	transporter.sendMail(mailOptions, function(error, info) {
 		if(error){
