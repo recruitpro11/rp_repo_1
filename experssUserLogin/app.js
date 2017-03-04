@@ -18,7 +18,9 @@ var db = mongoose.connection;
 
 
 //routes
+//index is the main page user sees after login
 var index = require('./routes/index');
+//userse is where we put auth stuff register/ login etc.
 var users = require('./routes/users');
 
 var app = express();
@@ -70,6 +72,8 @@ app.use(expressValidator({
 
 
 app.use(cookieParser());
+
+//public folder is where we'll put all static pages
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(flash());
@@ -78,6 +82,19 @@ app.use(function (req, res, next) {
   next();
 });
 
+/* index and users are locaions of local directories
+
+
+//routes
+var index = require('./routes/index');
+var users = require('./routes/users');
+
+Here we're telling the app to use index location as the root for our website 
+
+Basically: on website: /     === ./routes/index   on server  
+and        on website: /users === ./routes/users   on server
+
+*/
 app.use('/', index);
 app.use('/users', users);
 
