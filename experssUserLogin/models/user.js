@@ -37,8 +37,27 @@ var UserSchema = mongoose.Schema({
 
 
 
-//Make the User object available outside this file
+//Make the User object available outside this file. Anthing with 
+//Module.expoerts will be available outside this file.
 var User = module.exports = mongoose.model('User', UserSchema);
+
+module.exports.comparePassword = function(candidatePassword, hash, callback){
+  bcrypt.compare(candidatePassword, hash, function(err, isMatch){
+    if(err) return callback(err);
+    callback(null, isMatch);
+  });
+}
+
+module.exports.getUserById = function(id, callback){
+  User.findById(id, callback);
+}
+
+module.exports.getUserByUsername = function(formUsername, callback){
+  var query = {username: formUsername};
+  User.findOne(query, callback);
+}
+
+
 
 //Start the functions you want this model to handle with module.exports
 //so that they are availabel to us outside this file
