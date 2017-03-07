@@ -13,12 +13,32 @@ router.get('/', function(req, res, next) {
 });
 
 
+
+
 /* GET localhost:3000/users/register */
-router.get('/register', function(req, res, next) {
-  res.render('register', {
-    'title':'Register'
-  });
+//router.get('/register', function(req, res, next) {
+//  res.render('register', {
+//    'title':'Register'
+//  });
+//});
+
+//Locking out the registeration page for now. Later uncomment
+//above and remove below
+/* GET home page. */
+router.get('/register', ensureAuthenticated, function(req, res, next) {
+  res.render('register', { title: 'Register' });
 });
+
+function ensureAuthenticated(req, res, next){
+  //this is passports authentication API
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/users/login');
+}
+
+
+
 
 /* GET localhost:3000/users/register/prof */
 router.get('/register/prof', function(req, res, next) {
