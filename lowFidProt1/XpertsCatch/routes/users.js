@@ -9,7 +9,15 @@ var User = require('../models/user.js');
 
 /* GET localhost:3000/users */
 router.get('/', function(req, res, next) {
-  res.send('This is user routes root');
+   if(userOccupation == 'prof'){
+     res.redirect('/users/prof');
+   } else if(userOccupation == 'ta'){
+     res.redirect('/users/ta');
+   } else if(userOccupation == 'hm'){
+     res.redirect('/users/hm');
+   } else {
+     res.redirect('/');
+   }
 });
 
 
@@ -386,7 +394,21 @@ console.log(user);
 router.post('/login',passport.authenticate('local', {failureRedirect:'/users/login', failureFlash:'Invalid username or password'}), function(req,res){
    console.log('Authentication Successful');
    req.flash('success','You are logged in');
-   res.redirect('/');
+
+   var userOccupation = req.user.occupation;
+
+console.log("hs user occupation:\n");
+console.log(userOccupation);
+
+   if(userOccupation == 'prof'){
+     res.redirect('/users/prof');
+   } else if(userOccupation == 'ta'){
+     res.redirect('/users/ta');
+   } else if(userOccupation == 'hm'){
+     res.redirect('/users/hm');
+   } else {
+     res.redirect('/');
+   }
 });
 
 
@@ -395,5 +417,29 @@ router.get('/logout', function(req, res){
   req.flash('success', 'You have logged out');
   res.redirect('/users/login');
 });
+
+
+
+
+
+/* GET localhost:3000/users/prof*/
+router.get('/prof', function(req, res, next) {
+  res.render('profHome', {title: 'userHome'});
+});
+
+/* GET localhost:3000/users/ta*/
+router.get('/ta', function(req, res, next) {
+  res.render('taHome', {title: 'userHome'});
+});
+
+/* GET localhost:3000/users/hm*/
+router.get('/hm', function(req, res, next) {
+  res.render('hmHome', {title: 'userHome'});
+});
+
+
+
+
+
 
 module.exports = router;
