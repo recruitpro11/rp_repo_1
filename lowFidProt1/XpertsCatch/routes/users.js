@@ -3,39 +3,27 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+var currentUser = null;
+
 //user model=class
 var User = require('../models/user.js');
 
 
-/* GET localhost:3000/users */
-router.get('/', function(req, res, next) {
-   if(userOccupation == 'prof'){
-     res.redirect('/users/prof');
-   } else if(userOccupation == 'ta'){
-     res.redirect('/users/ta');
-   } else if(userOccupation == 'hm'){
-     res.redirect('/users/hm');
-   } else {
-     res.redirect('/');
-   }
+
+
+/*GET localhost:3000/users/register */
+router.get('/register', function(req, res, next) {
+  res.render('register', {
+    'title':'Register'
+  });
 });
-
-
-
-
-/* GET localhost:3000/users/register */
-//router.get('/register', function(req, res, next) {
-//  res.render('register', {
-//    'title':'Register'
-//  });
-//});
 
 //Locking out the registeration page for now. Later uncomment
 //above and remove below
 /* GET home page. */
-router.get('/register', ensureAuthenticated, function(req, res, next) {
+/*router.get('/register', ensureAuthenticated, function(req, res, next) {
   res.render('register', { title: 'Register' });
-});
+});*/
 
 function ensureAuthenticated(req, res, next){
   //this is passports authentication API
@@ -395,20 +383,12 @@ router.post('/login',passport.authenticate('local', {failureRedirect:'/users/log
    console.log('Authentication Successful');
    req.flash('success','You are logged in');
 
-   var userOccupation = req.user.occupation;
+   currentUser = req.user;
 
-console.log("hs user occupation:\n");
-console.log(userOccupation);
+console.log("hs currentUser:\n");
+console.log(currentUser);
 
-   if(userOccupation == 'prof'){
-     res.redirect('/users/prof');
-   } else if(userOccupation == 'ta'){
-     res.redirect('/users/ta');
-   } else if(userOccupation == 'hm'){
-     res.redirect('/users/hm');
-   } else {
-     res.redirect('/');
-   }
+   res.redirect('/users');
 });
 
 
@@ -422,19 +402,52 @@ router.get('/logout', function(req, res){
 
 
 
+
+
+
+/* GET localhost:3000/users */
+router.get('/',ensureAuthenticated, function(req, res, next){
+   if(currentUser == undefined){
+     //This check is no longer needed because, if someone's been authenticated
+      //then they have a user
+     res.redirect('/users/login');
+   } else if(currentUser.occupation == 'prof'){
+     res.redirect('/users/prof');
+   } else if(currentUser.occupation == 'ta'){
+     res.redirect('/users/ta');
+   } else if(currentUser.occupation == 'hm'){
+     res.redirect('/users/hm');
+   } else {
+     res.redirect('/users/login');
+   }
+  
+});
+
 /* GET localhost:3000/users/prof*/
-router.get('/prof', function(req, res, next) {
-  res.render('profHome', {title: 'userHome'});
+router.get('/prof',ensureAuthenticated, function(req, res, next) {
+  if(currentUser.occupation == 'prof'){
+    res.render('profHome', {title: 'userHome'});
+  } else {
+    res.redirect('/users/login');
+  }
 });
 
 /* GET localhost:3000/users/ta*/
-router.get('/ta', function(req, res, next) {
-  res.render('taHome', {title: 'userHome'});
+router.get('/ta', ensureAuthenticated, function(req, res, next) {
+  if(currentUser.occupation == 'ta'){
+    res.render('taHome', {title: 'userHome'});
+  } else {
+    res.redirect('/users/login');
+  }
 });
 
 /* GET localhost:3000/users/hm*/
-router.get('/hm', function(req, res, next) {
+router.get('/hm', ensureAuthenticated, function(req, res, next) {
+  if(currentUser.occupation == 'hm'){
   res.render('hmHome', {title: 'userHome'});
+  } else {
+    res.redirect('/users/login');
+  }
 });
 
 
