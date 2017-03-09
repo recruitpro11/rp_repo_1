@@ -20,11 +20,21 @@ var exphbs = require('express-handlebars');
 var db = mongoose.connection;
 
 
-//routes
+
+
+/***************************************************************
+***************************routes*******************************
+****************************************************************/
 //index is the main page user sees after login
 var index = require('./routes/index');
 //userse is where we put auth stuff register/ login etc.
 var users = require('./routes/users');
+//where our classes are
+var classes = require('./routes/classes');
+
+/*****************************************************************
+*****************************************************************/
+
 
 var app = express();
 
@@ -86,6 +96,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+
+
+/***************************************************************
+***************************routes*******************************
+****************************************************************/
 /* index and users are locaions of local directories
 
 
@@ -101,6 +116,10 @@ and        on website: /users === ./routes/users   on server
 */
 app.use('/', index);
 app.use('/users', users);
+app.use('/classes', classes);
+
+/*****************************************************************
+*****************************************************************/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
