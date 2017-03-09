@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
-var db = mongoose.connection;
 var bcrypt = require('bcrypt');
 
-mongoose.connect('mongodb://35.163.48.45/elearn');
 
 //User Schema
 var UserSchema = mongoose.Schema({
@@ -45,5 +43,25 @@ module.exports.getUserByUsername = function(username, callback){
   User.findOne(query, callback);
 }
 
+//Add a student
+module.exports.saveStudent = function(newUser, newStudent, callback){
+   bcrypt.hash(newUser.password,10,function(err, hash){
+          if(err) throw err;
+          //set hashed pw
+          newUser.password = hash
+          //make several updates in parallel: put the newUser in users and newStudent in students
+          async.parallel([newUser.save, newStudent.save], callback);
+        });
+}
 
+//Add an Instuctor 
+module.exports.saveInstructor = function(newUser, newInstructor, callback){
+   bcrypt.hash(newUser.password,10,function(err, hash){
+          if(err) throw err;
+          //set hashed pw
+          newUser.password = hash
+          //make several updates in parallel: put the newUser in users and newStudent in students
+          async.parallel([newUser.save, newInstructor.save], callback);
+        });
+}
 

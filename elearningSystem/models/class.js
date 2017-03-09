@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://35.163.48.45/elearn');
 
 
 //class schema

@@ -1,0 +1,15 @@
+{
+  "name": "hsrestapi",
+  "version": "1.0.0",
+  "description": "me",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "hooman shariati",
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.14.0",
+    "body-parser": "^1.17.1"
+  }
+}
