@@ -91,10 +91,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(flash());
+
+
+
+/***************************************************************
+*********Global Variable propagated through req.local***********
+****************************************************************/
+
 app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
+  if(req.url == '/'){
+    res.locals.isHome = true;
+  }
   next();
 });
+
+
+/***************************************************************
+***************************************************************/
+
+
 
 
 
@@ -120,6 +136,9 @@ app.use('/classes', classes);
 
 /*****************************************************************
 *****************************************************************/
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
