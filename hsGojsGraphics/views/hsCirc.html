@@ -37,6 +37,7 @@
           new go.Binding("fill", "fill"),
           new go.Binding("desiredSize", "size")),
         $(go.TextBlock,
+          { stretch: go.GraphObject.Horizontal, textAlign: "center" },
           new go.Binding("text", "text"))
       );
 
@@ -91,17 +92,10 @@
   function generateNodes(numNodes, width, height, randSizes, circ) {
     var nodeArray = [];
     for (var i = 0; i < numNodes; i++) {
-      var size;
-      if (randSizes) {
-        size = new go.Size(Math.floor(Math.random() * (65 - width + 1)) + width, Math.floor(Math.random() * (65 - height + 1)) + height);
-      } else {
-        size = new go.Size(width, height);
-      }
 
-      if (circ) size.height = size.width;
+      var size = new go.Size(width, height);
 
       var figure = "Circle";
-      if (circ) figure = "Ellipse";
 
       nodeArray.push({
         key: i,
@@ -112,13 +106,6 @@
       });
     }
 
-    // randomize the data, to help demonstrate sorting
-    for (i = 0; i < nodeArray.length; i++) {
-      var swap = Math.floor(Math.random() * nodeArray.length);
-      var temp = nodeArray[swap];
-      nodeArray[swap] = nodeArray[i];
-      nodeArray[i] = temp;
-    }
 
     // set the nodeDataArray to this array of objects
     myDiagram.model.nodeDataArray = nodeArray;
@@ -134,9 +121,9 @@
     if (cyclic) {
       for (var i = 0; i < num; i++) {
         if (i >= num - 1) {
-          linkArray.push({ from: i, to: 0 });
+          linkArray.push({ from: i, to: 0, stroke: go.Brush.randomColor() });
         } else {
-          linkArray.push({ from: i, to: i + 1 });
+          linkArray.push({ from: i, to: i + 1, stroke: go.Brush.randomColor() });
         }
       }
     } else {
@@ -151,7 +138,7 @@
           var nextKey = parseInt(next.text, 10);
           var toKey = parseInt(to.text, 10);
           if (nextKey !== toKey) {
-            linkArray.push({ from: nextKey, to: toKey });
+            linkArray.push({ from: nextKey, to: toKey, stroke: go.Brush.randomColor() });
           }
         }
       }
@@ -188,12 +175,11 @@
     var arrangement = document.getElementById("arrangement").value;
     if (arrangement === "ConstantDistance") lay.arrangement = go.CircularLayout.ConstantDistance;
     else if (arrangement === "ConstantAngle") lay.arrangement = go.CircularLayout.ConstantAngle;
+    else if (arrangement === "ConstantRadius") lay.arrangement = go.CircularLayout.ConstanRadius;
     else if (arrangement === "ConstantSpacing") lay.arrangement = go.CircularLayout.ConstantSpacing;
-    else if (arrangement === "Packed") lay.arrangement = go.CircularLayout.Packed;
 
     var diamFormula = getRadioValue("diamFormula");
-    if (diamFormula === "Pythagorean") lay.nodeDiameterFormula = go.CircularLayout.Pythagorean;
-    else if (diamFormula === "Circular") lay.nodeDiameterFormula = go.CircularLayout.Circular;
+    lay.nodeDiameterFormula = go.CircularLayout.Circular;
 
     var direction = document.getElementById("direction").value;
     if (direction === "Clockwise") lay.direction = go.CircularLayout.Clockwise;
@@ -259,7 +245,7 @@
         <option value="ConstantDistance">ConstantDistance</option>
         <option value="ConstantAngle">ConstantAngle</option>
         <option value="ConstantSpacing" selected="selected">ConstantSpacing</option>
-        <option value="Packed">Packed</option>
+        <option value="ConstantRadius">ConstantRadius</option>
       </select>
       <br />
       Node Diameter:
