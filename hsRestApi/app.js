@@ -15,7 +15,8 @@ var server = app.listen(3000, function () {
 
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+//  res.send('Hello World!');
+    res.render('euler');
 });
 
 

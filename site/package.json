@@ -7,5 +7,8 @@
     "start": "node hsHttpServingServer.js"
   },
   "author": "hooman shariati",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "gojs": ">=1.5.18"
+  }
 }
