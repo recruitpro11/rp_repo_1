@@ -45,6 +45,7 @@ module.exports.getUserByUsername = function(username, callback){
 
 //Add a student
 module.exports.saveStudent = function(newUser, newStudent, callback){
+console.log('hs users model saveStudent');
    bcrypt.hash(newUser.password,10,function(err, hash){
           if(err) throw err;
           //set hashed pw
@@ -56,6 +57,7 @@ module.exports.saveStudent = function(newUser, newStudent, callback){
 
 //Add an Instuctor 
 module.exports.saveInstructor = function(newUser, newInstructor, callback){
+console.log('hs users model saveInstructor');
    bcrypt.hash(newUser.password,10,function(err, hash){
           if(err) throw err;
           //set hashed pw

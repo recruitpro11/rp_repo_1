@@ -17,9 +17,10 @@ var mongoose = require('mongoose');
 
 var exphbs = require('express-handlebars');
 
+async = require('async');
 var db = mongoose.connection;
 mongoose.connect('mongodb://35.163.48.45/elearn');
-async = require('async'); 
+//var async = require('async'); 
 
 
 

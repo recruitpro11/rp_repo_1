@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "async": "^2.1.5",
+    "async": "*",
     "bcrypt": "*",
     "body-parser": "~1.15.2",
     "connect-flash": "*",
@@ -19,7 +19,7 @@
     "express-validator": "*",
     "jade": "~1.11.0",
     "mongodb": "*",
-    "mongoose": "*",
+    "mongoose": "4.7.5",
     "morgan": "~1.7.0",
     "multer": "*",
     "node-gyp": "^3.5.0",

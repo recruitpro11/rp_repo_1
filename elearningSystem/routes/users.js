@@ -28,8 +28,6 @@ console.log(req.body);
   var password2  = req.body.password2;
   var type       = req.body.type;
 
-console.log('hs route read username:');
-console.log(username);
 console.log('\nhs route read type:');
 console.log(type);
 
@@ -67,22 +65,39 @@ cosole.log(errors);
       type: type
     });
 
-console.log("hs route Created new user\n");
-cosole.log(newUser);
+console.log("hss route Created new User\n");
+//cosole.log(newUser.first_name);
+
+console.log("hs Compare res1\n");
+console.log(type == 'Student');
+console.log("hs Compare res2\n");
+console.log(type === 'Student');
 
     if(type == 'Student'){
-      //Instantiate new user. Using User class which we define
-      var newUser = new User({
+      //Instantiate new Strudent
+      var newStudent = new Student({
+        first_name : first_name,
+        last_name : last_name,
         email : email,
         username: username,
-        password: password,
-        type: type
+        password: password
       });
+
+console.log("hs route Created new Student\n");
+//cosole.log(newStudent.first_name);
 
       User.saveStudent(newUser, newStudent, function(err, user){
         console.log('New Student Created');
       });
     } else {
+      //Instantiate new Instructor
+      var newInstructor = new Instructor({
+        first_name : first_name,
+        last_name : last_name,
+        email : email,
+        username: username,
+        password: password
+      });
       User.saveInstructor(newUser, newInstructor, function(err, user){
         console.log('New Instructor Created');
       });
