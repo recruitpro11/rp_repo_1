@@ -73,7 +73,7 @@ console.log(type == 'Student');
 console.log("hs Compare res2\n");
 console.log(type === 'Student');
 
-    if(type == 'Student'){
+    if(type == 'student'){
       //Instantiate new Strudent
       var newStudent = new Student({
         first_name : first_name,
@@ -164,6 +164,30 @@ router.post('/login',passport.authenticate('local', {failureRedirect:'/users/log
 });
 
 /***************************End OF Login Stuff******************************/
+
+
+/**********************LOGOUT STUFF******************************/
+router.get('/logout', function(req,res){
+   req.logout();
+   req.flash('success','You have logged out');
+   res.redirect('/');
+});
+
+/***************************End OF Logout Stuff******************************/
+
+/*********************USE THIS TO LOCK UNUTH PEOPLE OUT*********************/
+/*EXAMPLE Locking out the registeration page.
+router.get('/register', ensureAuthenticated, function(req, res, next) {
+  res.render('register', { title: 'Register' });
+});*/
+
+function ensureAuthenticated(req, res, next){
+  //this is passports authentication API
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/');
+}
 
 
 module.exports = router;

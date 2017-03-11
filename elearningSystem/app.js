@@ -123,7 +123,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-
+//knowing the current loged in user
+//This makes the user objec global in all views
+app.get('*',function(req, res, next){
+  //put user into res.locals for easy access from templates
+  res.locals.user = req.user || null;
+  next();
+});
 /***************************************************************
 ***************************************************************/
 
