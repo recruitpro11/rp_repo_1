@@ -1,0 +1,11 @@
+<h3> Flash messages in Express 4 </h3>
+    <p><strong>FLASH!</strong> {{ messages }}</p>
+    <p><strong>FLASH!</strong> {{{ messages }}}</p>
+    <p><strong>FLASH!</strong> {{ messages.message }}</p>
+    <p><strong>FLASH!</strong> {{{ messages.message }}}</p>
+
+    <p><strong>FLASH!</strong> {{ expressFlash }}</p>
+    
+    <div class="{{ sessionFlash.type }}">
+        <strong>FLASH!</strong> {{ sessionFlash.message }}
+    </div>
