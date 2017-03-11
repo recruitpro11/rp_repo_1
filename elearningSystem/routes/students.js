@@ -38,7 +38,7 @@ router.post('/classes/register', function(req, res){
                 console.log(student);
         });
     
-        req.flash('success','You are now Registered!');
+        req.flash('success','You are now Registered in this class!');
   
         res.redirect('/students/classes');
 });

@@ -29,5 +29,21 @@ router.get('/:id/details', function(req, res, next) {
   });
 });
 
+
+router.get('/:id/lessons', function(req, res, next) {
+  Class.getClassById(req.params.id, function(err, classname){
+    if(err){
+      console.log(err);
+      res.send(err);
+    } else {
+console.log('hs /'+ req.params.id +'/lessons route found class:\n');
+console.log(classname);
+      res.render('classes/lessons', {'class': classname});
+    }
+  });
+});
+
+
+
 module.exports = router;
 

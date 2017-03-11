@@ -11,7 +11,7 @@
   {{/each}}
 </ul>
 {{#if user}}
-  <form id="classRegFrom" method="post" action="/students/classes/register">
+  <form id="classRegFrom" method="post" action="/{{user.type}}s/classes/register">
     <input type="hidden" name="student_username" value="{{user.username}}">
     <input type="hidden" name="class_id" value="{{class._id}}">
     <input type="hidden" name="class_title" value="{{class.title}}">

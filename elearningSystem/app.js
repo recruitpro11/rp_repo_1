@@ -42,7 +42,7 @@ var classes = require('./routes/classes');
 //this is we put student specific stuff (ex classes)
 var students = require('./routes/students');
 //this is we put instrcutor specific stuff (ex classes)
-//var instructors = require('./routes/instructors');
+var instructors = require('./routes/instructors');
 
 /*****************************************************************
 *****************************************************************/
@@ -148,7 +148,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/classes', classes);
 app.use('/students', students);
-//app.use('/instructors', instructors);
+app.use('/instructors', instructors);
 /*************************End of routes**************************
 *****************************************************************/
 
