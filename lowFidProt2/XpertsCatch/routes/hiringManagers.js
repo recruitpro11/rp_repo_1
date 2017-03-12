@@ -19,6 +19,7 @@ router.get('/jobs', ensureAuthenticated, function(req, res, next) {
 console.log('Inside hiringManager /jobs route');
   HiringManager.getHiringManagerByUsername(req.user.username, function(err, hiringManager){
     if(err){
+      req.flash('error','Did not find the HiringManager');
       console.log(err);
       res.send(err);
     } else {
