@@ -41,10 +41,10 @@ var HiringManagerSchema = mongoose.Schema({
 //Module.expoerts will be available outside this file.
 var HiringManager = module.exports = mongoose.model('HiringManager', HiringManagerSchema);
 
-//Fetch a single instructor by its username
 module.exports.getHiringManagerByUsername = function(username, callback){
   var query = {username: username};
-  HiringManagers.findOne(query, callback);
+console.log(query );
+  HiringManager.findOne(query, callback);
 }
 
 
