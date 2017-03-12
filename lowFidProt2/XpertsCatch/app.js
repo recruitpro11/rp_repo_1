@@ -119,6 +119,8 @@ app.use(function (req, res, next) {
 });
 
 
+
+
 /***************************************************************
 *********Global Variable propagated through req.local***********
 ****************************************************************/
@@ -134,12 +136,13 @@ app.use(function (req, res, next) {
 app.get('*',function(req, res, next){
   //put user into res.locals for easy access from templates
   res.locals.user = req.user || null;
-  /*if(req.locals.user != null){
-    if(res.locals.user.type == 'hiringManager'){
+  if(req.user != null){
+    console.log('here hsdk');
+    if(req.user.type == 'hiringManager'){
       res.locals.isTA = false;
       res.locals.isProf = false;
       res.locals.isHiringManager = true;
-    } else if(res.locals.user.type == 'prof'){
+    } else if(req.user.type == 'prof'){
       res.locals.isTA = false;
       res.locals.isProf = true;
       res.locals.isHiringManager = false;
@@ -148,7 +151,7 @@ app.get('*',function(req, res, next){
       res.locals.isProf = false;
       res.locals.isHiringManager = false;
     }
-  }*/
+  }
   next();
 });
 /***************************************************************

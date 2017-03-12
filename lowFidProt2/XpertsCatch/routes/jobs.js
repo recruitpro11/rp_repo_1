@@ -4,14 +4,14 @@ var router = express.Router();
 //Job Schema
 Job = require('../models/job');
 
-/* GET jobes home page. */
+/* GET jobs home page. */
 router.get('/', function(req, res, next) {
-  Job.getJobs(function(err, jobes){
+  Job.getJobs(function(err, jobs){
     if(err){
       console.log(err);
       res.send(err);
     } else {
-      res.render('jobs/index', {'jobes': jobes});
+      res.render('jobs/index', {'jobs': jobs});
     }
   });
 });
@@ -64,7 +64,7 @@ console.log('hs found  the lesson we were looking for');
            lesson = jobname.lessons[i];
         }
       }
-      res.render('jobes/lesson', {'job': jobname, "lesson":lesson });
+      res.render('jobs/lesson', {'job': jobname, "lesson":lesson });
     }
   });
 });

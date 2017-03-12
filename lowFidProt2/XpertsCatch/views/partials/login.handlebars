@@ -1,9 +1,32 @@
 {{#if user}}
-   <h5>Welcome Back {{user.username}}</h5>
-   <ul class="alt">
-   <li><a href="/{{user.type}}s/classes">My classes<a/></li>
-   <li><a href="/users/logout">Logout</a></li>
-   </ul>
+  {{#if isHiringManager}}
+    <h5>Welcome Back  {{user.username}}</h5>
+    <ul class="alt">
+    <li><a href="/{{user.type}}s/jobs">My Jobs<a/></li>
+    <li><a href="/{{user.type}}s/applicants">My Applicants<a/></li>
+    <li><a href="/{{user.type}}s/profs">My Profs<a/></li>
+    <li><a href="/users/logout">Logout</a></li>
+    </ul>
+  {{/if}}
+  {{#if isTA}}
+    <h5>Welcome Back  {{user.username}}</h5>
+    <ul class="alt">
+    <li><a href="/{{user.type}}s/referals">My Referals<a/></li>
+    <li><a href="/{{user.type}}s/jobs">My Jobs<a/></li>
+    <li><a href="/{{user.type}}s/profs">My Profs<a/></li>
+    <li><a href="/users/logout">Logout</a></li>
+    </ul>
+  {{/if}}
+  {{#if isProf}}
+    <h5>Welcome Back  {{user.username}}</h5>
+    <ul class="alt">
+    <li><a href="/{{user.type}}s/referals">My Referals<a/></li>
+    <li><a href="/{{user.type}}s/jobs">My Jobs<a/></li>
+    <li><a href="/{{user.type}}s/tAs">My TAs<a/></li>
+    <li><a href="/{{user.type}}s/hiringManagers">My HiringManagers<a/></li>
+    <li><a href="/users/logout">Logout</a></li>
+    </ul>
+  {{/if}}
 {{else}}
    <h4>Please Login</h4>
            <form method="post" action="/users/login">

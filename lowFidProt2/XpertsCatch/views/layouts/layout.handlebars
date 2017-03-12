@@ -12,31 +12,16 @@
 
 <!-- Menu Horizontal -->
 <ul class="menu">
-<!-- Later you can user this to give different menue options to different users -->
-<!--{{#if user}} -->
-<!--{{else}}-->
     <li class="current"><a href="/">Home</a></li>
     <li><a href="/jobs">Jobs</a></li>
-    <li><a href=""><span class="icon" data-icon="R"></span>Item 3</a>
-            <ul>
-            <li><a href=""><i class="fa fa-car"></i> Sub Item</a></li>
-            <li><a href=""><i class="fa fa-arrow-circle-right"></i> Sub Item</a>
-                    <ul>
-                    <li><a href=""><i class="fa fa-comments"></i> Sub Item</a></li>
-                    <li><a href=""><i class="fa fa-check"></i> Sub Item</a></li>
-                    <li><a href=""><i class="fa fa-cutlery"></i> Sub Item</a></li>
-                    <li><a href=""><i class="fa fa-cube"></i> Sub Item</a></li>
-                    </ul>
-            </li>
-            <li class="divider"><a href=""><i class="fa fa-file"></i> li.divider</a></li>
-            </ul>
-    </li>
-<!--{{/if}}-->
+    {{#if isHiringManager}}
+    <li><a href="/applicants">Applicants</a></li>
+    {{/if}}
 </ul>
 
 <div class="grid">
-
 <!-- ===================================== END HEADER ===================================== -->
+
 {{#if messages.error}}
 <ul class="error">{{{messages.error}}}</ul>
 {{/if}}
@@ -48,11 +33,6 @@
 {{/if}}
 
 
-<!--<container>
-{{{messages.success}}}
-{{{messages.error}}}
-{{{messages.info}}}
-</container>-->
 <div class="col_12">
         <div class="col_9">
             {{#if errors}}
@@ -62,17 +42,21 @@
                   <a href="#close" class="icon-remove"></a></div>
                {{/each}}
             {{/if}}
+
+
         {{{body}}}
         </div>
 
         <div class="col_3">
         {{>login}}
         </div>
-
-        <hr />
+        
+        <hr/>
          
         {{#if isHome}}
-          {{>jobs}}
+          {{#unless user}}
+            {{>jobs}}
+          {{/unless}}
         {{/if}}
 </div>
 

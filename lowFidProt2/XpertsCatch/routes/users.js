@@ -13,6 +13,9 @@ router.get('/signup', function(req, res, next) {
 });
 
 
+/**************************************************************
+**********************SIGNUP ROUTE******************************
+***************************************************************/
 router.post('/signup', function(req, res, next){
 
 console.log('hs /signup route got request:\n');
@@ -122,7 +125,11 @@ console.log("hss route Created new User with type: "+ type);
 });
 
 
-/**********************LOGIN STUFF******************************/
+
+
+/**************************************************************
+**********************LOGIN AUTHENTICATION*********************
+***************************************************************/
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -160,17 +167,21 @@ console.log(user);
 ));
 
 
+/**************************************************************
+**********************LOGIN ROUTE******************************
+***************************************************************/
 /* POST localhost:3000/users/login */
 router.post('/login',passport.authenticate('local', {failureRedirect:'/users/login', failureFlash:'Invalid username or password'}), function(req,res){
    console.log('Authentication Successful');
    req.flash('success','You are logged in');
-   res.redirect('/jobs');
+   res.redirect('/');
 });
 
-/***************************End OF Login Stuff******************************/
 
 
-/**********************LOGOUT STUFF******************************/
+/**************************************************************
+**********************LOGIN ROUTE******************************
+***************************************************************/
 router.get('/logout', function(req,res){
    req.logout();
    req.flash('success','You have logged out');
