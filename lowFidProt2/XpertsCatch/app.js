@@ -137,7 +137,6 @@ app.get('*',function(req, res, next){
   //put user into res.locals for easy access from templates
   res.locals.user = req.user || null;
   if(req.user != null){
-    console.log('here hsdk');
     if(req.user.type == 'hiringManager'){
       res.locals.isTA = false;
       res.locals.isProf = false;

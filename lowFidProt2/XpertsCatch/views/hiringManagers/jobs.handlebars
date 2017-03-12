@@ -4,17 +4,16 @@
   <thead>
     <tr>
       <th>Job ID</th>
-      <th>Job Name</th>
+      <th>Job Title</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     {{#each hiringManager.jobs}}
       <tr>
-        <td>{{job_id}}</td>
+        <td>{{_id}}</td>
         <td>{{job_title}}</td>
-        <td><a href="/jobs/{{job_id}}/lessons">View Lessons</a></td>
-        <td><a href="/hiringManagers/jobs/{{job_id}}/lessons/new">Add Lessons</a></td>
+        <td><a href="/jobs/{{job_id}}/details">View Job Details</a></td>
       </tr>
     {{/each}}
   </tbody>

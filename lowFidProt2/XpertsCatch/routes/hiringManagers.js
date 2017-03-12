@@ -14,7 +14,9 @@ function ensureAuthenticated(req, res, next){
   res.redirect('/');
 }
 
-
+/******************************************************************
+***********************Jobs Viwing Route***************************
+******************************************************************/
 router.get('/jobs', ensureAuthenticated, function(req, res, next) {
 console.log('Inside hiringManager /jobs route');
   HiringManager.getHiringManagerByUsername(req.user.username, function(err, hiringManager){
@@ -31,27 +33,47 @@ console.log(hiringManager);
 });
 
 
-router.post('/jobs/register', function(req, res){
-console.log('inside hiringManagers/jobs/register router');
+
+
+/*****************************************************************
+***********************Adding Jobs Route**************************
+******************************************************************/
+router.get('/jobs/addjob', ensureAuthenticated, function(req, res, next) {
+   res.render('hiringManagers/addjob', {"job_id": req.params.id});
+});
+
+
+router.post('/jobs/addjob', function(req, res){
         info = [];
         info['hiringManager_username'] = req.user.username;
-        info['job_id'] = req.body.job_id;
         info['job_title'] = req.body.job_title;
+        info['job_description'] = req.body.job_description;
 
-        HiringManager.register(info, function(err, hiringManager){
+        HiringManager.addJob(info, function(err, hiringManager){
                 if(err) throw err;
                 console.log(hiringManager);
         });
 
-        req.flash('success','You are now Registered to teach this job!');
+        req.flash('success','You have added a new job!');
         res.redirect('/hiringManagers/jobs');
 });
 
 
-router.get('/jobes/:id/lessons/new', ensureAuthenticated, function(req, res, next) {
-console.log('inside hiringManagers/jobs/'+req.params.id+'/lessons/new router');
-   res.render('hiringManagers/newlesson', {"job_id": req.params.id});
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.post('/jobes/:id/lessons/new', ensureAuthenticated, function(req, res, next) {
    //Get form Values

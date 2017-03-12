@@ -20,16 +20,13 @@ var HiringManagerSchema = mongoose.Schema({
         },
   
         jobs:[{
-                job_id:{type: [mongoose.Schema.Types.ObjectId]},
                 job_title: {type:String}
         }],
         applicants:[{
-            applicant_id:{type: [mongoose.Schema.Types.ObjectId]},
             applicant_first_name: {type:String},
             applicant_last_name: {type:String},
         }],
         profs:[{
-            profs_id:{type: [mongoose.Schema.Types.ObjectId]},
             profs_first_name: {type:String},
             profs_last_name: {type:String},
         }]
@@ -48,20 +45,23 @@ console.log(query );
 }
 
 
-//Register HiringManager for Class
-/*module.exports.addJob = function(info, callback){
+/*****************************************************************
+***********************Adding Jobs *******************************
+******************************************************************/
+module.exports.addJob = function(info, callback){
         hiringManager_username = info['hiringManager_username'];
-        job_id = info['job_id'];
         job_title = info['job_title'];
+        job_description = info['job_description'];
 
 
         var query = {username: hiringManager_username};
+console.log('query')
         HiringManager.findOneAndUpdate(
                 query,
-                {$push: {"jobs": {job_id: job_id, job_title: job_title}}},
+                {$push: {"jobs": {job_title: job_title, job_description: job_description}}},
                 {safe: true, upsert: true},
                 callback
         );
 
-}*/
+}
 
