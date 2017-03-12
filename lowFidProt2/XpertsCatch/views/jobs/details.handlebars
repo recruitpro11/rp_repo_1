@@ -1,22 +1,18 @@
-<h2>{{class.title}}</h2>
+<h2>{{job.title}}</h2>
 <p>
-  <strong>Instructor: </strong>{{class.instructor}}
+  <strong>Company: </strong>{{job.company}}
 </p>
 <p>
-  {{class.description}}
+  <strong>Description: </strong>{{job.description}}
 </p>
-<ul class="alt">
-  {{#each class.lessons}}
-    <li>{{lesson_title}}</li>
-  {{/each}}
-</ul>
+
 {{#if user}}
-  <form id="classRegFrom" method="post" action="/{{user.type}}s/classes/register">
+  <form id="jobRegFrom" method="post" action="/{{user.type}}s/jobes/register">
     <input type="hidden" name="student_username" value="{{user.username}}">
-    <input type="hidden" name="class_id" value="{{class._id}}">
-    <input type="hidden" name="class_title" value="{{class.title}}">
-    <input type="submit" class="button" value="Register For This Class">
+    <input type="hidden" name="job_id" value="{{job._id}}">
+    <input type="hidden" name="job_title" value="{{job.title}}">
+    <input type="submit" job="button" value="Register For This Class">
   </form>
 {{else}}
-  <p><em>You must be logged in to register for classes</em></p>
+  <p><em>You must be logged in to register for jobes</em></p>
 {{/if}}

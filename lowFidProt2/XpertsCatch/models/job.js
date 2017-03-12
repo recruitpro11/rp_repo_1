@@ -21,6 +21,7 @@ var jobSchema = mongoose.Schema({
     skill_name: {type: String}
   }],
   hiringManagers:[{
+    hiringManager_id:{type: mongoose.Schema.Types.ObjectId},
     hiringManager_first_name: {type:String},
     hiringManager_last_name: {type:String},
   }],
@@ -39,6 +40,17 @@ var jobSchema = mongoose.Schema({
 //Make this schema available outside this file through a variable
 var Job = module.exports = mongoose.model('Job', jobSchema);
 
+/*module.exports.createJob = function(newJob, callback){
+        bcrypt.hash(newUser.password,10,function(err, hash){
+          if(err) throw err;
+          //set hashed pw
+          newUser.password = hash
+          //put user in db
+          
+        });
+}*/
+
+
 //helper to Fetch all jobes from outside this file. Give a limit
 //to the number of jobes that it returns
 module.exports.getJobs = function(callback, limit){
@@ -47,12 +59,17 @@ module.exports.getJobs = function(callback, limit){
 
 //Fetch a single job by its id
 module.exports.getJobById = function(id, callback){
+console.log('inside getJobById');
   Job.findById(id, callback);
 }
 
 
+/*
+module.exports.addjob(info, callback(err, job){
+
+
 //Add a new lesson to a Job
-/*module.exports.addLesson = function(info, callback){
+/module.exports.addLesson = function(info, callback){
         job_id = info['job_id'];
         lesson_number = info['lesson_number'];
         lesson_title = info['lesson_title'];
