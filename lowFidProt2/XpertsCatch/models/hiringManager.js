@@ -21,6 +21,7 @@ var HiringManagerSchema = mongoose.Schema({
         },
   
         jobs:[{
+                job_id:{type: mongoose.Schema.Types.ObjectId},
                 job_title: {type:String}
         }],
         applicants:[{

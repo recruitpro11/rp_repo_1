@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var mongoose = require('mongoose');
+
 //Schemas
 Jobs = require('../models/job');
 HiringManager = require('../models/hiringManager');
@@ -43,16 +45,26 @@ console.log('inside hiringManagers/'+ req.params.id +'/jobs/add GET');
 });
 
 router.post('/:id/jobs/add', function(req, res){
-  console.log('inside hiringManagers/'+ req.params.id +'/jobs/add POST');
+
       var newJob = new Job({
         title : req.body.job_title,
         description : req.body.job_description,
         hiringManagers:[{hiringManager_id:req.params.id}]
       });
-console.log('hs created a job object hre');
+      console.log('hs created a job object to be added');
+
       newJob.save(function(err, job){
         if(err) throw err;
-        console.log(job);
+        console.log('created job:\n'+job+'\n\n');
+  
+        var query = {_id: mongoose.Types.ObjectId(req.params.id)};
+        HiringManager.findOneAndUpdate(
+                query,
+                {$push: {"jobs": {job_id: job._id, job_title: req.body.job_title, job_description: req.body.job_description}}},
+                {safe: true, upsert: true},
+                function(err, hiringManager){
+                  console.log('updated hiringManager:\n'+hiringManager+'\n\n');
+        });
       });
 
       req.flash('success','You have added a new job!');
