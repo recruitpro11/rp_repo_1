@@ -24,7 +24,7 @@ var mongoose = require('mongoose');
 var exphbs = require('express-handlebars');
 
 var db = mongoose.connection;
-mongoose.connect('mongodb://35.163.48.45/elearn');
+mongoose.connect('mongodb://35.163.48.45/xpertscatch2');
 mongoose.Promise = global.Promise
 async = require('async'); 
 
@@ -37,13 +37,18 @@ async = require('async');
 var index = require('./routes/index');
 //userse is where we put auth stuff register/ login etc.
 var users = require('./routes/users');
-//where our classes are
-var classes = require('./routes/classes');
-//this is we put student specific stuff (ex classes)
-var students = require('./routes/students');
-//this is we put instrcutor specific stuff (ex classes)
-var instructors = require('./routes/instructors');
 
+//where our jobs are
+var jobs = require('./routes/jobs');
+
+//this is we put tA specific stuff 
+var tAs = require('./routes/tAs');
+
+//this is we put prof specific stuff 
+var profs = require('./routes/profs');
+
+//this is we put hiringManagers specific stuff 
+var hiringManagers = require('./routes/hiringManagers');
 /*****************************************************************
 *****************************************************************/
 
@@ -103,11 +108,8 @@ app.use(expressValidator({
 
 app.use(cookieParser());
 
-
-
 //public folder is where we'll put all static pages
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 //flash stuff
 app.use(flash());
@@ -132,6 +134,21 @@ app.use(function (req, res, next) {
 app.get('*',function(req, res, next){
   //put user into res.locals for easy access from templates
   res.locals.user = req.user || null;
+  /*if(req.locals.user != null){
+    if(res.locals.user.type == 'hiringManager'){
+      res.locals.isTA = false;
+      res.locals.isProf = false;
+      res.locals.isHiringManager = true;
+    } else if(res.locals.user.type == 'prof'){
+      res.locals.isTA = false;
+      res.locals.isProf = true;
+      res.locals.isHiringManager = false;
+    } else{
+      res.locals.isTA = true;
+      res.locals.isProf = false;
+      res.locals.isHiringManager = false;
+    }
+  }*/
   next();
 });
 /***************************************************************
@@ -146,9 +163,10 @@ app.get('*',function(req, res, next){
 ****************************************************************/
 app.use('/', index);
 app.use('/users', users);
-app.use('/classes', classes);
-app.use('/students', students);
-app.use('/instructors', instructors);
+app.use('/jobs', jobs);
+app.use('/tAs', tAs);
+app.use('/profs', profs);
+app.use('/hiringManagers', hiringManagers);
 /*************************End of routes**************************
 *****************************************************************/
 

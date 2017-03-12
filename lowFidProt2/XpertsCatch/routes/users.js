@@ -4,8 +4,9 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../models/user.js');
-var Student = require('../models/student.js');
-var Instructor= require('../models/instructor.js');
+var Prof = require('../models/prof.js');
+var TA = require('../models/tA.js');
+var HiringManager= require('../models/hiringManager.js');
 
 router.get('/signup', function(req, res, next) {
   res.render('users/signup');
@@ -14,7 +15,7 @@ router.get('/signup', function(req, res, next) {
 
 router.post('/signup', function(req, res, next){
 
-console.log('hs route got request:\n');
+console.log('hs /signup route got request:\n');
 console.log(req.body);
 
 
@@ -28,7 +29,17 @@ console.log(req.body);
   var password2  = req.body.password2;
   var type       = req.body.type;
 
-console.log('\nhs route read type:');
+  if(type == 'Hiring Manager'){
+    type = 'hiringManager';
+  }
+  if(type == 'Professor'){
+    type = 'prof';
+  }
+  if(type == 'Teacher Assistant'){
+    type = 'tA';
+  }
+
+console.log('\nhs /signup route read type:');
 console.log(type);
 
   //Validate the Form
@@ -44,9 +55,6 @@ console.log(type);
   //store the errors for rendering
   var errors = req.validationErrors();
   if(errors){
-console.log("hs route Errors\n");
-cosole.log(errors);
-     
       res.render('users/signup',{
       errors : errors,
       first_name : first_name,
@@ -57,7 +65,7 @@ cosole.log(errors);
       password2: formPassword2
     });
   } else {
-    //Instantiate new user. Using User class which we define
+    //Instantiate new user. Using User job which we define
     var newUser = new User({
       email : email,
       username: username,
@@ -65,17 +73,11 @@ cosole.log(errors);
       type: type
     });
 
-console.log("hss route Created new User\n");
-//cosole.log(newUser.first_name);
+console.log("hss route Created new User with type: "+ type);
 
-console.log("hs Compare res1\n");
-console.log(type == 'Student');
-console.log("hs Compare res2\n");
-console.log(type === 'Student');
-
-    if(type == 'student'){
+    if(type == 'prof'){
       //Instantiate new Strudent
-      var newStudent = new Student({
+      var newProf = new Prof({
         first_name : first_name,
         last_name : last_name,
         email : email,
@@ -83,36 +85,40 @@ console.log(type === 'Student');
         password: password
       });
 
-console.log("hs route Created new Student\n");
-//cosole.log(newStudent.first_name);
-
-      User.saveStudent(newUser, newStudent, function(err, user){
-        console.log('New Student Created');
+      User.saveProf(newUser, newProf, function(err, user){
+        console.log('New Prof Created');
+      });
+    } else if(type == 'hiringManager') {
+      //Instantiate new HiringManager
+      var newHiringManager = new HiringManager({
+        first_name : first_name,
+        last_name : last_name,
+        email : email,
+        username: username,
+        password: password
+      });
+      User.saveHiringManager(newUser, newHiringManager, function(err, user){
+        console.log('New HiringManager Created');
       });
     } else {
-      //Instantiate new Instructor
-      var newInstructor = new Instructor({
+      //Instantiate new Strudent
+      var newTA = new TA({
         first_name : first_name,
         last_name : last_name,
         email : email,
         username: username,
         password: password
       });
-      User.saveInstructor(newUser, newInstructor, function(err, user){
-        console.log('New Instructor Created');
+
+      User.saveTA(newUser, newTA, function(err, user){
+        console.log('New TA Created');
       });
     }
 
 
-    //Send a success flash message
     req.flash('success','You are now registered and may login');
-
-    //redirect them to them homePage
     res.redirect('/');
-
   }
-
-
 });
 
 
@@ -129,7 +135,6 @@ passport.deserializeUser(function(id, done){
 
 passport.use(new LocalStrategy(
   function(username, password, done){
-console.log('hs inside localStrategy');
     User.getUserByUsername(username, function(err, user){
       if(err) throw err;
       if(!user){
@@ -137,9 +142,8 @@ console.log('hs inside localStrategy');
         return done(null, false, {message: 'Unknown User'});
       }
 
-console.log('hs found user:\n');
+console.log('hs LocalStrategy found user:\n');
 console.log(user);
-
 
       User.comparePassword(password, user.password, function(err, isMatch){
         if(err) throw err;
@@ -160,7 +164,7 @@ console.log(user);
 router.post('/login',passport.authenticate('local', {failureRedirect:'/users/login', failureFlash:'Invalid username or password'}), function(req,res){
    console.log('Authentication Successful');
    req.flash('success','You are logged in');
-   res.redirect('/classes');
+   res.redirect('/jobs');
 });
 
 /***************************End OF Login Stuff******************************/

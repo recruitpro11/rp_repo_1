@@ -1,0 +1,24 @@
+<h2>{{hiringManager.first_name}}'s Classes</h2>
+{{#if hiringManager.jobs}}
+<table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Job ID</th>
+      <th>Job Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each hiringManager.jobs}}
+      <tr>
+        <td>{{job_id}}</td>
+        <td>{{job_title}}</td>
+        <td><a href="/jobs/{{job_id}}/lessons">View Lessons</a></td>
+        <td><a href="/hiringManagers/jobs/{{job_id}}/lessons/new">Add Lessons</a></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+  <p>This hiringManager does not have any jobs</p>
+{{/if}}

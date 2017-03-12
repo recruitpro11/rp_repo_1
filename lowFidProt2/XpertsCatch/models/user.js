@@ -43,27 +43,39 @@ module.exports.getUserByUsername = function(username, callback){
   User.findOne(query, callback);
 }
 
-//Add a student
-module.exports.saveStudent = function(newUser, newStudent, callback){
-console.log('hs users model saveStudent');
+//Add a hiringManager
+module.exports.saveHiringManager = function(newUser, newHiringManager, callback){
+console.log('hs users model saveHiringManager');
    bcrypt.hash(newUser.password,10,function(err, hash){
           if(err) throw err;
           //set hashed pw
           newUser.password = hash
           //make several updates in parallel: put the newUser in users and newStudent in students
-          async.parallel([newUser.save, newStudent.save], callback);
+          async.parallel([newUser.save, newHiringManager.save], callback);
         });
 }
 
-//Add an Instuctor 
-module.exports.saveInstructor = function(newUser, newInstructor, callback){
-console.log('hs users model saveInstructor');
+//Add an Professor 
+module.exports.saveProf = function(newUser, newProf, callback){
+console.log('hs users model saveProf');
    bcrypt.hash(newUser.password,10,function(err, hash){
           if(err) throw err;
           //set hashed pw
           newUser.password = hash
           //make several updates in parallel: put the newUser in users and newStudent in students
-          async.parallel([newUser.save, newInstructor.save], callback);
+          async.parallel([newUser.save, newProf.save], callback);
+        });
+}
+
+//Add an TeachersAssitant
+module.exports.saveTA = function(newUser, newTa, callback){
+console.log('hs users model saveTa');
+   bcrypt.hash(newUser.password,10,function(err, hash){
+          if(err) throw err;
+          //set hashed pw
+          newUser.password = hash
+          //make several updates in parallel: put the newUser in users and newStudent in students
+          async.parallel([newUser.save, newTa.save], callback);
         });
 }
 

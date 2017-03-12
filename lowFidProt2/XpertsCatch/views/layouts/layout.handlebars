@@ -16,7 +16,7 @@
 <!--{{#if user}} -->
 <!--{{else}}-->
     <li class="current"><a href="/">Home</a></li>
-    <li><a href="/classes">Jobs</a></li>
+    <li><a href="/jobs">Jobs</a></li>
     <li><a href=""><span class="icon" data-icon="R"></span>Item 3</a>
             <ul>
             <li><a href=""><i class="fa fa-car"></i> Sub Item</a></li>
@@ -37,13 +37,24 @@
 <div class="grid">
 
 <!-- ===================================== END HEADER ===================================== -->
-<container>
+{{#if messages.error}}
+<ul class="error">{{{messages.error}}}</ul>
+{{/if}}
+{{#if messages.success}}
+<ul class="success">{{{messages.success}}}</ul>
+{{/if}}
+{{#if messages.info}}
+<ul class="info">{{{messages.info}}}</ul>
+{{/if}}
+
+
+<!--<container>
 {{{messages.success}}}
+{{{messages.error}}}
 {{{messages.info}}}
-</container>
+</container>-->
 <div class="col_12">
         <div class="col_9">
-            {{{locals.messages}}}
             {{#if errors}}
                {{#each errors}}
                   <div class="notice error"><i class="icon-remove-sign icon-large"></i>
@@ -61,7 +72,7 @@
         <hr />
          
         {{#if isHome}}
-          {{>classes}}
+          {{>jobs}}
         {{/if}}
 </div>
 
