@@ -20,21 +20,17 @@ var ProfSchema = mongoose.Schema({
         },
      
         jobs:[{
-                 job_id:{type: [mongoose.Schema.Types.ObjectId]},
                  job_title: {type:String}
         }],
         applicants:[{
-            applicant_id:{type: [mongoose.Schema.Types.ObjectId]},
             applicant_first_name: {type:String},
             applicant_last_name: {type:String},
         }],
         tAs:[{
-            tAs_id:{type: [mongoose.Schema.Types.ObjectId]},
             tAs_first_name: {type:String},
             tAs_last_name: {type:String},
         }],
         hiringManagers:[{
-            hiringManagers_id:{type: [mongoose.Schema.Types.ObjectId]},
             hiringManagerst_first_name: {type:String},
             hiringManagers_last_name: {type:String},
         }]

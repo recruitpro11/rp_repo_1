@@ -14,13 +14,11 @@ var applicantSchema = mongoose.Schema({
     type: String
   },
   referers:[{
-    referer_id:{type: [mongoose.Schema.Types.ObjectId]},
     referer_first_name: {type:String},
     referer_last_name: {type:String},
     referer_type: {type:String}
   }],
   jobs:[{
-    job_id:{type: [mongoose.Schema.Types.ObjectId]},
     job_title: {type:String}
   }],
   skills: [{
