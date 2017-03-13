@@ -11,12 +11,12 @@ Job = require('../models/job');
 ******************************************************************/
 router.get('/', function(req, res, next) {
   Job.getJobs(function(err, jobs){
-    if(err){
-      console.log(err);
-      res.send(err);
-    } else {
-      res.render('jobs/index', {'jobs': jobs});
-    }
+	if(err){
+	  console.log(err);
+	  res.send(err);
+	} else {
+	  res.render('jobs/index', {'jobs': jobs});
+	}
   });
 });
 
@@ -35,14 +35,14 @@ console.log('hs3 /'+ req.params.job_id +'/details route');
 console.log(req.params.hiringManager_id);
 console.log('isOwner: '+ isOwner);
   Job.getJobById(req.params.job_id, function(err, jobname){
-    if(err){
-      console.log(err);
-      res.send(err);
-    } else {
+	if(err){
+	  console.log(err);
+	  res.send(err);
+	} else {
 console.log('this is the job that was found\n')
 console.log(jobname);
-      res.render('jobs/details', {'job': jobname, 'isOwner': isOwner, 'hiringManager_id':req.params.hiringManager_id });
-    }
+	  res.render('jobs/details', {'job': jobname, 'isOwner': isOwner, 'hiringManager_id':req.params.hiringManager_id });
+	}
   });
 });
 
@@ -53,35 +53,73 @@ console.log(jobname);
 ******************************************************************/
 router.get('/:job_id/details/:hiringManager_id/edit', function(req, res, next) {
   Job.getJobById(req.params.job_id, function(err, job){
-    if(err){
-      console.log(err);
-      res.send(err);
-    } else {
-      res.render('jobs/edit', {'job':job});
-    }
+	if(err){
+	  console.log(err);
+	  res.send(err);
+	} else {
+	  res.render('jobs/edit', {'job':job});
+	}
   });
 });
 
 
 router.post('/:job_id/details/edit', function(req, res){
 console.log('inside job edit post');
-  var query = {_id: req.params.job_id};
-  Job.findOneAndUpdate(
-    query,
-    {$set: {"title":req.body.job_title, "description": req.body.job_description, "skills": req.body.job_skills}},
-    {safe: true, upsert: true},
-    //ALL CALLBACKS ARE OPTIONAL
-    function(err, job){
-      if(err) throw err;
-      else{
-        console.log('updated job:\n'+job+'\n\n');
-     //  req.flash('success','You have updated this job!');
-     //   res.redirect('/hiringManagers/jobs');
-      }   
-  });
+  	
+  	var query       = {_id: req.params.job_id};
+  	var title       = req.body.title;
+  	var description = req.body.description;
+  	var company     = req.body.company;
+  	var location    = req.body.location;
 
-  req.flash('success','You have updated this job!');
-  res.redirect('/hiringManagers/jobs');
+	if(req.files && req.files.description_file){
+		console.log("Uploading File...");
+
+		//file info
+		var descriptionFileOriginalName = req.files.description_file.originalname;
+		var descriptionFileName         = req.files.description_file.name
+		var descriptionFileMime         = req.files.description_file.mimetype;
+		var descriptionFilePath         = req.files.description_file.path
+		var descriptionFileExtension    = req.files.description_file.extension;
+		var descriptionFileSize         = req.files.description_file.size
+	} else {
+		// Set a default profile image. We put this in the uploads folder ourselves
+		var descriptionFileName = 'noImage.png';
+  	}
+
+
+  	//Validate the Form
+  	req.checkBody('title', 'Job Title field is required').notEmpty();
+ 
+  	//store the errors for rendering
+  	var formErrors = req.validationErrors();    
+
+  	if(formErrors){
+		res.render('jobs/edit',{errors : formErrors,title : title});
+  	} else {
+		Job.findOneAndUpdate(
+			query,
+			{$set:{
+				   "title":title,
+				   "description": description,
+				   "company": company,
+				   "location": location,
+				   "descriptionFile" : descriptionFileOriginalName
+				   }
+			},
+			{safe: true, upsert: true},
+			//ALL CALLBACKS ARE OPTIONAL
+			function(err, job){
+	  			if(err) throw err;
+	  			else{
+					console.log('updated job:\n'+job+'\n\n');
+	  			}
+	  		}   
+ 		);
+  	}
+
+  	req.flash('success','You have updated this job!');
+	res.redirect('/hiringManagers/jobs');
 });
 
 
@@ -94,7 +132,7 @@ console.log('inside job edit post');
 function ensureAuthenticated(req, res, next){
   //this is passports authentication API
   if(req.isAuthenticated()){
-    return next();
+	return next();
   }
   res.redirect('/');
 }

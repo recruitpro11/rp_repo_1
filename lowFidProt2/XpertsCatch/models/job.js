@@ -7,18 +7,27 @@ var jobSchema = mongoose.Schema({
   title: {
     type: String
   },
+  description: {
+    type: String
+  },
+  //need npm install mongoose-file for this
+  //descriptionFile: {
+    //type: File
+  //},
+  descriptionFile: {
+    type: String
+  },
   company: {
     type: String
   },
   location: {
     type: String
   },
-  description: {
-    type: String
-  },
   skills: [{
     skill_value: {type: Number},
-    skill_name: {type: String}
+    skill_name: {type: String},
+    skill_social: {type: Number},
+    skill_english: {type: Number}
   }],
   hiringManagers:[{
     hiringManager_id:{type: mongoose.Schema.Types.ObjectId},
