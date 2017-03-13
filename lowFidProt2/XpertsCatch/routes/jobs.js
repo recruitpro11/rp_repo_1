@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
 /*GET dynamic url to desplay each job's details*/
 //'path/:required/:optional?*'
-router.get('/:id/:hiringManager_id?/details', function(req, res, next) {
+router.get('/:id/*:hiringManager_id?/details', function(req, res, next) {
 console.log('hs3 /'+ req.params.id +'/details route');
 
   var isOwner = (req.params.hiringManager_id != '');
