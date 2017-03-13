@@ -2,10 +2,11 @@
 {{#each jobs}}
 	<div class="block">
         	<h3>{{title}}</h3>
-        	<p>
+        	<p><strong>Company: </strong>{{company}}</P>
+        	<p><strong>Description: </strong>
             	{{description}}
 			</p>
-            <p>Company: <strong>{{company}}</strong></P>
+            
         	<a class='button' href='/jobs/{{_id}}/details'> Job Details </a>
 	</div>
 {{/each}}

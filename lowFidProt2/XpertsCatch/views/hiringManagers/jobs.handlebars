@@ -1,5 +1,6 @@
 <h2>{{hiringManager.first_name}}'s Jobs</h2> 
-<a href="/hiringManagers/jobs/{{hiringManager._id}}/add">Add a New Job2</a>
+<a href="/hiringManagers/jobs/{{hiringManager._id}}/add">Add a New Job</a>
+<hr />
 
 {{#if hiringManager.jobs}}
 <table cellspacing="0" cellpadding="0">
@@ -15,7 +16,7 @@
       <tr>
         <td>{{_id}}</td>
         <td>{{job_title}}</td>
-        <td><a href="/jobs/{{_id}}/details">View Job Details</a></td>
+        <td><a href="/jobs/{{job_id}}/details">View Job Details</a></td>
       </tr>
     {{/each}}
   </tbody>
