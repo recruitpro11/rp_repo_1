@@ -28,6 +28,7 @@ console.log('Inside hiringManager /jobs route');
     } else {
 console.log('retreived hiringManager\n');
 console.log(hiringManager);
+//console.log('viewjob: hiringManager._id: '+hiringManager._id+'\nres.locals.user.id: '+res.locals.user.id+'\nres.user.id: '+req.user.id+'\nreq.user._id: '+req.user._id);
       res.render('hiringManagers/jobs', {'hiringManager': hiringManager});
     }
   });
@@ -39,17 +40,19 @@ console.log(hiringManager);
 /*****************************************************************
 ***********************Adding Jobs Route**************************
 ******************************************************************/
-router.get('/:id/jobs/add', ensureAuthenticated, function(req, res, next) {
-console.log('inside hiringManagers/'+ req.params.id +'/jobs/add GET');
-   res.render('hiringManagers/addjob', {"job_id": req.params.id});
+router.get('/jobs/:id/add', ensureAuthenticated, function(req, res, next) {
+console.log('inside hiringManagers/jobs/'+ req.params.id +'/add GET\n');
+//console.log('addjob: param: '+req.params.id+'\nuser.id: '+res.locals.user.id);
+   res.render('hiringManagers/addjob', {hiringManager_id: req.params.id});
 });
 
-router.post('/:id/jobs/add', function(req, res){
+router.post('/jobs/:id/add', function(req, res){
+console.log('inside hiringManagers/jobs/'+ req.params.id +'/add POST\n');
 
       var newJob = new Job({
         title : req.body.job_title,
         description : req.body.job_description,
-        hiringManagers:[{hiringManager_id:req.params.id}]
+        hiringManagers:[{hiringManager_id: req.params.id}]
       });
       console.log('hs created a job object to be added');
 
@@ -62,6 +65,7 @@ router.post('/:id/jobs/add', function(req, res){
                 query,
                 {$push: {"jobs": {job_id: job._id, job_title: req.body.job_title, job_description: req.body.job_description}}},
                 {safe: true, upsert: true},
+                //ALL CALLBACKS ARE OPTIONAL
                 function(err, hiringManager){
                   console.log('updated hiringManager:\n'+hiringManager+'\n\n');
         });
@@ -70,6 +74,8 @@ router.post('/:id/jobs/add', function(req, res){
       req.flash('success','You have added a new job!');
       res.redirect('/hiringManagers/jobs');
 });
+
+
 
 
 module.exports = router;

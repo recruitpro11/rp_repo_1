@@ -36,8 +36,6 @@ var HiringManagerSchema = mongoose.Schema({
 });
 
 
-
-//Module.expoerts will be available outside this file.
 var HiringManager = module.exports = mongoose.model('HiringManager', HiringManagerSchema);
 
 module.exports.getHiringManagerByUsername = function(username, callback){
