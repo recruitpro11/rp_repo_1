@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
-//Job Schema
+//mongo Schemas
 Job = require('../models/job');
+HiringManager = require('../models/hiringManager');
 
 
 /*****************************************************************
@@ -57,16 +58,18 @@ router.get('/:job_id/details/:hiringManager_id/edit', function(req, res, next) {
 	  console.log(err);
 	  res.send(err);
 	} else {
-	  res.render('jobs/edit', {'job':job});
+	  res.render('jobs/edit', {'job':job, 'hiringManager_id': req.params.hiringManager_id});
 	}
   });
 });
 
 
-router.post('/:job_id/details/edit', function(req, res){
+router.post('/:job_id/details/:hiringManager_id/edit', function(req, res){
 console.log('inside job edit post');
+
+	var hiringManagerId = req.params.hiringManager_id;
+  	var jobId           = req.params.job_id;
   	
-  	var query       = {_id: req.params.job_id};
   	var title       = req.body.title;
   	var description = req.body.description;
   	var company     = req.body.company;
@@ -97,6 +100,7 @@ console.log('inside job edit post');
   	if(formErrors){
 		res.render('jobs/edit',{errors : formErrors,title : title});
   	} else {
+  		query = {_id: req.params.job_id};
 		Job.findOneAndUpdate(
 			query,
 			{$set:{
@@ -113,11 +117,39 @@ console.log('inside job edit post');
 	  			if(err) throw err;
 	  			else{
 					console.log('updated job:\n'+job+'\n\n');
+        			HiringManager.update(
+        				{
+        					//select a doc: can also use <_id: hiringManagerId>
+        					"jobs.job_id": jobId,
+        					//select a job
+        					jobs: { $elemMatch:{job_id: jobId} }
+        				},
+        				{ 
+        					$set:{"jobs.$.job_title": title}
+        				},
+        				function(err, hiringManager){
+        					if(err) throw err;
+        					else{
+        						console.log('updated job name for hiringManager:\n'+hiringManager+'\n\n');
+        					}
+        				}
+        			);
 	  			}
 	  		}   
  		);
   	}
 
+  	       			/*
+					var query = {_id: mongoose.Types.ObjectId(req.params.hiringManager_id)};
+        			HiringManager.findOneAndUpdate(
+               			query,
+                		{$push: {"jobs": {job_id: job._id, job_title: req.body.job_title, job_description: req.body.job_description}}},
+                		{safe: true, upsert: true},
+                		//ALL CALLBACKS ARE OPTIONAL
+                		function(err, hiringManager){
+                  			console.log('updated hiringManager:\n'+hiringManager+'\n\n');
+        			});
+        			*/
   	req.flash('success','You have updated this job!');
 	res.redirect('/hiringManagers/jobs');
 });
