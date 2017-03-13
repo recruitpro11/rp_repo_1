@@ -77,7 +77,8 @@ app.use(session({
   secret: 'secret',
   saveUninitialized: true,
   resave: true,
-  cookie: { maxAge: 60000 }
+  //60000 60s cookie logs you out too fast
+  cookie: { maxAge: 180000 }
 }));
 
 //ha passport must be after express session middleware
