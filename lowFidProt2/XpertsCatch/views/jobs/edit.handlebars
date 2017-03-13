@@ -7,15 +7,29 @@
     <label>Job Title: </label>
     <input type="text" name="title" value={{job.title}}>
   </div>
+  
+
   <div>
     <label>Job Description: </label>
     <textarea name="description" id="hsTextAreaToBeReplaced">{{job.description}}</textarea>
-    <script>
+    <script type="text/javascript">
       // Replace the <textarea id="hsTextAreaToBeReplaced"> with a CKEditor
-      //CKEDITOR.replace( 'hsTextAreaToBeReplaced' );
+      CKEDITOR.replace( 'hsTextAreaToBeReplaced' );
+      
+      /*CKEDITOR.editorConfig = function( config ){
+        config.enterMode = CKEDITOR.ENTER_BR;
+        config.shiftEnterMode = CKEDITOR.ENTER_BR;
+      };
+      
+      $(function() {
+         $('hsTextAreaToBeReplaced').ckeditor({
+            toolbar: 'Full',
+            enterMode : CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P
+            });
+      });*/
     </script>
   </div>
-
 
 
   <div id="list1" class="dropdown-check-list" name="job_skills" tabindex="100">
@@ -28,7 +42,6 @@
       <li><input type="checkbox" />Language </li>
     </ul>
   </div>
-
   <script type="text/javascript">
     var checkList = document.getElementById('list1');
     checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
@@ -37,22 +50,30 @@
       else
         checkList.classList.add('visible');
       }
-
   </script>
+
 
   <div>
     <label>Company</label>
     <input type="text" name="company" value={{job.company}}>
   </div>
+
+  
   <div>
     <label>Location</label>
     <input type="text" name="location" value={{job.location}}>
   </div>
+
+  
   <div>
     <label>Job Description File: </label>
     <input type="file" name="description_file">
   </div>
+
+  
   <h6>Mahdi will help you edit Teck skills and hiring Managers here </h6>
+  <h6>Also why Company and Locations full strings dont show up </h6>
+
   <div>
     <input type="submit" value="Submit">
   </div>
