@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
 
 //Job Schema
 Job = require('../models/job');
@@ -60,6 +61,31 @@ router.get('/:job_id/details/:hiringManager_id/edit', function(req, res, next) {
     }
   });
 });
+
+
+router.post('/:job_id/details/edit', function(req, res){
+console.log('inside job edit post');
+  var query = {_id: req.params.job_id};
+  Job.findOneAndUpdate(
+    query,
+    {$set: {"title":req.body.job_title, "description": req.body.job_description, "skills": req.body.job_skills}},
+    {safe: true, upsert: true},
+    //ALL CALLBACKS ARE OPTIONAL
+    function(err, job){
+      if(err) throw err;
+      else{
+        console.log('updated job:\n'+job+'\n\n');
+     //  req.flash('success','You have updated this job!');
+     //   res.redirect('/hiringManagers/jobs');
+      }   
+  });
+
+  req.flash('success','You have updated this job!');
+  res.redirect('/hiringManagers/jobs');
+});
+
+
+
 
 
 
