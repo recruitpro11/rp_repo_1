@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 router.get('/:id/*:hiringManager_id?/details', function(req, res, next) {
 console.log('hs3 /'+ req.params.id +'/details route');
 
-  var isOwner = (req.params.hiringManager_id != '');
+  var isOwner = (req.params.hiringManager_id != null );
   Job.getJobById(req.params.id, function(err, jobname){
     if(err){
       console.log(err);

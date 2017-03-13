@@ -21,7 +21,7 @@
   <strong>Applicants: </strong>{{job.applicants}}
 </p>
 
-
+<h2>{{isOwner}}</h2>
 {{#if user}}
   {{#if isOwner}}
     <form id="jobRegFrom" method="post" action="/{{user.type}}s/jobes/register">
@@ -30,7 +30,6 @@
       <input type="hidden" name="job_title" value="{{job.title}}">
       <input type="submit" job="button" value="Edit This Job">
     </form>
-
   {{else}}
     <form id="jobRegFrom" method="post" action="/{{user.type}}s/jobes/register">
       <input type="hidden" name="student_username" value="{{user.username}}">
