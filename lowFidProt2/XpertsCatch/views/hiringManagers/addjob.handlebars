@@ -1,13 +1,77 @@
-<h2>Add New Job</h2>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<h2>Edit a New Job</h2>
 <form id="regForm" method="post" action="/hiringManagers/jobs/{{hiringManager_id}}/add">
   <div>
     <label>Job Title: </label>
-    <input type="text" name="job_title">
+    <input type="text" name="title" value={{job.title}}>
   </div>
+  
+
   <div>
     <label>Job Description: </label>
-    <textarea name="job_description"></textarea>
+    <textarea name="description" id="hsTextAreaToBeReplaced">{{job.description}}</textarea>
+    <script type="text/javascript">
+      // Replace the <textarea id="hsTextAreaToBeReplaced"> with a CKEditor
+      CKEDITOR.replace( 'hsTextAreaToBeReplaced' );
+      
+      /*CKEDITOR.editorConfig = function( config ){
+        config.enterMode = CKEDITOR.ENTER_BR;
+        config.shiftEnterMode = CKEDITOR.ENTER_BR;
+      };
+      
+      $(function() {
+         $('hsTextAreaToBeReplaced').ckeditor({
+            toolbar: 'Full',
+            enterMode : CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P
+            });
+      });*/
+    </script>
   </div>
+
+
+  <div id="list1" class="dropdown-check-list" name="job_skills" tabindex="100">
+    <span class="anchor">Required Skills</span>
+    <ul class="items">
+      <li><input type="checkbox" />Php </li>
+      <li><input type="checkbox" />Java</li>
+      <li><input type="checkbox" />C++ </li>
+      <li><input type="checkbox" />Node </li>
+      <li><input type="checkbox" />Language </li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    var checkList = document.getElementById('list1');
+    checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+      if (checkList.classList.contains('visible'))
+        checkList.classList.remove('visible');
+      else
+        checkList.classList.add('visible');
+      }
+  </script>
+
+
+  <div>
+    <label>Company</label>
+    <input type="text" name="company" value={{job.company}}>
+  </div>
+
+  
+  <div>
+    <label>Location</label>
+    <input type="text" name="location" value={{job.location}}>
+  </div>
+
+  
+  <div>
+    <label>Job Description File: </label>
+    <input type="file" name="description_file">
+  </div>
+
+  
+  <h6>Mahdi will help you edit Teck skills and hiring Managers here </h6>
+  <h6>Also why Company and Locations full strings dont show up </h6>
+
   <div>
     <input type="submit" value="Submit">
   </div>

@@ -23,16 +23,16 @@ router.get('/', ensureAuthenticated, function(req, res, next){
 router.get('/jobs', ensureAuthenticated, function(req, res, next) {
 console.log('Inside hiringManager /jobs route');
   HiringManager.getHiringManagerByUsername(req.user.username, function(err, hiringManager){
-    if(err){
-      req.flash('error','Did not find the HiringManager');
-      console.log(err);
-      res.send(err);
-    } else {
+	if(err){
+	  req.flash('error','Did not find the HiringManager');
+	  console.log(err);
+	  res.send(err);
+	} else {
 console.log('retreived hiringManager\n');
 console.log(hiringManager);
 //console.log('viewjob: hiringManager._id: '+hiringManager._id+'\nres.locals.user.id: '+res.locals.user.id+'\nres.user.id: '+req.user.id+'\nreq.user._id: '+req.user._id);
-      res.render('hiringManagers/jobs', {'hiringManager': hiringManager});
-    }
+	  res.render('hiringManagers/jobs', {'hiringManager': hiringManager});
+	}
   });
 });
 
@@ -49,31 +49,71 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add GE
 
 router.post('/jobs/:hiringManager_id/add', function(req, res){
 console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add POST\n');
+	
+	
+  	var title       	= req.body.title;
+  	var description 	= req.body.description;
+  	var company     	= req.body.company;
+  	var location    	= req.body.location;
+  	var hiringManagerId = req.params.hiringManager_id;
 
-      var newJob = new Job({
-        title : req.body.job_title,
-        description : req.body.job_description,
-        hiringManagers:[{hiringManager_id: req.params.hiringManager_id}]
-      });
-      console.log('hs created a job object to be added');
+  	if(req.files && req.files.description_file){
+		console.log("Uploading File...");
 
-      newJob.save(function(err, job){
-        if(err) throw err;
-        console.log('created job:\n'+job+'\n\n');
-  
-        var query = {_id: mongoose.Types.ObjectId(req.params.hiringManager_id)};
-        HiringManager.findOneAndUpdate(
-                query,
-                {$push: {"jobs": {job_id: job._id, job_title: req.body.job_title, job_description: req.body.job_description}}},
-                {safe: true, upsert: true},
-                //ALL CALLBACKS ARE OPTIONAL
-                function(err, hiringManager){
-                  console.log('updated hiringManager:\n'+hiringManager+'\n\n');
-        });
-      });
+		//file info
+		var descriptionFileOriginalName = req.files.description_file.originalname;
+		var descriptionFileName         = req.files.description_file.name
+		var descriptionFileMime         = req.files.description_file.mimetype;
+		var descriptionFilePath         = req.files.description_file.path
+		var descriptionFileExtension    = req.files.description_file.extension;
+		var descriptionFileSize         = req.files.description_file.size
+	} else {
+		// Set a default profile image. We put this in the uploads folder ourselves
+		var descriptionFileName = 'noFile.txt';
+	}
 
-      req.flash('success','You have added a new job!');
-      res.redirect('/hiringManagers/jobs');
+	//Validate the Form
+  	req.checkBody('title', 'Job Title field is required').notEmpty();
+ 
+  	//store the errors for rendering
+  	var formErrors = req.validationErrors();    
+
+  	if(formErrors){
+		res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManagerId});
+  	} else {
+  		var newJob = new Job({
+			title 			: title,
+			description 	: description,
+			company 		: company,
+			location    	: location,
+			descriptionFile : descriptionFileName,
+			hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
+			skills			: [],
+			referers		: [],
+			applicants		: []
+	  	});
+	  	console.log('hs created a job object to be added');
+
+	  	newJob.save(function(err, job){
+			if(err) throw err;
+			else{
+					console.log('created job:\n'+job+'\n\n');
+					var query = {_id: mongoose.Types.ObjectId(req.params.hiringManager_id)};
+					HiringManager.findOneAndUpdate(
+						query,
+						{$push: {"jobs": {job_id: job._id, job_title: job.title}}},
+						{safe: true, upsert: true},
+						//ALL CALLBACKS ARE OPTIONAL
+						function(err, hiringManager){
+				  			console.log('updated hiringManager:\n'+hiringManager+'\n\n');
+						}
+					);
+			}
+	  	});
+  	}
+
+  	req.flash('success','You have added a new job!');
+  	res.redirect('/hiringManagers/jobs');
 });
 
 
@@ -83,7 +123,7 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 function ensureAuthenticated(req, res, next){
   //this is passports authentication API
   if(req.isAuthenticated()){
-    return next();
+	return next();
   }
   res.redirect('/');
 }

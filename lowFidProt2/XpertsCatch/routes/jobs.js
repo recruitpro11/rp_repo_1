@@ -67,7 +67,7 @@ router.get('/:job_id/details/:hiringManager_id/edit', function(req, res, next) {
 router.post('/:job_id/details/:hiringManager_id/edit', function(req, res){
 console.log('inside job edit post');
 
-	var hiringManagerId = req.params.hiringManager_id;
+	  var hiringManagerId = req.params.hiringManager_id;
   	var jobId           = req.params.job_id;
   	
   	var title       = req.body.title;
@@ -87,8 +87,8 @@ console.log('inside job edit post');
 		var descriptionFileSize         = req.files.description_file.size
 	} else {
 		// Set a default profile image. We put this in the uploads folder ourselves
-		var descriptionFileName = 'noImage.png';
-  	}
+		var descriptionFileName = 'noFile.txt';
+  }
 
 
   	//Validate the Form
