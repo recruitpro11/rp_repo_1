@@ -18,8 +18,11 @@ router.get('/', function(req, res, next) {
 
 
 /*GET dynamic url to desplay each job's details*/
-router.get('/:id/details', function(req, res, next) {
+//'path/:required/:optional?*'
+router.get('/:id/:hiringManager_id?/details', function(req, res, next) {
 console.log('hs3 /'+ req.params.id +'/details route');
+
+  var isOwner = (req.params.hiringManager_id != '');
   Job.getJobById(req.params.id, function(err, jobname){
     if(err){
       console.log(err);
@@ -27,7 +30,7 @@ console.log('hs3 /'+ req.params.id +'/details route');
     } else {
 console.log('this is the job that was found\n')
 console.log(jobname);
-      res.render('jobs/details', {'job': jobname});
+      res.render('jobs/details', {'job': jobname, 'isOwner': isOwner});
     }
   });
 });

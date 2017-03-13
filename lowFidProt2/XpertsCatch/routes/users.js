@@ -84,8 +84,7 @@ console.log("hss route Created new User with type: "+ type);
         first_name : first_name,
         last_name : last_name,
         email : email,
-        username: username,
-        password: password
+        username: username
       });
 
       User.saveProf(newUser, newProf, function(err, user){
@@ -97,8 +96,7 @@ console.log("hss route Created new User with type: "+ type);
         first_name : first_name,
         last_name : last_name,
         email : email,
-        username: username,
-        password: password
+        username: username
       });
       User.saveHiringManager(newUser, newHiringManager, function(err, user){
         console.log('New HiringManager Created');
@@ -109,8 +107,7 @@ console.log("hss route Created new User with type: "+ type);
         first_name : first_name,
         last_name : last_name,
         email : email,
-        username: username,
-        password: password
+        username: username
       });
 
       User.saveTA(newUser, newTA, function(err, user){

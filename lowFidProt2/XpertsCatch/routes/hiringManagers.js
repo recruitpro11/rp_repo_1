@@ -7,16 +7,18 @@ var mongoose = require('mongoose');
 Jobs = require('../models/job');
 HiringManager = require('../models/hiringManager');
 
-function ensureAuthenticated(req, res, next){
-  //this is passports authentication API
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect('/');
-}
 
-/******************************************************************
-***********************Jobs Viwing Route***************************
+
+/*****************************************************************
+***********************index Route***************************
+******************************************************************/
+router.get('/', ensureAuthenticated, function(req, res, next){
+  res.render('hiringManagers/index');
+});
+
+
+/*****************************************************************
+***********************Jobs Route***************************
 ******************************************************************/
 router.get('/jobs', ensureAuthenticated, function(req, res, next) {
 console.log('Inside hiringManager /jobs route');
@@ -36,23 +38,22 @@ console.log(hiringManager);
 
 
 
-
 /*****************************************************************
-***********************Adding Jobs Route**************************
+***********************Jobs ADD Route**************************
 ******************************************************************/
-router.get('/jobs/:id/add', ensureAuthenticated, function(req, res, next) {
-console.log('inside hiringManagers/jobs/'+ req.params.id +'/add GET\n');
+router.get('/jobs/:hiringManager_id/add', ensureAuthenticated, function(req, res, next) {
+console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add GET\n');
 //console.log('addjob: param: '+req.params.id+'\nuser.id: '+res.locals.user.id);
-   res.render('hiringManagers/addjob', {hiringManager_id: req.params.id});
+   res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManager_id});
 });
 
-router.post('/jobs/:id/add', function(req, res){
-console.log('inside hiringManagers/jobs/'+ req.params.id +'/add POST\n');
+router.post('/jobs/:hiringManager_id/add', function(req, res){
+console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add POST\n');
 
       var newJob = new Job({
         title : req.body.job_title,
         description : req.body.job_description,
-        hiringManagers:[{hiringManager_id: req.params.id}]
+        hiringManagers:[{hiringManager_id: req.params.hiringManager_id}]
       });
       console.log('hs created a job object to be added');
 
@@ -60,7 +61,7 @@ console.log('inside hiringManagers/jobs/'+ req.params.id +'/add POST\n');
         if(err) throw err;
         console.log('created job:\n'+job+'\n\n');
   
-        var query = {_id: mongoose.Types.ObjectId(req.params.id)};
+        var query = {_id: mongoose.Types.ObjectId(req.params.hiringManager_id)};
         HiringManager.findOneAndUpdate(
                 query,
                 {$push: {"jobs": {job_id: job._id, job_title: req.body.job_title, job_description: req.body.job_description}}},
@@ -77,5 +78,14 @@ console.log('inside hiringManagers/jobs/'+ req.params.id +'/add POST\n');
 
 
 
+
+
+function ensureAuthenticated(req, res, next){
+  //this is passports authentication API
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/');
+}
 
 module.exports = router;
