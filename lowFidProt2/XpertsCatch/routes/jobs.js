@@ -4,7 +4,10 @@ var router = express.Router();
 //Job Schema
 Job = require('../models/job');
 
-/* GET jobs home page. */
+
+/*****************************************************************
+***********************index jobs Route***************************
+******************************************************************/
 router.get('/', function(req, res, next) {
   Job.getJobs(function(err, jobs){
     if(err){
@@ -17,17 +20,20 @@ router.get('/', function(req, res, next) {
 });
 
 
+
+/*****************************************************************
+***********************Job Details Route***************************
+******************************************************************/
 /*GET dynamic url to desplay each job's details*/
 //'path/:required/:optional?*'
-['/service', '/service/id/:id']
-router.get(['/:id/details/','/:id/details/:hiringManager_id'], function(req, res, next) {
-console.log('hs3 /'+ req.params.id +'/details route');
+router.get(['/:job_id/details/','/:job_id/details/:hiringManager_id'], function(req, res, next) {
+console.log('hs3 /'+ req.params.job_id +'/details route');
 
   var isOwner = (req.params.hiringManager_id != null );
 
 console.log(req.params.hiringManager_id);
 console.log('isOwner: '+ isOwner);
-  Job.getJobById(req.params.id, function(err, jobname){
+  Job.getJobById(req.params.job_id, function(err, jobname){
     if(err){
       console.log(err);
       res.send(err);
@@ -41,34 +47,22 @@ console.log(jobname);
 
 
 
-
-
-
-
-/*router.get('/:id/lessons/:lesson_nb', ensureAuthenticated, function(req, res, next) {
-   
-  //get the job, and look through its lessons for the one 
-  //we are looking for
-  Job.getJobById(req.params.id, function(err, jobname){
-console.log('hss got jobname:\n');
-console.log(jobname);
-    var lesson;
+/*****************************************************************
+***********************Edit job Route***************************
+******************************************************************/
+router.get('/:job_id/details/:hiringManager_id/edit', function(req, res, next) {
+  Job.getJobById(req.params.job_id, function(err, job){
     if(err){
       console.log(err);
       res.send(err);
     } else {
-      for(i=0; i<jobname.lessons.length; i++){
-console.log('hss lesson:\n');
-console.log(jobname.lessons[i]);
-        if(jobname.lessons[i].lesson_number == req.params.lesson_nb){
-console.log('hs found  the lesson we were looking for');
-           lesson = jobname.lessons[i];
-        }
-      }
-      res.render('jobs/lesson', {'job': jobname, "lesson":lesson });
+      res.render('jobs/edit', {'job':job});
     }
   });
-});*/
+});
+
+
+
 
 
 function ensureAuthenticated(req, res, next){
