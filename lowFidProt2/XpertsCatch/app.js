@@ -62,7 +62,7 @@ app.set('view engine', 'handlebars');
 
 //hs handles file uploads
 var multer = require('multer');
-var upload = multer({ dest: './uploads' });
+var upload = multer({ dest: 'uploads/' });
 
 
 // uncomment after placing your favicon in /public

@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
 var mongoose = require('mongoose');
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
 
 //Schemas
 Jobs = require('../models/job');
@@ -47,7 +48,7 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add GE
    res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManager_id});
 });
 
-router.post('/jobs/:hiringManager_id/add', function(req, res){
+router.post('/jobs/:hiringManager_id/add', upload.single('description_file'), function(req, res){
 console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add POST\n');
 	
 	
@@ -57,16 +58,16 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
   	var location    	= req.body.location;
   	var hiringManagerId = req.params.hiringManager_id;
 
-  	if(req.files && req.files.description_file){
+  	if(req.file){
 		console.log("Uploading File...");
 
 		//file info
-		var descriptionFileOriginalName = req.files.description_file.originalname;
-		var descriptionFileName         = req.files.description_file.name
+		var descriptionFileOriginalName = req.file.originalname;
+		/*var descriptionFileName         = req.files.description_file.name
 		var descriptionFileMime         = req.files.description_file.mimetype;
 		var descriptionFilePath         = req.files.description_file.path
 		var descriptionFileExtension    = req.files.description_file.extension;
-		var descriptionFileSize         = req.files.description_file.size
+		var descriptionFileSize         = req.files.description_file.size*/
 	} else {
 		// Set a default profile image. We put this in the uploads folder ourselves
 		var descriptionFileName = 'noFile.txt';
@@ -86,7 +87,7 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 			description 	: description,
 			company 		: company,
 			location    	: location,
-			descriptionFile : descriptionFileName,
+			descriptionFile : descriptionFileOriginalName,
 			hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
 			skills			: [],
 			referers		: [],
