@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-
-
+var path = require('path');
 
 //job schema
 var jobSchema = mongoose.Schema({
@@ -10,11 +9,8 @@ var jobSchema = mongoose.Schema({
   description: {
     type: String
   },
-  //need npm install mongoose-file for this
-  //descriptionFile: {
-    //type: File
-  //},
-  descriptionFile: {
+  file:{},
+  fileData: {
     type: String
   },
   company: {
@@ -46,18 +42,32 @@ var jobSchema = mongoose.Schema({
 });
 
 
+
+/**********************************************************************
+****************************mongoose-file STUFF*********************
+***********************************************************************/
+var filePluginLib = require('mongoose-file');
+var filePlugin = filePluginLib.filePlugin;
+var make_upload_to_model = filePluginLib.make_upload_to_model;
+
+
+var transfers_base = path.join(__dirname, "transfers");
+var transfers = path.join(transfers_base, "u");
+
+jobSchema.plugin(filePlugin, {
+  upload_to: make_upload_to_model(transfers, 'photos'),
+  relative_to: transfers_base
+});
+
+/**********************************************************************
+**********************END OF mongoose-file STUFF***********************
+***********************************************************************/
+
+
+
+
 //Make this schema available outside this file through a variable
 var Job = module.exports = mongoose.model('Job', jobSchema);
-
-/*module.exports.createJob = function(newJob, callback){
-        bcrypt.hash(newUser.password,10,function(err, hash){
-          if(err) throw err;
-          //set hashed pw
-          newUser.password = hash
-          //put user in db
-          
-        });
-}*/
 
 
 //helper to Fetch all jobes from outside this file. Give a limit
@@ -71,28 +81,3 @@ module.exports.getJobById = function(id, callback){
 console.log('inside getJobById');
   Job.findById(id, callback);
 }
-
-
-/*
-module.exports.addjob(info, callback(err, job){
-
-
-//Add a new lesson to a Job
-/module.exports.addLesson = function(info, callback){
-        job_id = info['job_id'];
-        lesson_number = info['lesson_number'];
-        lesson_title = info['lesson_title'];
-        lesson_body = info['lesson_body'];
-console.log('hs in models addLesson query:\n');
-
-        var query = {_id: mongoose.Types.ObjectId(job_id)};
-console.log(query);
-
-        Job.findOneAndUpdate(
-                query,
-                {$push: {"lessons": {lesson_number: lesson_number, lesson_title: lesson_title, lesson_body: lesson_body}}},
-                {safe: true, upsert: true},
-                callback
-        );
-
-}*/

@@ -10,7 +10,6 @@ var session = require('express-session');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
-var multer = require('multer');
 
 
 /* This does not work with handlebars have to user express-flash instead 
@@ -59,10 +58,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
-
-//hs handles file uploads
-var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
 
 
 // uncomment after placing your favicon in /public

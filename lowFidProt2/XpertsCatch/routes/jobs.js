@@ -1,8 +1,34 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+
+var streamBuffers = require('stream-buffers');
+var fs = require('fs');
+var path = require('path');
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
+var uploads = multer({ dest: 'transfers/' });
+
+/**********************************************************************
+****************************mongoose-file STUFF*********************
+***********************************************************************/
+var filePluginLib = require('mongoose-file');
+var filePlugin = filePluginLib.filePlugin;
+var make_upload_to_model = filePluginLib.make_upload_to_model;
+
+
+var transfers_base = path.join(__dirname, "transfers");
+var transfers = path.join(transfers_base, "u");
+
+/**********************************************************************
+**********************END OF mongoose-file STUFF***********************
+***********************************************************************/
+
+
+
+
+
+
+
 
 
 //mongo Schemas
@@ -67,9 +93,9 @@ router.get('/:job_id/details/:hiringManager_id/edit', function(req, res, next) {
 });
 
 
-router.post('/:job_id/details/:hiringManager_id/edit', upload.single('description_file'), function(req, res){
-console.log('inside job edit post uploded file:\n');
-console.log(req.file);
+router.post('/:job_id/details/:hiringManager_id/edit', uploads.single('description_file'), function(req, res){
+console.log('inside job edit post\n');
+
 
 	var hiringManagerId = req.params.hiringManager_id;
 	var jobId           = req.params.job_id;
@@ -79,69 +105,119 @@ console.log(req.file);
 	var company     = req.body.company;
 	var location    = req.body.location;
 
+
 	if(req.file){
-		console.log("Uploading File...");
+		console.log("Uploading File: \n");
+		console.log(req.file);
 
-		//file info
-		var descriptionFileOriginalName = req.file.originalname;
-		/*var descriptionFileName         = req.file.description_file.filename
-		var descriptionFileMime         = req.file.description_file.mimetype;
-		var descriptionFilePath         = req.file.description_file.path
-		var descriptionFileEncoding    = req.file.description_file.encoding;
-		var descriptionFileSize         = req.file.description_file.size;*/
-	} else {
-		// Set a default profile image. We put this in the uploads folder ourselves
-		var descriptionFileName = 'noFile.txt';
-  }
+		fs.readFile(req.file.path, function(err, original_data){
+			if(err){
+				console.log('hs readfile/jobs.js err: '+err);
+				throw err;
+			}
 
-console.log('descriptionFile originalname: '+descriptionFileOriginalName);
-
-	//Validate the Form
-	req.checkBody('title', 'Job Title field is required').notEmpty();
+			console.log('read the uploaded file');
+	
+			var base64File = original_data.toString('base64');
+			//Validate the Form
+			req.checkBody('title', 'Job Title field is required').notEmpty();
  
-	//store the errors for rendering
-	var formErrors = req.validationErrors();    
+			//store the errors for rendering
+			var formErrors = req.validationErrors();    
 
-	if(formErrors){
-		res.render('jobs/edit',{errors : formErrors,title : title});
-	} else {
-		query = {_id: req.params.job_id};
-		Job.findOneAndUpdate(
-			query,
-			{$set:{
-				   "title":title,
-				   "description": description,
-				   "company": company,
-				   "location": location,
-				   "descriptionFile" : descriptionFileOriginalName
-				   }
-			},
-			{safe: true, upsert: true},
-			//ALL CALLBACKS ARE OPTIONAL
-			function(err, job){
-				if(err) throw err;
-				else{
-					console.log('updated job:\n'+job+'\n\n');
-					HiringManager.update(
+			if(formErrors){
+				res.render('jobs/edit',{errors : formErrors,title : title});
+			} else {
+				query = {_id: req.params.job_id};
+				console.log('querying job:\n'+query);
+				Job.findOneAndUpdate(
+					query,
+					{$set:
 						{
-							//select a doc: can also use <_id: hiringManagerId>
-							"jobs.job_id": jobId,
-							//select a job
-							jobs: { $elemMatch:{job_id: jobId} }
-						},
-						{ 
-							$set:{"jobs.$.job_title": title}
-						},
-						function(err, hiringManager){
-							if(err) throw err;
-							else{
-								console.log('updated job name for hiringManager:\n'+hiringManager+'\n\n');
-							}
+				   			"title":title,
+				   			"description": description,
+				   			"company": company,
+				   			"location": location,
+				   			"file": req.file,
+							"fileData": base64File
+				   		}
+					},
+					{safe: true, upsert: true},
+					function(err, job){
+						if(err){
+							console.log('hs1 err: '+ err);
+							throw err;}
+						else{
+							console.log('updated job:\n'+job+'\n\n');
+							HiringManager.update(
+								{
+									//select a doc: can also use <_id: hiringManagerId>
+									"jobs.job_id": jobId,
+									//select a job
+									jobs: { $elemMatch:{job_id: jobId} }
+								},
+								{ 
+									$set:{"jobs.$.job_title": title}
+								},
+								function(err, hiringManager){
+									if(err){
+										console.log('hs2 err: '+ err); 
+										throw err;}
+									else{
+										console.log('updated job name for hiringManager:\n'+hiringManager+'\n\n');
+									}
+								}
+							);
 						}
-					);
-				}
-			}   
-		);
+					}	   
+				);
+			}
+		});
+
+	} else {
+		//store the errors for rendering
+		var formErrors = req.validationErrors();    
+
+		if(formErrors){
+			res.render('jobs/edit',{errors : formErrors,title : title});
+		} else {
+			query = {_id: req.params.job_id};
+			Job.findOneAndUpdate(
+				query,
+				{$set:
+					{
+			   			"title":title,
+			   			"description": description,
+			   			"company": company,
+			   			"location": location
+			   		}
+				},
+				{safe: true, upsert: true},
+				function(err, job){
+					if(err) throw err;
+					else{
+						console.log('updated job:\n'+job+'\n\n');
+						HiringManager.update(
+							{
+								//select a doc: can also use <_id: hiringManagerId>
+								"jobs.job_id": jobId,
+								//select a job
+								jobs: { $elemMatch:{job_id: jobId} }
+							},
+							{ 
+								$set:{"jobs.$.job_title": title}
+							},
+							function(err, hiringManager){
+								if(err) throw err;
+								else{
+									console.log('updated job name for hiringManager:\n'+hiringManager+'\n\n');
+								}
+							}
+						);
+					}
+				}	   
+			);
+		}
 	}
 
 
