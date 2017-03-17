@@ -9,7 +9,30 @@ var jobSchema = mongoose.Schema({
   description: {
     type: String
   },
-  file:{},
+  fileSize: {
+    type: Number
+  },
+  fileName: {
+    type: String
+  },
+  filePath: {
+     type: String
+   },
+  fileDestination: {
+     type: String
+   }, 
+  fileMimetype: {
+    type: String
+  },
+  fileEncoding: {
+    type: String
+  },
+  fileOriginalName: {
+      type: String
+  },
+  fileFieldName: {
+      type: String
+  },
   fileData: {
     type: String
   },

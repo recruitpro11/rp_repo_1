@@ -87,7 +87,7 @@ router.get('/:job_id/details/:hiringManager_id/edit', function(req, res, next) {
 			console.log(err);
 			res.send(err);
 		} else {
-			res.render('jobs/edit', {'job':job, 'hiringManager_id': req.params.hiringManager_id});
+			res.render('jobs/edit', {'job':job, 'hiringManager_id':req.params.hiringManager_id});
 		}
 	});
 });
@@ -109,6 +109,18 @@ console.log('inside job edit post\n');
 	if(req.file){
 		console.log("Uploading File: \n");
 		console.log(req.file);
+
+		var jobFileMeta = {} ;
+		jobFileMeta["fileOriginalName"] = req.file.originalname;
+		jobFileMeta["fileSize"] = req.file.size;
+		jobFileMeta["fileMimetype"] = req.file.mimetype;
+		jobFileMeta["fileName"] = req.file.filename;
+		jobFileMeta["fileFieldName"] = req.file.fieldname;
+		jobFileMeta["fileEncoding"] = req.file.encoding;
+		jobFileMeta["fileDestination"] = req.file.destination;
+		jobFileMeta["filePath"] = req.file.path;
+
+
 
 		fs.readFile(req.file.path, function(err, original_data){
 			if(err){
@@ -138,8 +150,15 @@ console.log('inside job edit post\n');
 				   			"description": description,
 				   			"company": company,
 				   			"location": location,
-				   			"file": req.file,
-							"fileData": base64File
+							"fileData": base64File,
+							"fileOriginalName": jobFileMeta["fileOriginalName"],
+							"fileSize": jobFileMeta["fileSize"],
+							"fileMimetype":jobFileMeta["fileMimetype"], 
+							"fileName":jobFileMeta["fileName"],
+							"fileFieldName":jobFileMeta["fileFieldNamem"],
+							"fileEncoding":jobFileMeta["fileEncoding"],
+							"fileDestination":jobFileMeta["fileDestination"],
+							"filePath":jobFileMeta["filePath"]
 				   		}
 					},
 					{safe: true, upsert: true},
@@ -172,7 +191,7 @@ console.log('inside job edit post\n');
 					}	   
 				);
 			}
-		});
+		}.bind( {jobFileMeta : jobFileMeta} ));
 
 	} else {
 		//store the errors for rendering
