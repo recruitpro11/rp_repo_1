@@ -1,8 +1,29 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+
+var streamBuffers = require('stream-buffers');
+var fs = require('fs');
+var path = require('path');
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
+var uploads = multer({ dest: 'transfers/' });
+
+/**********************************************************************
+****************************mongoose-file STUFF*********************
+***********************************************************************/
+var filePluginLib = require('mongoose-file');
+var filePlugin = filePluginLib.filePlugin;
+var make_upload_to_model = filePluginLib.make_upload_to_model;
+
+
+var transfers_base = path.join(__dirname, "transfers");
+var transfers = path.join(transfers_base, "u");
+
+/**********************************************************************
+**********************END OF mongoose-file STUFF***********************
+***********************************************************************/
+
+
 
 //Schemas
 Jobs = require('../models/job');
@@ -48,7 +69,7 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add GE
    res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManager_id});
 });
 
-router.post('/jobs/:hiringManager_id/add', upload.single('description_file'), function(req, res){
+router.post('/jobs/:hiringManager_id/add', uploads.single('description_file'), function(req, res){
 console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add POST\n');
 	
 	
@@ -59,39 +80,57 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
   	var hiringManagerId = req.params.hiringManager_id;
 
   	if(req.file){
-		console.log("Uploading File...");
+		console.log("Uploading File: \n");
+		console.log(req.file);
 
-		//file info
-		var descriptionFileOriginalName = req.file.originalname;
-		/*var descriptionFileName         = req.files.description_file.name
-		var descriptionFileMime         = req.files.description_file.mimetype;
-		var descriptionFilePath         = req.files.description_file.path
-		var descriptionFileExtension    = req.files.description_file.extension;
-		var descriptionFileSize         = req.files.description_file.size*/
-	} else {
-		// Set a default profile image. We put this in the uploads folder ourselves
-		var descriptionFileName = 'noFile.txt';
-	}
+		var jobFileMeta = {} ;
+		jobFileMeta["fileOriginalName"] = req.file.originalname;
+		jobFileMeta["fileSize"] = req.file.size;
+		jobFileMeta["fileMimetype"] = req.file.mimetype;
+		jobFileMeta["fileName"] = req.file.filename;
+		jobFileMeta["fileFieldName"] = req.file.fieldname;
+		jobFileMeta["fileEncoding"] = req.file.encoding;
+		jobFileMeta["fileDestination"] = req.file.destination;
+		jobFileMeta["filePath"] = req.file.path;
 
-	//Validate the Form
-  	req.checkBody('title', 'Job Title field is required').notEmpty();
+
+
+		fs.readFile(req.file.path, function(err, original_data){
+			if(err){
+				console.log('hs readfile/jobs.js err: '+err);
+				throw err;
+			}
+
+			console.log('read the uploaded file');
+	
+			var base64File = original_data.toString('base64');
+
+			req.checkBody('title', 'Job Title field is required').notEmpty();
  
-  	//store the errors for rendering
-  	var formErrors = req.validationErrors();    
+  			//store the errors for rendering
+  			var formErrors = req.validationErrors();    
 
-  	if(formErrors){
-		res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManagerId});
-  	} else {
+  			if(formErrors){
+				res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManagerId});
+  			} else {
   		var newJob = new Job({
 			title 			: title,
 			description 	: description,
 			company 		: company,
 			location    	: location,
-			descriptionFile : descriptionFileOriginalName,
 			hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
 			skills			: [],
 			referers		: [],
-			applicants		: []
+			applicants		: [],
+			fileData: base64File,
+			fileOriginalName: jobFileMeta["fileOriginalName"],
+			fileSize: jobFileMeta["fileSize"],
+			fileMimetype:jobFileMeta["fileMimetype"], 
+			fileName:jobFileMeta["fileName"],
+			fileFieldName:jobFileMeta["fileFieldNamem"],
+			fileEncoding:jobFileMeta["fileEncoding"],
+			fileDestination:jobFileMeta["fileDestination"],
+			filePath:jobFileMeta["filePath"]
 	  	});
 	  	console.log('hs created a job object to be added');
 
@@ -112,6 +151,63 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 			}
 	  	});
   	}
+
+
+		}.bind( {jobFileMeta : jobFileMeta} ));
+
+
+	} else {
+		req.checkBody('title', 'Job Title field is required').notEmpty();
+ 
+  	//store the errors for rendering
+  	var formErrors = req.validationErrors();    
+
+  	if(formErrors){
+		res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManagerId});
+  	} else {
+  		var newJob = new Job({
+			title 			: title,
+			description 	: description,
+			company 		: company,
+			location    	: location,
+			descriptionFile : descriptionFileOriginalName,
+			hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
+			skills			: [],
+			referers		: [],
+			applicants		: [],
+			fileData: base64File,
+			fileOriginalName: jobFileMeta["fileOriginalName"],
+			fileSize: jobFileMeta["fileSize"],
+			fileMimetype:jobFileMeta["fileMimetype"], 
+			fileName:jobFileMeta["fileName"],
+			fileFieldName:jobFileMeta["fileFieldNamem"],
+			fileEncoding:jobFileMeta["fileEncoding"],
+			fileDestination:jobFileMeta["fileDestination"],
+			filePath:jobFileMeta["filePath"]
+	  	});
+	  	console.log('hs created a job object to be added');
+
+	  	newJob.save(function(err, job){
+			if(err) throw err;
+			else{
+					console.log('created job:\n'+job+'\n\n');
+					var query = {_id: mongoose.Types.ObjectId(req.params.hiringManager_id)};
+					HiringManager.findOneAndUpdate(
+						query,
+						{$push: {"jobs": {job_id: job._id, job_title: job.title}}},
+						{safe: true, upsert: true},
+						//ALL CALLBACKS ARE OPTIONAL
+						function(err, hiringManager){
+				  			console.log('updated hiringManager:\n'+hiringManager+'\n\n');
+						}
+					);
+			}
+	  	});
+  	}
+	}
+
+	//Validate the Form
+  	
 
   	req.flash('success','You have added a new job!');
   	res.redirect('/hiringManagers/jobs');

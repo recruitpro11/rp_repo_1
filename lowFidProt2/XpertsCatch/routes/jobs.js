@@ -245,7 +245,31 @@ console.log('inside job edit post\n');
 });
 
 
+/*****************************************************************
+********Download or View job Description File Route***************
+******************************************************************/
+router.get('/:job_id/download', function(req, res){
+	console.log('inside download route');
+	
+	var query = {_id: mongoose.Types.ObjectId(req.params.job_id)};
+	Job.findOne(query, function(err, job){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			console.log('found job: \n');
+	  		//console.log(job);
 
+	  		var decodedImage = new Buffer(job.fileData, 'base64');
+
+	  		res.setHeader('Content-disposition', "inline; filename=" + job.fileOriginalName);
+	  		res.setHeader('Content-type', job.fileMimetype);
+
+	  		res.send(decodedImage);
+		}
+	});
+
+});
 
 
 
