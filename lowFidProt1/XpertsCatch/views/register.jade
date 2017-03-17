@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  .container
+    .jumbotron
+      .container
+        h1 Who Are You? 
+        p Please select of the options below
+
+        //below is a row of large buttons seperated by margin
+        a.btn.btn-primary.btn-lg(href='/users/register/prof') Professor&nbsp;
+        a.btn.btn-primary.btn-lg(href='/users/register/ta', style='margin-left: 10px;') TA/RA&nbsp
+        a.btn.btn-primary.btn-lg(href='/users/register/hm', style='margin-left: 10px;') Hiring Manager&nbsp 
+
+        //This is a more sophisticated way of doing same as above
+        //.row
+          //.col-md-4
+            //a.btn.btn-primary.btn-lg(href='/users/register/prof') Professor&nbsp;
+          //.col-md-4
+            //a.btn.btn-primary.btn-lg(href='/users/register/ta', style='margin-left: 5px;') TA/RA&nbsp
+          //.col-md-4
+            //a.btn.btn-primary.btn-lg(href='/users/register/hm', style='margin-left: 5px;') Hiring Manager&nbsp
+
+    .footer
+      .container
+        .row
+          .col-md-4
+            h2 About Us
+            a.btn.btn-default(href='#') View Details
+          .col-md-4
+            h2 Services
+            a.btn.btn-default(href='#') View Details
+          .col-md-4
+            h2 Get In Touch
+            a.btn.btn-default(href='#') View Details
+
