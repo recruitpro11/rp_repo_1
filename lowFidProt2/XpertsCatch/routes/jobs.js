@@ -245,6 +245,48 @@ console.log('inside job edit post\n');
 });
 
 
+
+
+
+
+
+
+/*****************************************************************
+***********************Edit job Route***************************
+******************************************************************/
+router.get('/:job_id/delete/:hiringManager_id', function(req, res){
+console.log('inside job delete\n');
+
+
+	var hiringManagerId = req.params.hiringManager_id;
+	var jobId           = req.params.job_id;
+
+	query = {_id: req.params.job_id};
+	Job.remove(query, function(err){
+		console.log('deleted job:\n'+'\n\n');
+						HiringManager.update(
+							{"jobs.job_id": jobId},
+							{ $pull:{ 'jobs': {job_id: jobId} }	},
+							function(err, hiringManager){
+								if(err) throw err;
+								else{
+									console.log('deleted job name for hiringManager:\n'+hiringManager+'\n\n');
+								}
+							}
+						);
+	})
+
+	req.flash('success','You have updated this job!');
+	res.redirect('/hiringManagers/jobs');
+});
+
+
+
+
+
+
+
+
 /*****************************************************************
 ********Download or View job Description File Route***************
 ******************************************************************/
