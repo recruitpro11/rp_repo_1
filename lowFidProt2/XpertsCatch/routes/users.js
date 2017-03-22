@@ -58,14 +58,16 @@ console.log(type);
   //store the errors for rendering
   var errors = req.validationErrors();
   if(errors){
-      res.render('users/signup',{
-      errors : errors,
-      first_name : first_name,
-      last_name : last_name,
-      email : formEmail,
-      username: formUsername,
-      password: formPassword,
-      password2: formPassword2
+    console.log('hs err:\n' + errors);
+
+    res.render('users/signup',{
+      'errors' : errors,
+      'first_name' : first_name,
+      'last_name' : last_name,
+      'email' : email,
+      'username': username,
+      'password': password,
+      'password2': password2
     });
   } else {
     //Instantiate new user. Using User job which we define
