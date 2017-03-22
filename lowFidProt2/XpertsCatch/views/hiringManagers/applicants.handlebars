@@ -1,24 +1,27 @@
-<h2>All Applicants in the System</h2>
-{{#each applicants}}
-	<div class="block">
-        	<h3>{{first_name}} {{last_name}}</h3>
-        	<p><strong>Jobs: </strong>
-            	{{jobs}}
-			</p>
-			<p><strong>Referrers: </strong>
-            	{{referers}}
-			</p>
-			<p><strong>Skills: </strong>
-            	{{skills}}
-			</p>
-			<p><strong>Info: </strong>
-            	{{info}}
-			</p>
-			<p><strong>Hiring Managers: </strong>
-            	{{hiringManagers}}
-			</p>
+<h2>{{tA.first_name}}'s Referrals</h2>
+<a href="/tAs/applicants/{{tA._id}}/add">Add a New Applicant</a>
+<hr />
 
-
-        	<a class='button' href='/jobs/{{_id}}/details/'> Reffer to a Job </a>
-	</div>
-{{/each}}
+{{#if tA.applicants}}
+<table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Applicant ID</th>
+      <th>First Name</th>
+      <th>First Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tA.applicants}}
+      <tr>
+        <td>{{applicant_id}}</td>
+        <td>{{applicant_first_name}}</td>
+        <td><a href="/jobs/{{applicant_id}}/lessons">View Details</a></td>  
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+  <p>This tA does not have any Refferals</p>
+{{/if}}

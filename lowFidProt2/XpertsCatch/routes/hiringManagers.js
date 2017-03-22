@@ -237,18 +237,14 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 ******************************************************************/
 router.get('/allApplicants', ensureAuthenticated, function(req, res, next) {
 console.log('Inside hiringManager /allApplicants route');
-  /*Applicant.find(req.user.username, function(err, hiringManager){
+  Applicant.find(function(err, applicants){
 	if(err){
-	  req.flash('error','Did not find the HiringManager');
 	  console.log(err);
 	  res.send(err);
 	} else {
-console.log('retreived hiringManager\n');
-console.log(hiringManager);
-//console.log('viewjob: hiringManager._id: '+hiringManager._id+'\nres.locals.user.id: '+res.locals.user.id+'\nres.user.id: '+req.user.id+'\nreq.user._id: '+req.user._id);
-	  res.render('hiringManagers/jobs', {'hiringManager': hiringManager});
+	  res.render('hiringManagers/allApplicants', {'applicants': applicants});
 	}
-  });*/
+  });
 });
 
 
