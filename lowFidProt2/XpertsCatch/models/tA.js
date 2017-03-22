@@ -23,12 +23,14 @@ var TASchema = mongoose.Schema({
                  job_title: {type:String}
         }],
         applicants:[{
+            applicant_id:{type: mongoose.Schema.Types.ObjectId},
             applicant_first_name: {type:String},
             applicant_last_name: {type:String},
         }],
         profs:[{
-            profs_first_name: {type:String},
-            profs_last_name: {type:String},
+            prof_id:{type: mongoose.Schema.Types.ObjectId},
+            prof_first_name: {type:String},
+            prof_last_name: {type:String},
         }]
 });
 

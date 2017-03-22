@@ -13,12 +13,20 @@ var applicantSchema = mongoose.Schema({
   email: {
     type: String
   },
-  referers:[{
-    referer_first_name: {type:String},
-    referer_last_name: {type:String},
-    referer_type: {type:String}
+  referrers:[{
+    referrer_id:{type: mongoose.Schema.Types.ObjectId},
+    referrer_first_name: {type:String},
+    referrer_last_name: {type:String},
+    referrer_type: {type:String}
+  }],
+  hiringManagers:[{
+    hiringManager_id:{type: mongoose.Schema.Types.ObjectId},
+    hiringManager_first_name: {type:String},
+    hiringManager_last_name: {type:String},
+    hiringManager_type: {type:String}
   }],
   jobs:[{
+    job_id:{type: mongoose.Schema.Types.ObjectId},
     job_title: {type:String}
   }],
   skills: [{
@@ -28,7 +36,37 @@ var applicantSchema = mongoose.Schema({
   info: [{
     location: {type: String},
     school: {type: String}
-  }]
+  }],
+  description: {
+    type: String
+  },
+  fileSize: {
+    type: Number
+  },
+  fileName: {
+    type: String
+  },
+  filePath: {
+     type: String
+   },
+  fileDestination: {
+     type: String
+   }, 
+  fileMimetype: {
+    type: String
+  },
+  fileEncoding: {
+    type: String
+  },
+  fileOriginalName: {
+      type: String
+  },
+  fileFieldName: {
+      type: String
+  },
+  fileData: {
+    type: String
+  }
 });
 
 

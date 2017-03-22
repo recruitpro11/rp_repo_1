@@ -54,11 +54,13 @@ var jobSchema = mongoose.Schema({
     hiringManager_last_name: {type:String},
   }],
   referers:[{
+    referer_id:{type: mongoose.Schema.Types.ObjectId},
     referer_first_name: {type:String},
     referer_last_name: {type:String},
     referer_type: {type:String}
   }],
   applicants:[{
+    applicant_id:{type: mongoose.Schema.Types.ObjectId},
     applicant_first_name: {type:String},
     applicant_last_name: {type:String},
   }]

@@ -23,16 +23,19 @@ var ProfSchema = mongoose.Schema({
                  job_title: {type:String}
         }],
         applicants:[{
+            applicant_id:{type: mongoose.Schema.Types.ObjectId},
             applicant_first_name: {type:String},
             applicant_last_name: {type:String},
         }],
         tAs:[{
-            tAs_first_name: {type:String},
-            tAs_last_name: {type:String},
+            tA_id:{type: mongoose.Schema.Types.ObjectId},
+            tA_first_name: {type:String},
+            tA_last_name: {type:String},
         }],
         hiringManagers:[{
-            hiringManagerst_first_name: {type:String},
-            hiringManagers_last_name: {type:String},
+            hiringManager_id:{type: mongoose.Schema.Types.ObjectId},
+            hiringManager_first_name: {type:String},
+            hiringManager_last_name: {type:String},
         }]
 });
 
