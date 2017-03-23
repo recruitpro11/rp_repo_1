@@ -17,7 +17,8 @@
       <tr>
         <td>{{applicant_id}}</td>
         <td>{{applicant_first_name}}</td>
-        <td><a href="/jobs/{{applicant_id}}/lessons">View Details</a></td>  
+        <td><a href="/tAs/applicants/{{applicant_id}}/details/{{../tA._id}}">View Applicant Details</a></td>
+        <td><a href="/tAs/applicants/{{applicant_id}}/delete/{{../tA._id}}">Delete This Applicant</a></td>  
       </tr>
     {{/each}}
   </tbody>

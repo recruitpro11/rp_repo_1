@@ -227,6 +227,268 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 
 
 
+/*****************************************************************
+***********************Job Details Route***************************
+******************************************************************/
+router.get('/applicants/:applicant_id/details/:tA_id', function(req, res, next) {
+
+	Applicant.findById(req.params.applicant_id, function(err, applicant){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			console.log('this is the applicant that was found\n')
+			console.log(applicant);
+		  res.render('tAs/applicantDetails', {'applicant': applicant, 'tA_id':req.params.tA_id });
+	   }
+  });
+});
+
+
+
+
+
+
+/*****************************************************************
+***********************Edit Applicant Route***************************
+******************************************************************/
+router.get('/applicants/:applicant_id/details/:tA_id/edit', function(req, res, next) {
+	Applicant.findById(req.params.applicant_id, function(err, applicant){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			res.render('tAs/editApplicant', {'applicant':applicant, 'tA_id':req.params.tA_id});
+		}
+	});
+});
+
+
+router.post('/:job_id/details/:hiringManager_id/edit', uploads.single('description_file'), function(req, res){
+console.log('inside job edit post\n');
+
+
+	var hiringManagerId = req.params.hiringManager_id;
+	var jobId           = req.params.job_id;
+	
+	var title       = req.body.title;
+	var description = req.body.description;
+	var company     = req.body.company;
+	var location    = req.body.location;
+
+
+	if(req.file){
+		console.log("Uploading File: \n");
+		console.log(req.file);
+
+		var jobFileMeta = {} ;
+		jobFileMeta["fileOriginalName"] = req.file.originalname;
+		jobFileMeta["fileSize"] = req.file.size;
+		jobFileMeta["fileMimetype"] = req.file.mimetype;
+		jobFileMeta["fileName"] = req.file.filename;
+		jobFileMeta["fileFieldName"] = req.file.fieldname;
+		jobFileMeta["fileEncoding"] = req.file.encoding;
+		jobFileMeta["fileDestination"] = req.file.destination;
+		jobFileMeta["filePath"] = req.file.path;
+
+
+
+		fs.readFile(req.file.path, function(err, original_data){
+			if(err){
+				console.log('hs readfile/jobs.js err: '+err);
+				throw err;
+			}
+
+			console.log('read the uploaded file');
+	
+			var base64File = original_data.toString('base64');
+			//Validate the Form
+			req.checkBody('title', 'Job Title field is required').notEmpty();
+ 
+			//store the errors for rendering
+			var formErrors = req.validationErrors();    
+
+			if(formErrors){
+				res.render('jobs/edit',{errors : formErrors,title : title});
+			} else {
+				query = {_id: req.params.job_id};
+				console.log('querying job:\n'+query);
+				Job.findOneAndUpdate(
+					query,
+					{$set:
+						{
+				   			"title":title,
+				   			"description": description,
+				   			"company": company,
+				   			"location": location,
+							"fileData": base64File,
+							"fileOriginalName": jobFileMeta["fileOriginalName"],
+							"fileSize": jobFileMeta["fileSize"],
+							"fileMimetype":jobFileMeta["fileMimetype"], 
+							"fileName":jobFileMeta["fileName"],
+							"fileFieldName":jobFileMeta["fileFieldNamem"],
+							"fileEncoding":jobFileMeta["fileEncoding"],
+							"fileDestination":jobFileMeta["fileDestination"],
+							"filePath":jobFileMeta["filePath"]
+				   		}
+					},
+					{safe: true, upsert: true},
+					function(err, job){
+						if(err){
+							console.log('hs1 err: '+ err);
+							throw err;}
+						else{
+							console.log('updated job:\n'+job+'\n\n');
+							HiringManager.update(
+								{
+									//select a doc: can also use <_id: hiringManagerId>
+									"jobs.job_id": jobId,
+									//select a job
+									jobs: { $elemMatch:{job_id: jobId} }
+								},
+								{ 
+									$set:{"jobs.$.job_title": title}
+								},
+								function(err, hiringManager){
+									if(err){
+										console.log('hs2 err: '+ err); 
+										throw err;}
+									else{
+										console.log('updated job name for hiringManager:\n'+hiringManager+'\n\n');
+									}
+								}
+							);
+						}
+					}	   
+				);
+			}
+		}.bind( {jobFileMeta : jobFileMeta} ));
+
+	} else {
+		//store the errors for rendering
+		var formErrors = req.validationErrors();    
+
+		if(formErrors){
+			res.render('jobs/edit',{errors : formErrors,title : title});
+		} else {
+			query = {_id: req.params.job_id};
+			Job.findOneAndUpdate(
+				query,
+				{$set:
+					{
+			   			"title":title,
+			   			"description": description,
+			   			"company": company,
+			   			"location": location
+			   		}
+				},
+				{safe: true, upsert: true},
+				function(err, job){
+					if(err) throw err;
+					else{
+						console.log('updated job:\n'+job+'\n\n');
+						HiringManager.update(
+							{
+								//select a doc: can also use <_id: hiringManagerId>
+								"jobs.job_id": jobId,
+								//select a job
+								jobs: { $elemMatch:{job_id: jobId} }
+							},
+							{ 
+								$set:{"jobs.$.job_title": title}
+							},
+							function(err, hiringManager){
+								if(err) throw err;
+								else{
+									console.log('updated job name for hiringManager:\n'+hiringManager+'\n\n');
+								}
+							}
+						);
+					}
+				}	   
+			);
+		}
+	}
+
+
+	req.flash('success','You have updated this job!');
+	res.redirect('/hiringManagers/jobs');
+});
+
+
+
+
+
+
+
+/*****************************************************************
+***********************Delete job Route***************************
+******************************************************************/
+router.get('/:job_id/delete/:hiringManager_id', function(req, res){
+console.log('inside job delete\n');
+
+
+	var hiringManagerId = req.params.hiringManager_id;
+	var jobId           = req.params.job_id;
+
+	query = {_id: req.params.job_id};
+	Job.remove(query, function(err){
+		console.log('deleted job:\n'+'\n\n');
+						HiringManager.update(
+							{"jobs.job_id": jobId},
+							{ $pull:{ 'jobs': {job_id: jobId} }	},
+							function(err, hiringManager){
+								if(err) throw err;
+								else{
+									console.log('deleted job name for hiringManager:\n'+hiringManager+'\n\n');
+								}
+							}
+						);
+	})
+
+	req.flash('success','You have updated this job!');
+	res.redirect('/hiringManagers/jobs');
+});
+
+
+
+
+
+
+
+
+/*****************************************************************
+********Download or View job Description File Route***************
+******************************************************************/
+router.get('/:job_id/download', function(req, res){
+	console.log('inside download route');
+	
+	var query = {_id: mongoose.Types.ObjectId(req.params.job_id)};
+	Job.findOne(query, function(err, job){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			console.log('found job: \n');
+	  		//console.log(job);
+
+	  		var decodedImage = new Buffer(job.fileData, 'base64');
+
+	  		res.setHeader('Content-disposition', "inline; filename=" + job.fileOriginalName);
+	  		res.setHeader('Content-type', job.fileMimetype);
+
+	  		res.send(decodedImage);
+		}
+	});
+
+});
+
+
+
+
+
+
+
 function ensureAuthenticated(req, res, next){
   //this is passports authentication API
   if(req.isAuthenticated()){

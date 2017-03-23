@@ -252,7 +252,7 @@ console.log('inside job edit post\n');
 
 
 /*****************************************************************
-***********************Edit job Route***************************
+***********************Delete job Route***************************
 ******************************************************************/
 router.get('/:job_id/delete/:hiringManager_id', function(req, res){
 console.log('inside job delete\n');
