@@ -1,5 +1,5 @@
 <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-<h2>Add a New Applicant</h2>
+<h2>Edit this Applicant's Details</h2>
 <form id="regForm" method="post" enctype="multipart/form-data" action="/tAs/applicants/{{tA_id}}/add">
   <div>
     <label>First Name: </label>
@@ -11,11 +11,11 @@
   </div>
   <div>
     <label>Email</label>
-    <input type="text" name="email value={{applicant.email}}>
+    <input type="text" name="email" value={{applicant.email}}>
   </div>
   <div>
     <label>Additional Info</label>
-    <input type="text" name="info" value="applicant.info">
+    <input type="text" name="info" value={{applicant.info}}>
   </div>   
 
 
@@ -49,13 +49,15 @@
 <h6></h6>
 
   <div>
-    <p><strong>Resume File: </strong></p>
-    <a href="/applicants/{{applicant._id}}/download">{{applicant.fileOriginalName}}</a>
+    <p>
+      <strong>Resume File: </strong>
+      <a href="/tAs/applicants/{{applicant._id}}/download">{{applicant.fileOriginalName}}</a>
+    </p>
   </div>
 
   <div>
     <label>Upload a new Resume: </label>
-    <input type="file" name="resume_file" value={{applicant.fileOriginalName}}>
+    <input type="file" name="resume_file">
   </div>
 
 
@@ -64,7 +66,7 @@
 
   <div>
     <label>Write a resume/description for the Applicant: </label>
-    <textarea name="description" id="hsTextAreaToBeReplaced" value={{applicant.fileOriginalName}}></textarea>
+    <textarea name="description" id="hsTextAreaToBeReplaced">{{applicant.description}}</textarea>
     <script type="text/javascript">
       // Replace the <textarea id="hsTextAreaToBeReplaced"> with a CKEditor
       CKEDITOR.replace( 'hsTextAreaToBeReplaced' );

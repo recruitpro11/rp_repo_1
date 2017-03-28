@@ -420,6 +420,37 @@ console.log('inside job edit post\n');
 
 
 
+/*****************************************************************
+********Download or View Applicant Resume File Route***************
+******************************************************************/
+router.get('/applicants/:applicant_id/download', function(req, res){
+	console.log('inside applicant resume download route');
+	
+	var query = {_id: mongoose.Types.ObjectId(req.params.applicant_id)};
+	Applicant.findOne(query, function(err, applicant){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			console.log('found applicant: \n');
+	  		//console.log(job);
+
+	  		var decodedImage = new Buffer(applicant.fileData, 'base64');
+
+	  		res.setHeader('Content-disposition', "inline; filename=" + applicant.fileOriginalName);
+	  		res.setHeader('Content-type', applicant.fileMimetype);
+
+	  		res.send(decodedImage);
+		}
+	});
+
+});
+
+
+
+
+
+
 
 /*****************************************************************
 ***********************Delete job Route***************************
