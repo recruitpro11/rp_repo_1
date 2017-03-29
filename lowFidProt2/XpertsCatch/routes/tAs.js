@@ -131,6 +131,53 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	var description = req.body.description;
 
 
+/**********retrieving skills**************/
+	/*var cheerio = require('cheerio'),
+		$ = cheerio.load('file.html'),
+		fs = require('fs');
+
+	fs.readFile('./views/tAs/addApplicant.handlebars', function (err, hbs) {
+		if (err) {
+			throw err; 
+		} else {
+			$ = cheerio.load(hbs.toString());
+			console.log("hsObj:\n" + $('#list1'));   
+		}
+	});*/
+
+	var s1 = req.body.s1;
+	var s2 = req.body.s2;
+	var s3 = req.body.s3;
+	var s4 = req.body.s4;
+	var s5 = req.body.s5;
+	if(s1 == 'on'){
+		s1 = 1;
+	} else {
+		s1 = 0;
+	}
+	if(s2 == 'on'){
+		s2 = 1;
+	} else {
+		s2 = 0;
+	}
+	if(s3 == 'on'){
+		s3 = 1;
+	} else {
+		s3 = 0;
+	}
+	if(s4 == 'on'){
+		s4 = 1;
+	} else {
+		s4 = 0;
+	}
+	if(s5 == 'on'){
+		s5 = 1;
+	} else {
+		s5 = 0;
+	}
+
+
+
 	if(req.file){
 		console.log("Uploading File: \n");
 		console.log(req.file);
@@ -175,7 +222,7 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	  				description     : description,
 	  				referrers       : [{referrer_id: req.params.tA_id, hiringManager_first_name: req.user.username}],
 	  				info            : [],
-	  				skills          : [],
+	  				skills          : [{skill_value: s1, skill_name: 'Php'}, {skill_value: s2, skill_name: 'Java'}, {skill_value: s3, skill_name: 'C++'}, {skill_value: s4, skill_name: 'Node'}, {skill_value: s5, skill_name: 'Language'}],
 	  				hiringManagers  : [],
 	  				jobs            : [],
 	  				fileData        : base64File,
@@ -229,7 +276,7 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	  			description     : description,
 	  			referrers       : [{referrer_id: req.params.tA_id, hiringManager_first_name: req.user.username}],
 	  			info            : [],
-	  			skills          : [],
+	  			skills          : [{skill_value: s1, skill_name: 'Php'}, {skill_value: s2, skill_name: 'Java'}, {skill_value: s3, skill_name: 'C++'}, {skill_value: s4, skill_name: 'Node'}, {skill_value: s5, skill_name: 'Language'}],
 	  			hiringManagers  : [],
 	  			jobs            : []
 	  		});

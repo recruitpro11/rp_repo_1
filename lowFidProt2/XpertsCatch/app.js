@@ -64,7 +64,7 @@ app.set('view engine', 'handlebars');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 /********The cookie and max age must be here otherwise express flash wont work*************************/

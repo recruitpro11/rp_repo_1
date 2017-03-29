@@ -92,6 +92,53 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
   	var location    	= req.body.location;
   	var hiringManagerId = req.params.hiringManager_id;
 
+
+/**********retrieving skills**************/
+  	/*var cheerio = require('cheerio'),
+		$ = cheerio.load('file.html'),
+		fs = require('fs');
+
+	fs.readFile('./views/tAs/addApplicant.handlebars', function (err, hbs) {
+		if (err) {
+			throw err; 
+		} else {
+			$ = cheerio.load(hbs.toString());
+			console.log("hsObj:\n" + $('#list1'));   
+		}
+	});*/
+
+	var s1 = req.body.s1;
+	var s2 = req.body.s2;
+	var s3 = req.body.s3;
+	var s4 = req.body.s4;
+	var s5 = req.body.s5;
+	if(s1 == 'on'){
+		s1 = 1;
+	} else {
+		s1 = 0;
+	}
+	if(s2 == 'on'){
+		s2 = 1;
+	} else {
+		s2 = 0;
+	}
+	if(s3 == 'on'){
+		s3 = 1;
+	} else {
+		s3 = 0;
+	}
+	if(s4 == 'on'){
+		s4 = 1;
+	} else {
+		s4 = 0;
+	}
+	if(s5 == 'on'){
+		s5 = 1;
+	} else {
+		s5 = 0;
+	}
+
+
   	if(req.file){
 		console.log("Uploading File: \n");
 		console.log(req.file);
@@ -132,7 +179,7 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 					company 		: company,
 					location    	: location,
 					hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
-					skills			: [],
+					skills			: [{skill_value: s1, skill_name: 'Php'}, {skill_value: s2, skill_name: 'Java'}, {skill_value: s3, skill_name: 'C++'}, {skill_value: s4, skill_name: 'Node'}, {skill_value: s5, skill_name: 'Language'}],
 					referers		: [],
 					applicants		: [],
 					fileData: base64File,
@@ -170,38 +217,28 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 
 	} else {
 		req.checkBody('title', 'Job Title field is required').notEmpty();
- 
-  	//store the errors for rendering
-  	var formErrors = req.validationErrors();    
+  			
+  		//store the errors for rendering
+  		var formErrors = req.validationErrors();    
 
-  	if(formErrors){
-		res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManagerId});
-  	} else {
-  		var newJob = new Job({
-			title 			: title,
-			description 	: description,
-			company 		: company,
-			location    	: location,
-			descriptionFile : descriptionFileOriginalName,
-			hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
-			skills			: [],
-			referers		: [],
-			applicants		: [],
-			fileData: base64File,
-			fileOriginalName: jobFileMeta["fileOriginalName"],
-			fileSize: jobFileMeta["fileSize"],
-			fileMimetype:jobFileMeta["fileMimetype"], 
-			fileName:jobFileMeta["fileName"],
-			fileFieldName:jobFileMeta["fileFieldNamem"],
-			fileEncoding:jobFileMeta["fileEncoding"],
-			fileDestination:jobFileMeta["fileDestination"],
-			filePath:jobFileMeta["filePath"]
-	  	});
-	  	console.log('hs created a job object to be added');
+  		if(formErrors){
+			res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManagerId, 'errors' : formErrors});
+  		} else {
+  			var newJob = new Job({
+  				title 			: title,
+				description 	: description,
+				company 		: company,
+				location    	: location,
+				hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
+				skills			: [{skill_value: s1, skill_name: 'Php'}, {skill_value: s2, skill_name: 'Java'}, {skill_value: s3, skill_name: 'C++'}, {skill_value: s4, skill_name: 'Node'}, {skill_value: s5, skill_name: 'Language'}],
+				referers		: [],
+				applicants		: []
+				});
+			console.log('hs created a job object to be added');
 
-	  	newJob.save(function(err, job){
-			if(err) throw err;
-			else{
+			newJob.save(function(err, job){
+				if(err) throw err;
+				else{
 					console.log('created job:\n'+job+'\n\n');
 					var query = {_id: mongoose.Types.ObjectId(req.params.hiringManager_id)};
 					HiringManager.findOneAndUpdate(
@@ -210,16 +247,13 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 						{safe: true, upsert: true},
 						//ALL CALLBACKS ARE OPTIONAL
 						function(err, hiringManager){
-				  			console.log('updated hiringManager:\n'+hiringManager+'\n\n');
+							console.log('updated hiringManager:\n'+hiringManager+'\n\n');
 						}
 					);
-			}
-	  	});
-  	}
+				}
+			});
+		}
 	}
-
-	//Validate the Form
-  	
 
   	req.flash('success','You have added a new job!');
   	res.redirect('/hiringManagers/jobs');
