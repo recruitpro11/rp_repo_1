@@ -276,7 +276,7 @@ console.log('inside job delete\n');
 						);
 	})
 
-	req.flash('success','You have updated this job!');
+	req.flash('success','You have deleted this job!');
 	res.redirect('/hiringManagers/jobs');
 });
 

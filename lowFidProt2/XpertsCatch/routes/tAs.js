@@ -56,6 +56,44 @@ router.get('/jobs', ensureAuthenticated, function(req, res, next) {
 
 
 /*****************************************************************
+********Download or View job Description File Route***************
+******************************************************************/
+router.get('/:job_id/download', function(req, res){
+	console.log('inside download route');
+	
+	var query = {_id: mongoose.Types.ObjectId(req.params.job_id)};
+	Job.findOne(query, function(err, job){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			console.log('found job: \n');
+	  		//console.log(job);
+
+	  		var decodedImage = new Buffer(job.fileData, 'base64');
+
+	  		res.setHeader('Content-disposition', "inline; filename=" + job.fileOriginalName);
+	  		res.setHeader('Content-type', job.fileMimetype);
+
+	  		res.send(decodedImage);
+		}
+	});
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*****************************************************************
 **********************Applicants View Route***********************
 ******************************************************************/
 router.get('/applicants', ensureAuthenticated, function(req, res, next) {
@@ -228,7 +266,7 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 
 
 /*****************************************************************
-***********************Job Details Route***************************
+***********************Applicant Details Route***************************
 ******************************************************************/
 router.get('/applicants/:applicant_id/details/:tA_id', function(req, res, next) {
 
@@ -453,32 +491,32 @@ router.get('/applicants/:applicant_id/download', function(req, res){
 
 
 /*****************************************************************
-***********************Delete job Route***************************
+***********************Delete Applicant Route***************************
 ******************************************************************/
-router.get('/:job_id/delete/:hiringManager_id', function(req, res){
-console.log('inside job delete\n');
+router.get('/applicants/:applicant_id/delete/:tA_id', function(req, res){
+console.log('inside tAs applicant delete\n');
 
 
-	var hiringManagerId = req.params.hiringManager_id;
-	var jobId           = req.params.job_id;
+	var applicantId = req.params.applicant_id;
+	var tAId        = req.params.tA_id;
 
-	query = {_id: req.params.job_id};
-	Job.remove(query, function(err){
-		console.log('deleted job:\n'+'\n\n');
-						HiringManager.update(
-							{"jobs.job_id": jobId},
-							{ $pull:{ 'jobs': {job_id: jobId} }	},
-							function(err, hiringManager){
+	query = {_id: applicantId};
+	Applicant.remove(query, function(err){
+		console.log('deleted applicant:\n'+'\n\n');
+						TA.update(
+							{"applicants.applicant_id": applicantId},
+							{ $pull:{ 'applicants': {applicant_id: applicantId} }	},
+							function(err, tA){
 								if(err) throw err;
 								else{
-									console.log('deleted job name for hiringManager:\n'+hiringManager+'\n\n');
+									console.log('deleted applicant name for tA:\n'+tA+'\n\n');
 								}
 							}
 						);
 	})
 
-	req.flash('success','You have updated this job!');
-	res.redirect('/hiringManagers/jobs');
+	req.flash('success','You have deleted this applicant!');
+	res.redirect('/tAs/applicants');
 });
 
 
@@ -488,31 +526,7 @@ console.log('inside job delete\n');
 
 
 
-/*****************************************************************
-********Download or View job Description File Route***************
-******************************************************************/
-router.get('/:job_id/download', function(req, res){
-	console.log('inside download route');
-	
-	var query = {_id: mongoose.Types.ObjectId(req.params.job_id)};
-	Job.findOne(query, function(err, job){
-		if(err){
-			console.log(err);
-			res.send(err);
-		} else {
-			console.log('found job: \n');
-	  		//console.log(job);
 
-	  		var decodedImage = new Buffer(job.fileData, 'base64');
-
-	  		res.setHeader('Content-disposition', "inline; filename=" + job.fileOriginalName);
-	  		res.setHeader('Content-type', job.fileMimetype);
-
-	  		res.send(decodedImage);
-		}
-	});
-
-});
 
 
 
