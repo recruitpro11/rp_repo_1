@@ -31,6 +31,11 @@ var TASchema = mongoose.Schema({
             prof_id:{type: mongoose.Schema.Types.ObjectId},
             prof_first_name: {type:String},
             prof_last_name: {type:String},
+        }],
+        referrals:[{
+            applicant_id:{type: mongoose.Schema.Types.ObjectId},
+            hiringManager_id:{type: mongoose.Schema.Types.ObjectId},
+            job_id:{type: mongoose.Schema.Types.ObjectId}
         }]
 });
 

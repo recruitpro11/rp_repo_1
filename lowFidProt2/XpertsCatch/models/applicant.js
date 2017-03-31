@@ -23,7 +23,6 @@ var applicantSchema = mongoose.Schema({
     hiringManager_id:{type: mongoose.Schema.Types.ObjectId},
     hiringManager_first_name: {type:String},
     hiringManager_last_name: {type:String},
-    hiringManager_type: {type:String}
   }],
   jobs:[{
     job_id:{type: mongoose.Schema.Types.ObjectId},

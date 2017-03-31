@@ -26,7 +26,7 @@ var transfers = path.join(transfers_base, "u");
 //Schemas
 Job = require('../models/job');
 TA = require('../models/tA');
-User = require('../models/user');
+HiringManager = require('../models/hiringManager');
 
 
 
@@ -322,8 +322,6 @@ router.get('/applicants/:applicant_id/details/:tA_id', function(req, res, next) 
 			console.log(err);
 			res.send(err);
 		} else {
-			console.log('this is the applicant that was found\n')
-			console.log(applicant);
 		  res.render('tAs/applicantDetails', {'applicant': applicant, 'tA_id':req.params.tA_id });
 	   }
   });
@@ -564,6 +562,119 @@ console.log('inside tAs applicant delete\n');
 
 	req.flash('success','You have deleted this applicant!');
 	res.redirect('/tAs/applicants');
+});
+
+
+
+
+
+
+
+/*****************************************************************
+**********************Applicants Refer Route***********************
+******************************************************************/
+router.get('/applicants/:applicant_id/refer/:tA_id', ensureAuthenticated, function(req, res, next) {
+	res.render('tAs/referApplicant', {'applicant_id':req.params.applicant_id, 'tA_id':req.params.tA_id});
+});
+
+router.post('/applicants/:applicant_id/refer/:tA_id', ensureAuthenticated, function(req, res, next) {
+	console.log('ta refer post router type: ' + type);
+	
+	//get form values
+	var type       = req.body.type;
+	var jobTitle = req.body.job;
+	var hiringManagerUsername  = req.body.hiringManager;
+	var tA_id = req.params.tA_id;
+
+	var query = {_id: mongoose.Types.ObjectId(req.params.applicant_id)};
+	Applicant.findOne(query, function(err, applicant){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			console.log('found applicant. \n');
+
+			if(type == 'a Hiring Manager'){
+				var query = {username: hiringManagerUsername };
+				HiringManager.findOneAndUpdate(
+					query,
+	  				{$push: {"applicants": {applicant_id: applicant._id, applicant_first_name: applicant.first_name, applicant_last_name: applicant.last_name}}},
+	  				{safe: true, upsert: true},
+	  				//ALL CALLBACKS ARE OPTIONAL
+	  				function(err, hiringManager){
+	  					console.log('updated the hiringManager.\n');
+
+	  					var query = {_id: mongoose.Types.ObjectId(tA_id)};
+	  					TA.update(
+	  						query,
+	  						{$push: {"referrals": {applicant_id: applicant._id, hiringManager_id: hiringManager._id}}},
+	  						{safe: true, upsert: true},
+	  						function(err){
+	  							if(err) throw err;
+	  							else
+	  								console.log('Updated the TA.\n');
+	  						}
+	  					);
+
+	  					applicant.hiringManagers.push({
+	  						hiringManager_id: hiringManager._id, 
+	  						hiringManager_first_name: hiringManager.first_name,
+	  						hiringManager_last_name: hiringManager.last_name
+	  					});
+
+	  					applicant.save(function(err){
+	  						if(err)
+	  							throw err;
+	  						console.log('updated the applicant.\n');
+	  					});
+
+	  				}.bind( {applicant : applicant, tA_id: tA_id} )
+	  			);
+			}
+			else if(type == 'a Job'){
+				var query = {title: jobTitle };
+				Job.findOneAndUpdate(
+					query,
+	  				{$push: {"applicants": {applicant_id: applicant._id, applicant_first_name: applicant.first_name, applicant_last_name: applicant.last_name}}},
+	  				{safe: true, upsert: true},
+	  				//ALL CALLBACKS ARE OPTIONAL
+	  				function(err, job){
+	  					console.log('updated the job.\n');
+
+	  					var query = {_id: mongoose.Types.ObjectId(tA_id)};
+	  					TA.update(
+	  						query,
+	  						{$push: {"referrals": {applicant_id: applicant._id, job_id: job._id}}},
+	  						{safe: true, upsert: true},
+	  						function(err){
+	  							if(err) throw err;
+	  							else
+	  								console.log('Updated the TA.\n');
+	  						}
+	  					);
+
+	  					applicant.jobs.push({
+	  						job_id: job._id, 
+	  						job_title: job.title
+	  					});
+
+	  					applicant.save(function(err){
+	  						if(err)
+	  							throw err;
+	  						console.log('updated the applicant.\n');
+	  					});
+
+	  				}.bind( {applicant : applicant, tA_id: tA_id} )
+	  			);
+			}
+
+			
+		}
+	});
+
+
+	req.flash('success','You have reffered this applicant!');
+	res.redirect('/tAs/applicants/'+req.params.applicant_id+'/details/'+req.params.tA_id);
 });
 
 

@@ -1,4 +1,4 @@
-<h2>{{tA.first_name}}'s Referrals</h2>
+<h2>{{tA.first_name}}'s Applicants</h2>
 <a href="/tAs/applicants/{{tA._id}}/add">Add a New Applicant</a>
 <hr />
 
@@ -8,7 +8,6 @@
     <tr>
       <th>Applicant ID</th>
       <th>First Name</th>
-      <th>First Name</th>
       <th></th>
     </tr>
   </thead>
@@ -17,8 +16,9 @@
       <tr>
         <td>{{applicant_id}}</td>
         <td>{{applicant_first_name}}</td>
-        <td><a href="/tAs/applicants/{{applicant_id}}/details/{{../tA._id}}">View Applicant Details</a></td>
-        <td><a href="/tAs/applicants/{{applicant_id}}/delete/{{../tA._id}}">Delete This Applicant</a></td>  
+        <td><a href="/tAs/applicants/{{applicant_id}}/details/{{../tA._id}}">Details</a></td>
+        <td><a href="/tAs/applicants/{{applicant_id}}/refer/{{../tA._id}}">Refer to Job or HM</a></td>
+        <td><a href="/tAs/applicants/{{applicant_id}}/delete/{{../tA._id}}">Delete</a></td>  
       </tr>
     {{/each}}
   </tbody>
