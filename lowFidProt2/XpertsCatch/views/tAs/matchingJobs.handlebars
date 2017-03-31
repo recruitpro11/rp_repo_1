@@ -1,0 +1,13 @@
+<h2>Jobs Matching this applicant's skills</h2>
+{{#each jobs}}
+	<div class="block">
+        	<h3>{{title}}</h3>
+        	<p><strong>Company: </strong>{{company}}</P>
+        	<p><strong>Description: </strong>
+            	{{description}}
+			</p>
+            
+            <a class='button' href='/tAs/applicants/{{../applicant_id}}/refer/{{../tA_id}}/job/{{_id}}'> Refer the applicant to this job </a>
+        	<a class='button' href='/jobs/{{_id}}/details/'> Job Details </a>
+	</div>
+{{/each}}

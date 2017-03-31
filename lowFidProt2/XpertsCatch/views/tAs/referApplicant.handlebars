@@ -1,19 +1,6 @@
-<h4>Refer this applicant to a job or hiring manager</h4>
+<h4>Refer this applicant to a hiring manager</h4>
 
-<form id="regForm" method="post" action="/tAs/applicants/{{{applicant_id}}}/refer/{{{tA_id}}}">
-        <div>
-                <label>Refer Applicant To:</label>
-                <select name="type">
-                        <option>a Job</option>
-                        <option>a Hiring Manager</option>
-                </select>
-        </div>
-
-        <div>
-                <label>Job Title: </label>
-                <input type="text" name="job">
-        </div>
-
+<form id="regForm" method="post" action="/tAs/applicants/{{{applicant_id}}}/refer/{{{tA_id}}}/hiringManager">
         <div>
                 <label>Hiring Manager's Username: </label>
                 <input type="text" name="hiringManager">
