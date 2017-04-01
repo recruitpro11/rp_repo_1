@@ -4,32 +4,51 @@
 
 <form id="skillForm" method="get" action="/tAs/applicants/{{applicant_id}}/refer/{{tA_id}}/job">
 
-	<input type="text" placeholder="Type something here" />
-
-	
-	<div id="checkbox-container">
-	  <div>
-		<label for="option1">Php</label>
-		<input type="checkbox" onchange="$('#skillForm').submit();" id="option1" name="Php">
-	  </div>
-	  <div>
-		<label for="option2">Java</label>
-		<input type="checkbox" onchange="$('#skillForm').submit();" id="option2" name="Java">
-	  </div>
-	  <div>
-		<label for="option3">C++</label>
-		<input type="checkbox" onchange="$('#skillForm').submit();" id="option3" name="C">
-	  </div>
-	  <div>
-		<label for="option4">Node</label>
-		<input type="checkbox" onchange="$('#skillForm').submit();" id="option4" name="Node">
-	  </div>
-	  <div>
-		<label for="option5">Language</label>
-		<input type="checkbox" onchange="$('#skillForm').submit();" id="option5" name="Language">
-	  </div>
-	  <button>Check All</button>
+	<div id="list1" class="dropdown-check-list" name="skills" tabindex="100">
+		<span class="anchor">Applicant's Skills</span>
+		
+		<input type="text" placeholder="Type something here" />
+		
+		<div id="checkbox-container">
+			<ul class="items">
+				<div>
+					<label for="option1">Php</label>
+					<input type="checkbox" onchange="$('#skillForm').submit();" id="option1" name="Php">
+				</div>
+				<div>
+					<label for="option2">Java</label>
+					<input type="checkbox" onchange="$('#skillForm').submit();" id="option2" name="Java">
+				</div>
+				<div>
+					<label for="option3">C++</label>
+					<input type="checkbox" onchange="$('#skillForm').submit();" id="option3" name="C">
+				</div>
+				<div>
+					<label for="option4">Node</label>
+					<input type="checkbox" onchange="$('#skillForm').submit();" id="option4" name="Node">
+				</div>
+				<div>
+					<label for="option5">Language</label>
+					<input type="checkbox" onchange="$('#skillForm').submit();" id="option5" name="Language">
+				</div>
+				
+				<button>Check All</button>
+			</ul>
+		</div>
 	</div>
+
+	<script type="text/javascript">
+		var checkList = document.getElementById('list1');
+		checkList.classList.add('visible');
+		checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+			if (checkList.classList.contains('visible')){
+				checkList.classList.remove('visible');
+			}
+			else{
+				checkList.classList.add('visible');
+			}
+		}
+    </script>
 
 	<script type="text/javascript">
 		var formValues = JSON.parse(localStorage.getItem('formValues')) || {};
