@@ -1,4 +1,33 @@
 <h2>Jobs Matching this applicant's skills</h2>
+
+<form method="get" action="/tAs/applicants/{{applicant_id}}/refer/{{tA_id}}/job">
+
+	<div id="list1" class="dropdown-check-list" name="skills" tabindex="100">
+    	<span class="anchor">Applicant's Skills</span>
+    	<ul class="items">
+          <li><input type="checkbox" name="Php" />Php </li>
+      		<li><input type="checkbox" name="Java" />Java</li>
+      		<li><input type="checkbox" name="C" />C++ </li>
+      		<li><input type="checkbox" name="Node" />Node </li>
+      		<li><input type="checkbox" name="Language" />Language </li>
+    	</ul>
+  	</div>
+  	<script type="text/javascript">
+    	var checkList = document.getElementById('list1');
+    	checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+      		if (checkList.classList.contains('visible'))
+        		checkList.classList.remove('visible');
+      		else
+        		checkList.classList.add('visible');
+      	}
+  	</script>
+
+
+	<input type="submit" value="Filter">
+</form>
+
+
+
 {{#each jobs}}
 	<div class="block">
         	<h3>{{title}}</h3>

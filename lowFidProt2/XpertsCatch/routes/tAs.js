@@ -54,7 +54,6 @@ router.get('/jobs', ensureAuthenticated, function(req, res, next) {
 
 
 
-
 /*****************************************************************
 ********Download or View job Description File Route***************
 ******************************************************************/
@@ -646,14 +645,39 @@ router.post('/applicants/:applicant_id/refer/:tA_id/hiringManager', ensureAuthen
 ************Applicants Refer to a Matching JOB Route**************
 ******************************************************************/
 router.get('/applicants/:applicant_id/refer/:tA_id/job', ensureAuthenticated, function(req, res, next) {
-	Job.getJobs(function(err, jobs){
-	if(err){
-	  console.log(err);
-	  res.send(err);
-	} else {
-	  res.render('tAs/matchingJobs', {'applicant_id':req.params.applicant_id, 'tA_id':req.params.tA_id, 'jobs': jobs});
+	
+	var query = {};
+
+	if(Object.keys(req.query).length !== 0){
+		console.log(req.query);
+
+
+		//Here we have to convert binary on off to numbers because in our schema 
+		//we defined skill_value as number. If it was boolian it would get 'on' and  'off'
+		query = {
+			$and:[
+				{skills:{ $elemMatch: {"skill_value" : parseInt([req.query.Php=='on' ? 1 : 0],10), "skill_name" : "Php"} } },
+				{skills:{ $elemMatch: {"skill_value" : parseInt([req.query.Java=='on' ? 1 : 0],10), "skill_name" : "Java"} } },
+				{skills:{ $elemMatch: {"skill_value" : parseInt([req.query.C=='on' ? 1 : 0],10), "skill_name" : "C++"} } },
+				{skills:{ $elemMatch: {"skill_value" : parseInt([req.query.Node=='on' ? 1 : 0],10), "skill_name" : "Node"} } },
+				{skills:{ $elemMatch: {"skill_value" : parseInt([req.query.Language=='on' ? 1 : 0],10), "skill_name" : "Language"} } }
+			]
+		};
 	}
-  });
+	else{
+		console.log('no query');
+	}
+
+
+	Job.find(query, function(err, jobs){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			res.render('tAs/matchingJobs', {'applicant_id':req.params.applicant_id, 'tA_id':req.params.tA_id, 'jobs': jobs});
+		}
+  	});
+
 });
 
 router.get('/applicants/:applicant_id/refer/:tA_id/job/:job_id', ensureAuthenticated, function(req, res, next) {
