@@ -689,16 +689,16 @@ router.get('/applicants/:applicant_id/refer/:tA_id/job', ensureAuthenticated, fu
 				if(err) throw err;
 				else{
 
-					var skills = {
-						'option1': applicant.skills[1].skill_value==0 ? '' : 'true', 
-						'option2': applicant.skills[2].skill_value==0 ? '' : 'true',
-						'option3': applicant.skills[3].skill_value==0 ? '' : 'true',
-						'option4': applicant.skills[4].skill_value==0 ? '' : 'true',
-						//'option5': applicant.skills[5].skill_value==0 ? 'false' : 'true'
-					};
+					var skills = {};
+					for(var i=0; i < applicant.skills.length; i++){
+						var t = i+1;
+						var opName = 'option' + t;
+						skills[opName] = applicant.skills[i].skill_value==0 ? '' : 'true';
+					}
 
-					console.log('hsBS:\n');
+					console.log('applicant skills:\n');
 					console.log(skills);
+					
 	
 					res.render(
 						'tAs/matchingJobs', 
