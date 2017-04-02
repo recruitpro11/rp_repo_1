@@ -1,3 +1,11 @@
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+  var myName = "{{tA._id}}";
+  console.log('hs tA_id: ' + myName);
+  localStorage.removeItem(myName);
+</script>
+
+
 <h2>{{tA.first_name}}'s Applicants</h2>
 <a href="/tAs/applicants/{{tA._id}}/add">Add a New Applicant</a>
 <hr />

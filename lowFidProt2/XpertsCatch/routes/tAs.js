@@ -685,7 +685,32 @@ router.get('/applicants/:applicant_id/refer/:tA_id/job', ensureAuthenticated, fu
 			console.log(err);
 			res.send(err);
 		} else {
-			res.render('tAs/matchingJobs', {'applicant_id':req.params.applicant_id, 'tA_id':req.params.tA_id, 'jobs': jobs});
+			Applicant.findById(req.params.applicant_id, function(err, applicant){
+				if(err) throw err;
+				else{
+
+					var skills = {
+						'option1': applicant.skills[1].skill_value==0 ? '' : 'true', 
+						'option2': applicant.skills[2].skill_value==0 ? '' : 'true',
+						'option3': applicant.skills[3].skill_value==0 ? '' : 'true',
+						'option4': applicant.skills[4].skill_value==0 ? '' : 'true',
+						//'option5': applicant.skills[5].skill_value==0 ? 'false' : 'true'
+					};
+
+					console.log('hsBS:\n');
+					console.log(skills);
+	
+					res.render(
+						'tAs/matchingJobs', 
+						{
+							'applicant_id':req.params.applicant_id, 
+							'tA_id':req.params.tA_id, 
+							'jobs': jobs, 
+							'skills': skills
+						}
+					);
+				}
+			});
 		}
   	});
 

@@ -51,7 +51,19 @@
     </script>
 
 	<script type="text/javascript">
-		var formValues = JSON.parse(localStorage.getItem('formValues')) || {};
+
+		var myName = "{{tA_id}}";
+		console.log('hs tA_id: ' + myName);
+
+		//var $t = {'option3':'true'};
+		var op1 = "{{skills.option1}}";
+		var op2 = "{{skills.option2}}";
+		var op3 = "{{skills.option3}}";
+		var op4 = "{{skills.option4}}";
+		var op5 = "{{skills.option5}}";
+
+		var formValues = JSON.parse(localStorage.getItem(myName)) || {'option1':op1, 'option2':op2, 'option3':op3, 'option4':op4, 'option5':op5};
+		
 		var $checkboxes = $("#checkbox-container :checkbox");
 		var $button = $("#checkbox-container button");
 
@@ -73,7 +85,7 @@
 			});
 
 			formValues["buttonText"] = $button.text();
-			localStorage.setItem("formValues", JSON.stringify(formValues));
+			localStorage.setItem(myName, JSON.stringify(formValues));
 		}
 
 		$button.on("click", function() {
@@ -88,6 +100,7 @@
 		});
 
 		// On page load
+		console.log(formValues);
 		$.each(formValues, function(key, value) {
 			$("#" + key).prop('checked', value);
 		});
