@@ -248,6 +248,8 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	  						//ALL CALLBACKS ARE OPTIONAL
 	  						function(err, tA){
 	  							console.log('updated tA:\n'+tA+'\n\n');
+	  							req.flash('success','You have added a new Applicant!');
+								res.redirect('/tAs/applicants/'+applicant._id+'/refer/'+tA._id+'/job');
 	  						}
 	  					);
 	  				}
@@ -293,16 +295,14 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	  					//ALL CALLBACKS ARE OPTIONAL
 	  					function(err, tA){
 	  						console.log('updated tA:\n'+tA+'\n\n');
+	  						req.flash('success','You have added a new Applicant!');
+							res.redirect('/tAs/applicants/'+applicant._id+'/refer/'+tA._id+'/job');
 	  					}
 	  				);
 	  			}
 	  		});
 	  	}
 	}
-
-
-	req.flash('success','You have added a new Applicant!');
-	res.redirect('/tAs/applicants');
 });
 
 
