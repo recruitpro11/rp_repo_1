@@ -248,6 +248,8 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	  						//ALL CALLBACKS ARE OPTIONAL
 	  						function(err, tA){
 	  							console.log('updated tA:\n'+tA+'\n\n');
+	  							req.flash('success','You have added a new Applicant!');
+								res.redirect('/tAs/applicants/'+applicant._id+'/refer/'+tA._id+'/job');
 	  						}
 	  					);
 	  				}
@@ -293,16 +295,14 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	  					//ALL CALLBACKS ARE OPTIONAL
 	  					function(err, tA){
 	  						console.log('updated tA:\n'+tA+'\n\n');
+	  						req.flash('success','You have added a new Applicant!');
+							res.redirect('/tAs/applicants/'+applicant._id+'/refer/'+tA._id+'/job');
 	  					}
 	  				);
 	  			}
 	  		});
 	  	}
 	}
-
-
-	req.flash('success','You have added a new Applicant!');
-	res.redirect('/tAs/applicants');
 });
 
 
@@ -685,7 +685,32 @@ router.get('/applicants/:applicant_id/refer/:tA_id/job', ensureAuthenticated, fu
 			console.log(err);
 			res.send(err);
 		} else {
-			res.render('tAs/matchingJobs', {'applicant_id':req.params.applicant_id, 'tA_id':req.params.tA_id, 'jobs': jobs});
+			Applicant.findById(req.params.applicant_id, function(err, applicant){
+				if(err) throw err;
+				else{
+
+					var skills = {};
+					for(var i=0; i < applicant.skills.length; i++){
+						var t = i+1;
+						var opName = 'option' + t;
+						skills[opName] = applicant.skills[i].skill_value==0 ? '' : 'true';
+					}
+
+					console.log('applicant skills:\n');
+					console.log(skills);
+					
+	
+					res.render(
+						'tAs/matchingJobs', 
+						{
+							'applicant_id':req.params.applicant_id, 
+							'tA_id':req.params.tA_id, 
+							'jobs': jobs, 
+							'skills': skills
+						}
+					);
+				}
+			});
 		}
   	});
 
