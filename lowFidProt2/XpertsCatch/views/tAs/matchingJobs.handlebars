@@ -9,32 +9,7 @@
 		
 		<input type="text" placeholder="Type something here" />
 		
-		<div id="checkbox-container">
-			<ul class="items">
-				<div>
-					<label for="option1">Php</label>
-					<input type="checkbox" onchange="$('#skillForm').submit();" id="option1" name="Php">
-				</div>
-				<div>
-					<label for="option2">Java</label>
-					<input type="checkbox" onchange="$('#skillForm').submit();" id="option2" name="Java">
-				</div>
-				<div>
-					<label for="option3">C++</label>
-					<input type="checkbox" onchange="$('#skillForm').submit();" id="option3" name="C">
-				</div>
-				<div>
-					<label for="option4">Node</label>
-					<input type="checkbox" onchange="$('#skillForm').submit();" id="option4" name="Node">
-				</div>
-				<div>
-					<label for="option5">Language</label>
-					<input type="checkbox" onchange="$('#skillForm').submit();" id="option5" name="Language">
-				</div>
-				
-				<button>Check All</button>
-			</ul>
-		</div>
+		<div id="checkbox-container"></div>
 	</div>
 
 	<script type="text/javascript">
@@ -55,17 +30,29 @@
 		var myName = "{{tA_id}}";
 		console.log('hs tA_id: ' + myName);
 
-		//var $t = {'option3':'true'};
-		var op1 = "{{skills.option1}}";
-		var op2 = "{{skills.option2}}";
-		var op3 = "{{skills.option3}}";
-		var op4 = "{{skills.option4}}";
-		var op5 = "{{skills.option5}}";
+		var initOpts = {};
+		{{#each applicantSkills}}
+			
+			initOpts['{{skill_name}}'] = '{{skill_value}}'=='0' ? '' : 'true';
 
-		var formValues = JSON.parse(localStorage.getItem(myName)) || {'option1':op1, 'option2':op2, 'option3':op3, 'option4':op4, 'option5':op5};
+			var skillName = '{{skill_name}}';
+			$("#checkbox-container").append(
+				$("<ul class='items'><div></div></ul>").append(
+					$("<label></label>").text(skillName).attr("for",skillName).append(
+						$("<input type='checkbox'>").attr("id",skillName).attr("name",skillName).attr("onchange","$('#skillForm').submit();")
+					)
+				)
+			);
+
+		{{/each}}
+
+		console.log(initOpts);
 		
+		var formValues = JSON.parse(localStorage.getItem(myName)) || initOpts;
+
 		var $checkboxes = $("#checkbox-container :checkbox");
 		var $button = $("#checkbox-container button");
+
 
 		function allChecked(){
 			return $checkboxes.length === $checkboxes.filter(":checked").length;
@@ -105,8 +92,8 @@
 		});
 
 		$button.text(formValues["buttonText"]);
-	</script>
 
+	</script>
 </form>
 
 

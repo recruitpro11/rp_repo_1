@@ -689,24 +689,13 @@ router.get('/applicants/:applicant_id/refer/:tA_id/job', ensureAuthenticated, fu
 				if(err) throw err;
 				else{
 
-					var skills = {};
-					for(var i=0; i < applicant.skills.length; i++){
-						var t = i+1;
-						var opName = 'option' + t;
-						skills[opName] = applicant.skills[i].skill_value==0 ? '' : 'true';
-					}
-
-					console.log('applicant skills:\n');
-					console.log(skills);
-					
-	
 					res.render(
 						'tAs/matchingJobs', 
 						{
 							'applicant_id':req.params.applicant_id, 
 							'tA_id':req.params.tA_id, 
 							'jobs': jobs, 
-							'skills': skills
+							'applicantSkills': applicant.skills
 						}
 					);
 				}
