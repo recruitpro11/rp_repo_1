@@ -5,39 +5,48 @@
 
 
 
+<form id="appForm" method="post" enctype="multipart/form-data" action="/tAs/applicants/{{tA_id}}/add">
+</form>
+
+
 <h2>Add a New Applicant</h2>
 
-<form id="regForm" method="post" enctype="multipart/form-data" action="/tAs/applicants/{{tA_id}}/add">
-  <div>
+<div>
 	<label>First Name: </label>
-	<input type="text" name="first_name">
-  </div>
-  <div>
+	<input type="text" name="first_name" form="appForm">
+</div>
+
+<div>
 	<label>Last Name: </label>
-	<input type="text" name="last_name">
-  </div>
-  <div>
+	<input type="text" name="last_name" form="appForm">
+</div>
+
+<div>
 	<label>Email</label>
-	<input type="text" name="email">
-  </div>
-  <div>
+	<input type="text" name="email" form="appForm">
+</div>
+
+<div>
 	<label>Additional Info</label>
-	<input type="text" name="info">
-  </div>   
+	<input type="text" name="info"  form="appForm">
+</div>   
+
 
 
 </hr>
 <h6></h6>
 
 
+
+
 <div id="list1" class="dropdown-check-list" name="skillsList" tabindex="100">
 	<span class="anchor">Applicant's Skills</span>
 	<ul class="items">
-	  <li><input type="checkbox" name="s1" />Php </li>
-	  <li><input type="checkbox" name="s2" />Java</li>
-	  <li><input type="checkbox" name="s3" />C++ </li>
-	  <li><input type="checkbox" name="s4" />Node </li>
-	  <li><input type="checkbox" name="s5" />Language </li>
+	  <li><input type="checkbox" name="s1" form="appForm" />Php </li>
+	  <li><input type="checkbox" name="s2" form="appForm" />Java</li>
+	  <li><input type="checkbox" name="s3" form="appForm" />C++ </li>
+	  <li><input type="checkbox" name="s4" form="appForm" />Node </li>
+	  <li><input type="checkbox" name="s5" form="appForm" />Language </li>
 	</ul>
 </div>
 
@@ -53,9 +62,6 @@
 
 
 
-
-
-
 <section>
   <a class="reg">Add a New Skill</a>
 </section>
@@ -64,12 +70,12 @@
 	<span>✖</span>
 	<h1>jQuery Pop Up</h1>
 	<p>This is a random pop up, hopefully its not annoying.</p>
-	<form id="regForm" method="post" enctype="multipart/form-data" action="/tAs/kos">
+	<form id="popupform" method="post" action="/tAs">
 		<div>
 			<label>Skill Name: </label>
 			<input type="text" name="new_skill_name">
   		</div>
-		<input type="submit" value="Send">
+		<input type="submit" value="Send" form="popupform">
 	</form>
 </div>
 
@@ -80,16 +86,13 @@
 	    	$(".pop").fadeIn(300);
 	     	positionPopup();
 	 	});
-
-	$(".pop > span, .pop").click(function () {
-	    	$(".pop").fadeOut(300);
-		});
+	
+	//This disappears the the popup	
+	$(".pop > span").click(function () {
+	   	$(".pop").fadeOut(300);
+			});
 	});
 </script>
-
-
-
-
 
 
 
@@ -97,40 +100,28 @@
 <h6></h6>
 
 
+
 <div>
-<label>Upload Applicant's Resume: </label>
-<input type="file" name="resume_file">
+	<label>Upload Applicant's Resume: </label>
+	<input type="file" name="resume_file" form="appForm">
 </div>
+
 
 
 <h6> and/or </h6>
 
 
+
 <div>
-<label>Write a resume/description for the Applicant: </label>
-<textarea name="description" id="hsTextAreaToBeReplaced"></textarea>
-<script type="text/javascript">
-  // Replace the <textarea id="hsTextAreaToBeReplaced"> with a CKEditor
-  CKEDITOR.replace( 'hsTextAreaToBeReplaced' );
-  
-  /*CKEDITOR.editorConfig = function( config ){
-	config.enterMode = CKEDITOR.ENTER_BR;
-	config.shiftEnterMode = CKEDITOR.ENTER_BR;
-  };
-  
-  $(function() {
-	 $('hsTextAreaToBeReplaced').ckeditor({
-		toolbar: 'Full',
-		enterMode : CKEDITOR.ENTER_BR,
-		shiftEnterMode: CKEDITOR.ENTER_P
-		});
-  });*/
-</script>
+	<label>Write a resume/description for the Applicant: </label>
+	<textarea name="description" id="hsTextAreaToBeReplaced" form="appForm"></textarea>
+	<script type="text/javascript">
+		// Replace the <textarea id="hsTextAreaToBeReplaced"> with a CKEditor
+		CKEDITOR.replace( 'hsTextAreaToBeReplaced' );
+	</script>
 </div>
 
 
-
-  <div>
-	<input type="submit" value="Submit">
-  </div>
-</form>
+<div>
+	<input type="submit" value="Submit" form="appForm">
+</div>

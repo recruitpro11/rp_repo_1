@@ -771,6 +771,15 @@ router.get('/applicants/:applicant_id/refer/:tA_id/job/:job_id', ensureAuthentic
 
 
 
+/*****************************************************************
+***********************Edit Applicant Route***************************
+******************************************************************/
+router.get('/pop', function(req, res, next) {
+	res.render('pop1');
+});
+
+
+
 
 
 
