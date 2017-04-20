@@ -12,6 +12,7 @@
 		<div id="checkbox-container"></div>
 	</div>
 
+
 	<script type="text/javascript">
 		var checkList = document.getElementById('list1');
 		checkList.classList.add('visible');
@@ -25,6 +26,7 @@
 		}
     </script>
 
+
 	<script type="text/javascript">
 
 		var myName = "{{tA_id}}";
@@ -34,13 +36,21 @@
 		{{#if applicantSkills}}
 			{{#each applicantSkills}}
 				
-				initOpts['{{skill_name}}'] = '{{skill_value}}'=='0' ? '' : 'true';
-
+				
+				
+				var skillId = '{{skill_name}}';
 				var skillName = '{{skill_name}}';
+				if(skillName == 'CPlusPlus' || skillName == 'cPlusPlus'){
+					skillName = 'c++'
+				}
+
+				initOpts[skillId] = '{{skill_value}}'=='0' ? '' : 'true';
+
+				
 				$("#checkbox-container").append(
 					$("<ul class='items'><div></div></ul>").append(
-						$("<label></label>").text(skillName).attr("for",skillName).append(
-							$("<input type='checkbox'>").attr("id",skillName).attr("name",skillName).attr("onchange","$('#skillForm').submit();")
+						$("<label></label>").text(skillName).attr("for",skillId).append(
+							$("<input type='checkbox'>").attr("id",skillId).attr("name",skillId).attr("onchange","$('#skillForm').submit();")
 						)
 					)
 				);
@@ -54,9 +64,10 @@
 			);
 		{{/if}}
 
-		console.log(initOpts);
+		console.log('initialOps: ' + initOpts);
 		
 		var formValues = JSON.parse(localStorage.getItem(myName)) || initOpts;
+		console.log('read values: ' + formValues);
 
 		var $checkboxes = $("#checkbox-container :checkbox");
 		var $button = $("#checkbox-container button");
@@ -81,6 +92,7 @@
 
 			formValues["buttonText"] = $button.text();
 			localStorage.setItem(myName, JSON.stringify(formValues));
+			console.log('saved values: ' + formValues)
 		}
 
 		$button.on("click", function() {
