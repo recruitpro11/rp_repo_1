@@ -7,6 +7,8 @@
 
 <form id="appForm" method="post" enctype="multipart/form-data" action="/tAs/applicants/{{tA_id}}/add">
 </form>
+<form id="popupform" method="post" action="/tAs">
+</form>
 
 
 <h2>Add a New Applicant</h2>
@@ -38,6 +40,11 @@
 
 
 
+<section>
+  <a class="reg">Add a New Skill</a>
+</section>
+
+
 
 <div id="list1" class="dropdown-check-list" name="skillsList" tabindex="100">
 	<span class="anchor">Applicant's Skills</span>
@@ -62,21 +69,28 @@
 
 
 
-<section>
-  <a class="reg">Add a New Skill</a>
-</section>
+</hr>
+<h6></h6>
+
+
+
+<div>
+	<label>Upload Applicant's Resume: </label>
+	<input type="file" name="resume_file" form="appForm">
+</div>
+
+
+
 
 <div class="pop">
 	<span>✖</span>
-	<h1>jQuery Pop Up</h1>
-	<p>This is a random pop up, hopefully its not annoying.</p>
-	<form id="popupform" method="post" action="/tAs">
-		<div>
-			<label>Skill Name: </label>
-			<input type="text" name="new_skill_name">
-  		</div>
-		<input type="submit" value="Send" form="popupform">
-	</form>
+	<h1>Add a New Skill</h1>
+	<p>Please type the name of the skill you'd like to add.</p>
+	<label>Skill Name: </label>
+	<input type="text" name="new_skill_name" form="popupform">
+	<div class="hsPopButton">
+	<input type="submit" value="Send" form="popupform">
+	</div>
 </div>
 
 
@@ -93,18 +107,6 @@
 			});
 	});
 </script>
-
-
-
-</hr>
-<h6></h6>
-
-
-
-<div>
-	<label>Upload Applicant's Resume: </label>
-	<input type="file" name="resume_file" form="appForm">
-</div>
 
 
 

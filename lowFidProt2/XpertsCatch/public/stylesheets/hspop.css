@@ -26,10 +26,10 @@ section > a {
 	.pop {
 		display: none;
 		position: fixed;
-		top: 10.3%;
+		top: 23.3%;
 		left: 10.3%;
-		width: 80%;
-		height: 80%;
+		width: 30%;
+		height: 37%;
 		background: #ffffff;
 		-webkit-border-radius: 6px;
 		-moz-border-radius: 6px;
@@ -47,6 +47,22 @@ section > a {
 		padding-left: 30px;
 		font-size: 100%;
 		color: #777;
+	}
+	.pop > label {
+		padding-left: 30px;
+		font-size: 100%;
+		color: #777;
+	}
+	.pop > input {
+		padding-left: 30px;
+		font-size: 100%;
+		color: #777;
+	}
+	.hsPopButton > input {
+		font-size: 100%;
+		color: #777;
+		left: 30;
+		text-indent: 0px;
 	}
 	.pop > span {
 		cursor: pointer;
