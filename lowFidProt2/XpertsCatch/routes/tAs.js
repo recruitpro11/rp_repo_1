@@ -137,10 +137,8 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	var email       = req.body.email;
 	var description = req.body.description;
 
-	
-
+	var reqBody = req.body;
 	var skillsAr = [];
-	
 
 	Object.keys(reqBody).forEach(function(key) {
   		var val = reqBody[key];
@@ -767,14 +765,6 @@ router.post('/applicants/:tA_id/add/newskill',ensureAuthenticated, function(req,
 		}
 	});
 	console.log('hs created an applicant object to be added');
-/*	Tecskill.find(function(skills, err){
-		if(err){
-	  		console.log(err);
-	  		res.send(err);
-		} else {
-	  		res.render('jobs/index', {'jobs': jobs});
-		}
-	});*/
 });
 
 

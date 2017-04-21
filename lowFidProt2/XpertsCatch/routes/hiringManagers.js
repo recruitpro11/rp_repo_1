@@ -27,6 +27,7 @@ var transfers = path.join(transfers_base, "u");
 Jobs = require('../models/job');
 HiringManager = require('../models/hiringManager');
 Applicant = require('../models/applicant');
+Tecskill = require('../models/tecskill');
 
 
 
@@ -78,8 +79,15 @@ console.log(hiringManager);
 ******************************************************************/
 router.get('/jobs/:hiringManager_id/add', ensureAuthenticated, function(req, res, next) {
 console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add GET\n');
-//console.log('addjob: param: '+req.params.id+'\nuser.id: '+res.locals.user.id);
-   res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManager_id});
+
+	Tecskill.find(function(err, skills){
+		if(err){
+			console.log('could not find the skillslist with er:\n');
+	  		console.log(err);
+	  	}
+	  	
+	  	res.render('hiringManagers/addjob', {hiringManager_id: req.params.hiringManager_id, skillsList: skills});
+	});
 });
 
 router.post('/jobs/:hiringManager_id/add', uploads.single('description_file'), function(req, res){
@@ -92,51 +100,22 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
   	var location    	= req.body.location;
   	var hiringManagerId = req.params.hiringManager_id;
 
+	
+	var reqBody = req.body;
+  	var skillsAr = [];
 
-/**********retrieving skills**************/
-  	/*var cheerio = require('cheerio'),
-		$ = cheerio.load('file.html'),
-		fs = require('fs');
+	Object.keys(reqBody).forEach(function(key) {
+  		var val = reqBody[key];
+  		if(val === 'on'){
+  			//C++ must be stored as CPlusPlus
+  			var fixedName = key.split("+").join("Plus");
+  			skillsAr.push({skill_value: 1, skill_name: fixedName});
+  		}
+	});
 
-	fs.readFile('./views/tAs/addApplicant.handlebars', function (err, hbs) {
-		if (err) {
-			throw err; 
-		} else {
-			$ = cheerio.load(hbs.toString());
-			console.log("hsObj:\n" + $('#list1'));   
-		}
-	});*/
-
-	var s1 = req.body.s1;
-	var s2 = req.body.s2;
-	var s3 = req.body.s3;
-	var s4 = req.body.s4;
-	var s5 = req.body.s5;
-	if(s1 == 'on'){
-		s1 = 1;
-	} else {
-		s1 = 0;
-	}
-	if(s2 == 'on'){
-		s2 = 1;
-	} else {
-		s2 = 0;
-	}
-	if(s3 == 'on'){
-		s3 = 1;
-	} else {
-		s3 = 0;
-	}
-	if(s4 == 'on'){
-		s4 = 1;
-	} else {
-		s4 = 0;
-	}
-	if(s5 == 'on'){
-		s5 = 1;
-	} else {
-		s5 = 0;
-	}
+	console.log('skillsAr:\n');
+	console.log(skillsAr);
+	console.log('\n');
 
 
   	if(req.file){
@@ -179,7 +158,7 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 					company 		: company,
 					location    	: location,
 					hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
-					skills			: [{skill_value: s1, skill_name: 'Php'}, {skill_value: s2, skill_name: 'Java'}, {skill_value: s3, skill_name: 'C++'}, {skill_value: s4, skill_name: 'Node'}, {skill_value: s5, skill_name: 'Language'}],
+					skills			: skillsAr,
 					referers		: [],
 					applicants		: [],
 					fileData: base64File,
@@ -230,7 +209,7 @@ console.log('inside hiringManagers/jobs/'+ req.params.hiringManager_id +'/add PO
 				company 		: company,
 				location    	: location,
 				hiringManagers  : [{hiringManager_id: req.params.hiringManager_id}],
-				skills			: [{skill_value: s1, skill_name: 'Php'}, {skill_value: s2, skill_name: 'Java'}, {skill_value: s3, skill_name: 'C++'}, {skill_value: s4, skill_name: 'Node'}, {skill_value: s5, skill_name: 'Language'}],
+				skills			: skillsAr,
 				referers		: [],
 				applicants		: []
 				});
@@ -280,6 +259,39 @@ console.log('Inside hiringManager /allApplicants route');
 	}
   });
 });
+
+
+
+
+
+
+
+/*****************************************************************
+*************Add new skill Route************************
+******************************************************************/
+router.post('/jobs/:hiringManager_id/add/newskill',ensureAuthenticated, function(req, res, next) {
+
+	var newSkillName = req.body.new_skill_name;
+	console.log('new_skill_name: ' + newSkillName);
+	var newTecskill = new Tecskill({
+				skill_name  : newSkillName,
+	  			skill_value : 1
+	});
+
+	newTecskill.save(function(err, skill){
+		if(err){
+	  		console.log('Error:\n'+err);
+	  		res.send(err);
+		} else {
+	  		console.log('created skilllist:\n');
+	  		console.log(skill);
+	  		res.redirect('/tAs/applicants/'+ req.params.tA_id + '/add');
+		}
+	});
+	console.log('hs created an applicant object to be added');
+});
+
+
 
 
 

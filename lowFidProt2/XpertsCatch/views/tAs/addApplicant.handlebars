@@ -100,22 +100,18 @@
 </div>
 
 
-	<div class="pop">
-		<span>✖</span>
-		<h1></h1>
-		<p>Please type the name of the skill you'd like to add.</p>
-		<form id="popupform" method="post" action="/tAs/applicants/:tA_id/add/newskill">
-			<label>Skill Name: </label>
-			<input type="text" name="new_skill_name">
-			<div class="hsPopButton">
-				<input type="submit" value="Send">
-			</div>
-		</form>
-
-
-
-	<div class="hsPopButton"></div>
-	</div>
+<div class="pop">
+	<span>✖</span>
+	<h1></h1>
+	<p>Please type the name of the skill you'd like to add.</p>
+	<form id="popupform" method="post" action="/tAs/applicants/{{tA_id}}/add/newskill">
+		<label>Skill Name: </label>
+		<input type="text" name="new_skill_name">
+		<div class="hsPopButton">
+			<input type="submit" value="Send">
+		</div>
+	</form>
+</div>
 
 <script type="text/javascript">
 	$(document).ready(function () {
