@@ -22,20 +22,17 @@
 </div>
 
 <div>
-	<label>Email</label>
+	<label>Email:</label>
 	<input type="text" name="email" form="appForm">
 </div>
 
 <div>
-	<label>Additional Info</label>
+	<label>Additional Info: </label>
 	<input type="text" name="info"  form="appForm">
 </div>   
 
 
-
-</hr>
-<h6></h6>
-
+<br>
 
 
 <section>
@@ -73,14 +70,14 @@
 		var skillId = '{{skill_name}}';
 		var skillName = '{{skill_name}}';
 		if(skillName == 'CPlusPlus' || skillName == 'cPlusPlus'){
-			skillName = 'c++'
+			skillName = 'C++'
 		}
 
 		
 		$("#checkbox-container").append(
 			$("<ul class='items'><div></div></ul>").append(
 				$("<label></label>").text(skillName).attr("for",skillId).append(
-					$("<input type='checkbox'>").attr("form",formName).attr("id",skillId).attr("name",skillId).attr("onchange","$('#skillForm').submit();")
+					$("<input type='checkbox'>").attr("form",formName).attr("id",skillId).attr("name",skillName).attr("onchange","$('#skillForm').submit();")
 				)
 			)
 		);
@@ -91,8 +88,9 @@
 
 
 
-</hr>
-<h6></h6>
+<br>
+<br>
+
 
 
 
@@ -134,9 +132,7 @@
 </script>
 
 
-
-<h6> and/or </h6>
-
+<br>
 
 
 <div>
