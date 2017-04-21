@@ -784,7 +784,7 @@ router.get('/applicants/:applicant_id/refer/:tA_id/job/:job_id', ensureAuthentic
 ******************************************************************/
 router.post('/applicants/:tA_id/add/newskill',ensureAuthenticated, function(req, res, next) {
 
-	var newSkillName = req.body.new_skill_name1;
+	var newSkillName = req.body.new_skill_name;
 	console.log('new_skill_name: ' + newSkillName);
 	var newTecskill = new Tecskill({
 				skill_name  : newSkillName,

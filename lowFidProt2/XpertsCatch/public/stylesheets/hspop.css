@@ -26,10 +26,10 @@ section > a {
 	.pop {
 		display: none;
 		position: fixed;
-		top: 23.3%;
-		left: 10.3%;
+		top: 28.3%;
+    	left: 9.3%;
 		width: 30%;
-		height: 37%;
+		height: 35%;
 		background: #ffffff;
 		-webkit-border-radius: 6px;
 		-moz-border-radius: 6px;
@@ -48,13 +48,13 @@ section > a {
 		font-size: 100%;
 		color: #777;
 	}
-	.pop > label {
+	.pop > form label {
 		padding-left: 30px;
 		font-size: 100%;
 		color: #777;
+		width: 105px;
 	}
-	.pop > input {
-		padding-left: 30px;
+	.pop > form input {
 		font-size: 100%;
 		color: #777;
 	}
