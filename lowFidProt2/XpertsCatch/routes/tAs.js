@@ -137,7 +137,8 @@ router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(re
 	var email       = req.body.email;
 	var description = req.body.description;
 
-	var reqBody = req.body;
+	
+
 	var skillsAr = [];
 	
 
@@ -625,31 +626,25 @@ router.post('/applicants/:applicant_id/refer/:tA_id/hiringManager', ensureAuthen
 router.get('/applicants/:applicant_id/refer/:tA_id/job', ensureAuthenticated, function(req, res, next) {
 	
 	var query = {};
+	var reqQuery = req.query;
 
-	if(Object.keys(req.query).length !== 0){
-		console.log(req.query);
 
+	if(Object.keys(reqQuery).length !== 0){
+		console.log(reqQuery);
+		
+		query = {$and:[]};
 
 		//Here we have to convert binary on off to numbers because in our schema 
 		//we defined skill_value as number. If it was boolian it would get 'on' and  'off'
-		query = {$and:[]};
+		Object.keys(reqQuery).forEach(function(key) {
+  			var val = reqQuery[key];
+  			if(val === 'on'){
+  				//C++ must be stored as CPlusPlus
+  				var fixedName = key.split("+").join("Plus");
+  				query.$and.push({skills:{ $elemMatch: {"skill_value" : parseInt(1,10), "skill_name" : fixedName} } });
+  			}
+		});
 
-		if(req.query.Php){
-			query.$and.push({skills:{ $elemMatch: {"skill_value" : parseInt([req.query.Php=='on' ? 1 : 0],10), "skill_name" : "Php"} } });
-		}
-		if(req.query.Java){
-			query.$and.push({skills:{ $elemMatch: {"skill_value" : parseInt([req.query.Java=='on' ? 1 : 0],10), "skill_name" : "Java"} } });
-		}
-		if(req.query.C){
-			query.$and.push({skills:{ $elemMatch: {"skill_value" : parseInt([req.query.C=='on' ? 1 : 0],10), "skill_name" : "C++"} } });
-		}
-		if(req.query.Node){
-			query.$and.push({skills:{ $elemMatch: {"skill_value" : parseInt([req.query.Node=='on' ? 1 : 0],10), "skill_name" : "Node"} } });
-		}
-		if(req.query.Language){
-			query.$and.push({skills:{ $elemMatch: {"skill_value" : parseInt([req.query.Language=='on' ? 1 : 0],10), "skill_name" : "Language"} } });
-		}
-		
 		console.log('Built Query:\n');
 		console.log(query.$and);
 	}
