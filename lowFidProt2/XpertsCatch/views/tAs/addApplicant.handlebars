@@ -7,8 +7,6 @@
 
 <form id="appForm" method="post" enctype="multipart/form-data" action="/tAs/applicants/{{tA_id}}/add">
 </form>
-<form id="popupform" method="post" action="/tAs">
-</form>
 
 
 <h2>Add a New Applicant</h2>
@@ -47,24 +45,48 @@
 
 
 <div id="list1" class="dropdown-check-list" name="skillsList" tabindex="100">
+	
 	<span class="anchor">Applicant's Skills</span>
-	<ul class="items">
-	  <li><input type="checkbox" name="s1" form="appForm" />Php </li>
-	  <li><input type="checkbox" name="s2" form="appForm" />Java</li>
-	  <li><input type="checkbox" name="s3" form="appForm" />C++ </li>
-	  <li><input type="checkbox" name="s4" form="appForm" />Node </li>
-	  <li><input type="checkbox" name="s5" form="appForm" />Language </li>
-	</ul>
+	
+	<div id="checkbox-container"></div>
+
 </div>
 
 <script type="text/javascript">
+	
 	var checkList = document.getElementById('list1');
+	checkList.classList.add('visible');
 	checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
-	  if (checkList.classList.contains('visible'))
-		checkList.classList.remove('visible');
-	  else
-		checkList.classList.add('visible');
-	  }
+		if (checkList.classList.contains('visible'))
+			checkList.classList.remove('visible');
+		else
+			checkList.classList.add('visible');
+	}
+
+</script>
+
+<script type="text/javascript">
+
+	{{#each skillsList}}
+
+		var formName = "appForm";
+		var skillId = '{{skill_name}}';
+		var skillName = '{{skill_name}}';
+		if(skillName == 'CPlusPlus' || skillName == 'cPlusPlus'){
+			skillName = 'c++'
+		}
+
+		
+		$("#checkbox-container").append(
+			$("<ul class='items'><div></div></ul>").append(
+				$("<label></label>").text(skillName).attr("for",skillId).append(
+					$("<input type='checkbox'>").attr("form",formName).attr("id",skillId).attr("name",skillId).attr("onchange","$('#skillForm').submit();")
+				)
+			)
+		);
+
+	{{/each}}
+
 </script>
 
 
@@ -80,16 +102,21 @@
 </div>
 
 
-
-
 <div class="pop">
 	<span>✖</span>
 	<h1>Add a New Skill</h1>
 	<p>Please type the name of the skill you'd like to add.</p>
-	<label>Skill Name: </label>
-	<input type="text" name="new_skill_name" form="popupform">
+	
+	<div>
+		<form id="popupform2" method="post" action="/tAs/applicants/:tA_id/add/newskill">
+			<label>Skill Name: </label>
+			<input type="text" name="new_skill_name1">
+			<input type="submit" value="Send1">
+		</form>
+	</div>
+
 	<div class="hsPopButton">
-	<input type="submit" value="Send" form="popupform">
+	
 	</div>
 </div>
 

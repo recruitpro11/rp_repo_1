@@ -27,7 +27,7 @@ var transfers = path.join(transfers_base, "u");
 Job = require('../models/job');
 TA = require('../models/tA');
 HiringManager = require('../models/hiringManager');
-
+Tecskill = require('../models/tecskill');
 
 
 
@@ -117,7 +117,15 @@ router.get('/applicants', ensureAuthenticated, function(req, res, next) {
 ******************************************************************/
 router.get('/applicants/:tA_id/add', ensureAuthenticated, function(req, res, next) {
 	console.log('inside tAs/applicants/'+ req.params.tA_id +'/add GET\n');
-	res.render('tAs/addApplicant', {tA_id: req.params.tA_id});
+	
+	Tecskill.find(function(err, skills){
+		if(err){
+			console.log('could not find the skillslist with er:\n');
+	  		console.log(err);
+	  	}
+	  	
+	  	res.render('tAs/addApplicant', {tA_id: req.params.tA_id, skillsList: skills});
+	});
 });
 
 router.post('/applicants/:tA_id/add', uploads.single('resume_file'), function(req, res){
@@ -335,7 +343,7 @@ router.get('/applicants/:applicant_id/details/:tA_id', function(req, res, next) 
 ***********************Edit Applicant Route***************************
 ******************************************************************/
 router.get('/applicants/:applicant_id/details/:tA_id/edit', function(req, res, next) {
-	Applicant.findById(req.params.applicant_id, function(err, applicant){
+	Applicant.findById(req.params.applicant_id, function(applicant, err ){
 		if(err){
 			console.log(err);
 			res.send(err);
@@ -772,10 +780,36 @@ router.get('/applicants/:applicant_id/refer/:tA_id/job/:job_id', ensureAuthentic
 
 
 /*****************************************************************
-***********************Edit Applicant Route***************************
+*************Add new skill Route************************
 ******************************************************************/
-router.get('/pop', function(req, res, next) {
-	res.render('pop1');
+router.post('/applicants/:tA_id/add/newskill',ensureAuthenticated, function(req, res, next) {
+
+	var newSkillName = req.body.new_skill_name1;
+	console.log('new_skill_name: ' + newSkillName);
+	var newTecskill = new Tecskill({
+				skill_name  : newSkillName,
+	  			skill_value : 1
+	});
+
+	newTecskill.save(function(err, skill){
+		if(err){
+	  		console.log('Error:\n'+err);
+	  		res.send(err);
+		} else {
+	  		console.log('created skilllist:\n');
+	  		console.log(skill);
+	  		res.redirect('/tAs/applicants/'+ req.params.tA_id + '/add');
+		}
+	});
+	console.log('hs created an applicant object to be added');
+/*	Tecskill.find(function(skills, err){
+		if(err){
+	  		console.log(err);
+	  		res.send(err);
+		} else {
+	  		res.render('jobs/index', {'jobs': jobs});
+		}
+	});*/
 });
 
 
