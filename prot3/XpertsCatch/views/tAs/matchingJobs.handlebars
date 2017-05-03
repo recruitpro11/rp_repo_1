@@ -1,0 +1,132 @@
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+
+<h2>Jobs Matching this applicant's skills</h2>
+
+<form id="skillForm" method="get" action="/tAs/applicants/{{applicant_id}}/refer/{{tA_id}}/job">
+
+	<div id="list1" class="dropdown-check-list" name="skills" tabindex="100">
+		<span class="anchor">Applicant's Skills</span>
+		
+		<input type="text" placeholder="Type something here" />
+		
+		<div id="checkbox-container"></div>
+	</div>
+
+
+	<script type="text/javascript">
+		var checkList = document.getElementById('list1');
+		checkList.classList.add('visible');
+		checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+			if (checkList.classList.contains('visible')){
+				checkList.classList.remove('visible');
+			}
+			else{
+				checkList.classList.add('visible');
+			}
+		}
+    </script>
+
+
+	<script type="text/javascript">
+
+		var myName = "{{tA_id}}";
+		console.log('hs tA_id: ' + myName);
+
+		var initOpts = {};
+		{{#if applicantSkills}}
+			{{#each applicantSkills}}
+				
+				
+				
+				var skillId = '{{skill_name}}';
+				var skillName = '{{skill_name}}';
+				if(skillName == 'CPlusPlus' || skillName == 'cPlusPlus'){
+					skillName = 'c++'
+				}
+
+				initOpts[skillId] = '{{skill_value}}'=='0' ? '' : 'true';
+
+				
+				$("#checkbox-container").append(
+					$("<ul class='items'><div></div></ul>").append(
+						$("<label></label>").text(skillName).attr("for",skillId).append(
+							$("<input type='checkbox'>").attr("id",skillId).attr("name",skillId).attr("onchange","$('#skillForm').submit();")
+						)
+					)
+				);
+
+			{{/each}}
+		{{else}}
+			$("#checkbox-container").append(
+				$("<ul class='items'><div></div></ul>").append(
+					$("<h6>This Applicant Has No Skills</h6>")
+				)		
+			);
+		{{/if}}
+
+		console.log('initialOps: ' + initOpts);
+		
+		var formValues = JSON.parse(localStorage.getItem(myName)) || initOpts;
+		console.log('read values: ' + formValues);
+
+		var $checkboxes = $("#checkbox-container :checkbox");
+		var $button = $("#checkbox-container button");
+
+
+		function allChecked(){
+			return $checkboxes.length === $checkboxes.filter(":checked").length;
+		}
+
+		function updateButtonStatus(){
+			$button.text(allChecked()? "Uncheck all" : "Check all");
+		}
+
+		function handleButtonClick(){
+			$checkboxes.prop("checked", allChecked()? false : true)
+		}
+
+		function updateStorage(){
+			$checkboxes.each(function(){
+				formValues[this.id] = this.checked;
+			});
+
+			formValues["buttonText"] = $button.text();
+			localStorage.setItem(myName, JSON.stringify(formValues));
+			console.log('saved values: ' + formValues)
+		}
+
+		$button.on("click", function() {
+			handleButtonClick();
+			updateButtonStatus();
+			updateStorage();
+		});
+
+		$checkboxes.on("change", function(){
+			updateButtonStatus();
+			updateStorage();
+		});
+
+		// On page load
+		$.each(formValues, function(key, value) {
+			$("#" + key).prop('checked', value);
+		});
+
+		$button.text(formValues["buttonText"]);
+
+	</script>
+</form>
+
+
+
+{{#each jobs}}
+  <div class="block">
+		  <h3>{{title}}</h3>
+		  <p><strong>Company: </strong>{{company}}</P>
+		  <p><strong>Description: </strong>
+			  {{description}}
+	  </p>
+			
+			<a class='button' href='/tAs/applicants/{{../applicant_id}}/refer/{{../tA_id}}/job/{{_id}}'> Refer the applicant to this job </a>
+		  <a class='button' href='/jobs/{{_id}}/details/'> Job Details </a>
+  </div>
+{{/each}}

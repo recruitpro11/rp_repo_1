@@ -1,0 +1,28 @@
+<h2>{{hiringManager.first_name}}'s Jobs</h2> 
+<a href="/hiringManagers/jobs/{{hiringManager._id}}/add">Add a New Job</a>
+<hr />
+
+{{#if hiringManager.jobs}}
+<table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Job ID</th>
+      <th>Job Title</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each hiringManager.jobs}}
+      <tr>
+        <td>{{_id}}</td>
+        <td>{{job_title}}</td>
+
+        <td><a href="/jobs/{{job_id}}/details/{{../hiringManager._id}}">View Job Details</a></td>
+        <td><a href="/jobs/{{job_id}}/delete/{{../hiringManager._id}}">Delete This Job</a></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+  <p>This hiringManager does not have any jobs</p>
+{{/if}}

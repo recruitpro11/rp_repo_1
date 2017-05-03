@@ -1,0 +1,80 @@
+section > a {
+		display: inline-block;
+		margin: 0 auto;
+		width: 170px;
+		height: 30px;
+		line-height: 5px;
+		border: 1px solid #ccc;
+		padding: 12px 18px 13px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		-ms-border-radius: 6px;
+		-o-border-radius: 6px;
+		border-radius: 6px;
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		cursor: pointer;
+		color:#000;
+	}
+	section > a:hover {
+		opacity: 0.8;
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+	}
+	.pop {
+		display: none;
+		position: fixed;
+		top: 28.3%;
+    	left: 9.3%;
+		width: 30%;
+		height: 35%;
+		background: #ffffff;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		-ms-border-radius: 6px;
+		-o-border-radius: 6px;
+		border-radius: 6px;
+		outline: 10px solid rgba(0, 0, 0, 0.1);
+	}
+	.pop > h1 {
+		padding: 30px 30px 10px 30px;
+		color: #2a3644;
+		font-size: 100%;
+	}
+	.pop > p {
+		padding-left: 30px;
+		font-size: 100%;
+		color: #777;
+	}
+	.pop > form label {
+		padding-left: 30px;
+		font-size: 100%;
+		color: #777;
+		width: 105px;
+	}
+	.pop > form input {
+		font-size: 100%;
+		color: #777;
+	}
+	.hsPopButton > input {
+		font-size: 100%;
+		color: #777;
+		left: 30;
+		text-indent: 0px;
+	}
+	.pop > span {
+		cursor: pointer;
+		position: absolute;
+		top: 4%;
+		right: 4%;
+		-webkit-border-radius: 100px;
+		-moz-border-radius: 100px;
+		border-radius: 100px;
+		background: #cccccc;
+		color: #ffffff;
+		padding: 6px 0px 0px 9px;
+		width: 30px;
+		height: 30px;
+	}

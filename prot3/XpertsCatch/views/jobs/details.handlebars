@@ -1,0 +1,43 @@
+<h2>{{job.title}}</h2>
+<p>
+  <strong>Company: </strong>{{job.company}}
+</p>
+<p>
+  <strong>Location: </strong>{{job.location}}
+</p>
+<p>
+  <strong>Description: </strong>{{job.description}}
+</p>
+<p>
+  <strong>Job Description File: </strong>
+  <a href="/jobs/{{job._id}}/download">{{job.fileOriginalName}}</a>
+</p>
+<p>
+  <strong>Hring Managers: </strong>{{job.hiringManagers}}
+</p>
+<p>
+  <strong>Required Skills: </strong>{{job.skills}}
+</p>
+<p>
+  <strong>Referers: </strong>{{job.referers}}
+</p>
+<p>
+  <strong>Applicants: </strong>{{job.applicants}}
+</p>
+
+{{#if user}}
+  {{#if isOwner}}
+    <form id="jobRegFrom" method="get" action="/jobs/{{job._id}}/details/{{hiringManager_id}}/edit">
+      <input type="submit" job="button" value="Edit This Job">
+    </form>
+  {{else}}
+    <form id="jobRegFrom" method="post" action="/{{user.type}}s/jobes/register">
+      <input type="hidden" name="student_username" value="{{user.username}}">
+      <input type="hidden" name="job_id" value="{{job._id}}">
+      <input type="hidden" name="job_title" value="{{job.title}}">
+      <input type="submit" job="button" value="Refer Applicants For This Job">
+    </form>
+  {{/if}}
+{{else}}
+  <p><em>You must be logged in to refer applicants for jobes</em></p>
+{{/if}}

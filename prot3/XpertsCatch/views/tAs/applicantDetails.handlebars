@@ -1,0 +1,36 @@
+<h4>{{applicant.first_name}}  {{applicant.last_name}}</h4>
+<p>
+  <strong>Email: </strong>{{applicant.email}}
+</p>
+<p>
+  <strong>Referrers: </strong>{{applicant.referrers}}
+</p>
+<p>
+  <strong>Description: </strong>{{applicant.description}}
+</p>
+<p>
+  <strong>Resume File: </strong>
+  <a href="/tAs/applicants/{{applicant._id}}/download">{{applicant.fileOriginalName}}</a>
+</p>
+<p>
+  <strong>Skills: </strong>{{applicant.skills}}
+</p>
+<p>
+  <strong>Info: </strong>{{applicant.info}}
+</p>
+<p>
+  <strong>Hring Managers: </strong>{{applicant.hiringManagers}}
+</p>
+
+<p>
+  <strong>Jobs: </strong>{{applicant.jobs}}
+</p>
+
+
+{{#if user}}
+  <form id="applicantRegFrom" method="get" action="/tAs/applicants/{{applicant._id}}/details/{{tA_id}}/edit">
+    <input type="submit" applicant="button" value="Edit This Applicant's details">
+  </form>
+{{else}}
+  <p><em>You must be logged in to refer applicants for applicantes</em></p>
+{{/if}}
