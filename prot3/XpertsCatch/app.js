@@ -56,7 +56,9 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
+
+//For a default layout applied to every page can pass this to  exphbs({defaultLayout: 'layout'})
+app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 
