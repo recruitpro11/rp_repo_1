@@ -15,7 +15,8 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
      	 	console.log(err);
      	 	res.send(err);
     		} else {
-     	 		res.render('index', {'jobs': jobs});
+     	 		//res.render('index', {'jobs': jobs, layout: 'landingLayout.handlebars'});
+                res.render('index', {'jobs': jobs});
     		} 
   		});
 	}
