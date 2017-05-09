@@ -1,0 +1,94 @@
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<h2>Edit this Applicant's Details</h2>
+<form id="regForm" method="post" enctype="multipart/form-data" action="/tAs/applicants/{{tA_id}}/add">
+  <div>
+    <label>First Name: </label>
+    <input type="text" name="first_name" value={{applicant.first_name}}>
+  </div>
+  <div>
+    <label>Last Name: </label>
+    <input type="text" name="last_name" value={{applicant.last_name}}>
+  </div>
+  <div>
+    <label>Email</label>
+    <input type="text" name="email" value={{applicant.email}}>
+  </div>
+  <div>
+    <label>Additional Info</label>
+    <input type="text" name="info" value={{applicant.info}}>
+  </div>   
+
+
+</hr>
+<h6></h6>
+
+
+  <h6>Mahdi will help you add Teck skills here </h6>
+  <div id="list1" class="dropdown-check-list" name="applicant_skills" tabindex="100">
+    <span class="anchor">Applicant's Skills</span>
+    <ul class="items">
+      <li><input type="checkbox" />Php </li>
+      <li><input type="checkbox" />Java</li>
+      <li><input type="checkbox" />C++ </li>
+      <li><input type="checkbox" />Node </li>
+      <li><input type="checkbox" />Language </li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    var checkList = document.getElementById('list1');
+    checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+      if (checkList.classList.contains('visible'))
+        checkList.classList.remove('visible');
+      else
+        checkList.classList.add('visible');
+      }
+  </script>
+
+
+</hr>
+<h6></h6>
+
+  <div>
+    <p>
+      <strong>Resume File: </strong>
+      <a href="/tAs/applicants/{{applicant._id}}/download">{{applicant.fileOriginalName}}</a>
+    </p>
+  </div>
+
+  <div>
+    <label>Upload a new Resume: </label>
+    <input type="file" name="resume_file">
+  </div>
+
+
+<h6> and/or </h6>
+
+
+  <div>
+    <label>Write a resume/description for the Applicant: </label>
+    <textarea name="description" id="hsTextAreaToBeReplaced">{{applicant.description}}</textarea>
+    <script type="text/javascript">
+      // Replace the <textarea id="hsTextAreaToBeReplaced"> with a CKEditor
+      CKEDITOR.replace( 'hsTextAreaToBeReplaced' );
+      
+      /*CKEDITOR.editorConfig = function( config ){
+        config.enterMode = CKEDITOR.ENTER_BR;
+        config.shiftEnterMode = CKEDITOR.ENTER_BR;
+      };
+      
+      $(function() {
+         $('hsTextAreaToBeReplaced').ckeditor({
+            toolbar: 'Full',
+            enterMode : CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P
+            });
+      });*/
+    </script>
+  </div>
+
+
+
+  <div>
+    <input type="submit" value="Submit">
+  </div>
+</form>

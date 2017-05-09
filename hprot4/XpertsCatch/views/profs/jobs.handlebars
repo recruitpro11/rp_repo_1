@@ -1,0 +1,23 @@
+<h2>{{prof.first_name}}'s Jobs</h2>
+{{#if prof.jobs}}
+<table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Job ID</th>
+      <th>Job Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each prof.jobs}}
+      <tr>
+        <td>{{job_id}}</td>
+        <td>{{job_title}}</td>
+        <td><a href="/jobs/{{job_id}}/lessons">View Lessons</a></td>  
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+  <p>This prof does not have any jobs</p>
+{{/if}}

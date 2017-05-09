@@ -1,0 +1,37 @@
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+  var myName = "{{tA._id}}";
+  console.log('hs tA_id: ' + myName);
+  localStorage.removeItem(myName);
+</script>
+
+
+<h2>{{tA.first_name}}'s Applicants</h2>
+<a href="/tAs/applicants/{{tA._id}}/add">Add a New Applicant</a>
+<hr />
+
+{{#if tA.applicants}}
+<table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Applicant ID</th>
+      <th>First Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tA.applicants}}
+      <tr>
+        <td>{{applicant_id}}</td>
+        <td>{{applicant_first_name}}</td>
+        <td><a href="/tAs/applicants/{{applicant_id}}/details/{{../tA._id}}">Details</a></td>
+        <td><a href="/tAs/applicants/{{applicant_id}}/refer/{{../tA._id}}/hiringManager">Refer to a HiringManager</a></td>
+        <td><a href="/tAs/applicants/{{applicant_id}}/refer/{{../tA._id}}/job">Refer to a Matching Job</a></td>
+        <td><a href="/tAs/applicants/{{applicant_id}}/delete/{{../tA._id}}">Delete</a></td>  
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+  <p>This tA does not have any Refferals</p>
+{{/if}}

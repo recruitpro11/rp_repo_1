@@ -1,0 +1,146 @@
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+
+<link href="/stylesheets/hspop.css" rel="stylesheet">
+
+
+
+<form id="appForm" method="post" enctype="multipart/form-data" action="/tAs/applicants/{{tA_id}}/add">
+</form>
+
+
+<h2>Add a New Applicant</h2>
+
+<div>
+	<label>First Name: </label>
+	<input type="text" name="first_name" form="appForm">
+</div>
+
+<div>
+	<label>Last Name: </label>
+	<input type="text" name="last_name" form="appForm">
+</div>
+
+<div>
+	<label>Email:</label>
+	<input type="text" name="email" form="appForm">
+</div>
+
+<div>
+	<label>Additional Info: </label>
+	<input type="text" name="info"  form="appForm">
+</div>   
+
+
+<br>
+
+
+<section>
+  <a class="reg">Add a New Skill</a>
+</section>
+
+
+
+<div id="list1" class="dropdown-check-list" name="skillsList" tabindex="100">
+	
+	<span class="anchor">Applicant's Skills</span>
+	
+	<div id="checkbox-container"></div>
+
+</div>
+
+<script type="text/javascript">
+	
+	var checkList = document.getElementById('list1');
+	checkList.classList.add('visible');
+	checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+		if (checkList.classList.contains('visible'))
+			checkList.classList.remove('visible');
+		else
+			checkList.classList.add('visible');
+	}
+
+</script>
+
+<script type="text/javascript">
+
+	{{#each skillsList}}
+
+		var formName = "appForm";
+		var skillId = '{{skill_name}}';
+		var skillName = '{{skill_name}}';
+		if(skillName == 'CPlusPlus' || skillName == 'cPlusPlus'){
+			skillName = 'C++'
+		}
+
+		
+		$("#checkbox-container").append(
+			$("<ul class='items'><div></div></ul>").append(
+				$("<label></label>").text(skillName).attr("for",skillId).append(
+					$("<input type='checkbox'>").attr("form",formName).attr("id",skillId).attr("name",skillId).attr("onchange","$('#skillForm').submit();")
+				)
+			)
+		);
+
+	{{/each}}
+
+</script>
+
+
+
+<br>
+<br>
+
+
+
+
+<div>
+	<label>Upload Applicant's Resume: </label>
+	<input type="file" name="resume_file" form="appForm">
+</div>
+
+
+<div class="pop">
+	<span>✖</span>
+	<h1></h1>
+	<p>Please type the name of the skill you'd like to add.</p>
+	<form id="popupform" method="post" action="/tAs/applicants/{{tA_id}}/add/newskill">
+		<label>Skill Name: </label>
+		<input type="text" name="new_skill_name">
+		<div class="hsPopButton">
+			<input type="submit" value="Send">
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("a").click(function () {
+	    	$(".pop").fadeIn(300);
+	     	positionPopup();
+	 	});
+	
+	//This disappears the the popup	
+	$(".pop > span").click(function () {
+	   	$(".pop").fadeOut(300);
+			});
+	});
+</script>
+
+
+<br>
+
+
+<div>
+	<label>Write a resume/description for the Applicant: </label>
+	<textarea name="description" id="hsTextAreaToBeReplaced" form="appForm"></textarea>
+	<script type="text/javascript">
+		// Replace the <textarea id="hsTextAreaToBeReplaced"> with a CKEditor
+		CKEDITOR.replace( 'hsTextAreaToBeReplaced' );
+	</script>
+</div>
+
+
+<div>
+	<input type="submit" value="Submit" form="appForm">
+</div>

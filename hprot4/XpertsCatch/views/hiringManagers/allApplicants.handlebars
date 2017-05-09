@@ -1,0 +1,24 @@
+<h2>All Applicants in the System</h2>
+{{#each applicants}}
+	<div class="block">
+        	<h3>{{first_name}} {{last_name}}</h3>
+        	<p><strong>Jobs: </strong>
+            	{{jobs}}
+			</p>
+			<p><strong>Referrers: </strong>
+            	{{referers}}
+			</p>
+			<p><strong>Skills: </strong>
+            	{{skills}}
+			</p>
+			<p><strong>Info: </strong>
+            	{{info}}
+			</p>
+			<p><strong>Hiring Managers: </strong>
+            	{{hiringManagers}}
+			</p>
+
+
+        	<a class='button' href='/jobs/{{_id}}/details/'> Contact this Applicant </a>
+	</div>
+{{/each}}

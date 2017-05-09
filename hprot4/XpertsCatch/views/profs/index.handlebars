@@ -1,0 +1,29 @@
+<h1>Proffessors home page</h1>
+        <p>
+        Mahdi will customize this for you.
+        </p>
+
+
+<h2>{{tA.first_name}}'s Jobes</h2>
+{{#if tA.jobs}}
+<table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Job ID</th>
+      <th>Job Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tA.jobs}}
+      <tr>
+        <td>{{job_id}}</td>
+        <td>{{job_title}}</td>
+        <td><a href="/jobs/{{job_id}}/lessons">View Lessons</a></td>  
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+  <p>This tA does not have any jobs</p>
+{{/if}}
