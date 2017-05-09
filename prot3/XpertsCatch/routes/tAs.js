@@ -36,6 +36,27 @@ Tecskill = require('../models/tecskill');
 
 
 /*****************************************************************
+**********************tAs HOMEPAGE Route**************************
+******************************************************************/
+router.get('/', ensureAuthenticated, function(req, res, next) {
+	TA.getTAByUsername(req.user.username, function(err, tA){
+		if(err){
+			console.log(err);
+			res.send(err);
+		} else {
+			res.render('tAs/index', {'tA': tA});
+		}
+	});
+});
+
+
+
+
+
+
+
+
+/*****************************************************************
 **********************View TA jobs Route**************************
 ******************************************************************/
 router.get('/jobs', ensureAuthenticated, function(req, res, next) {

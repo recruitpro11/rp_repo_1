@@ -8,14 +8,18 @@ var Prof = require('../models/prof.js');
 var TA = require('../models/tA.js');
 var HiringManager= require('../models/hiringManager.js');
 
-router.get('/signup', function(req, res, next) {
-  res.render('users/signup');
-});
+
+
 
 
 /**************************************************************
 **********************SIGNUP ROUTE******************************
 ***************************************************************/
+router.get('/signup', function(req, res, next) {
+
+  res.render('users/login', {layout: false});
+});
+
 router.post('/signup', function(req, res, next){
 
 console.log('hs /signup route got request:\n');
@@ -166,9 +170,17 @@ console.log(user);
 ));
 
 
+
+
 /**************************************************************
 **********************LOGIN ROUTE******************************
 ***************************************************************/
+router.get('/login', function(req,res){
+  console.log('hs user login');
+   res.render('users/login');
+});
+
+
 /* POST localhost:3000/users/login */
 router.post('/login',passport.authenticate('local', {failureRedirect:'/', failureFlash:'Invalid username or password'}), function(req,res){
    console.log('Authentication Successful');
@@ -179,7 +191,7 @@ router.post('/login',passport.authenticate('local', {failureRedirect:'/', failur
 
 
 /**************************************************************
-**********************LOGIN ROUTE******************************
+**********************LOGOUT ROUTE******************************
 ***************************************************************/
 router.get('/logout', function(req,res){
    req.logout();

@@ -15,6 +15,17 @@ function ensureAuthenticated(req, res, next){
 }
 
 
+router.get('/', ensureAuthenticated, function(req, res, next) {
+  Prof.getProfByUsername(req.user.username, function(err, prof){
+    if(err){
+      console.log(err);
+      res.send(err);
+    } else {
+      res.render('profs/jobs', {'prof': prof});
+    }
+  });
+});
+
 router.get('/jobs', ensureAuthenticated, function(req, res, next) {
   Prof.getProfByUsername(req.user.username, function(err, prof){
     if(err){
