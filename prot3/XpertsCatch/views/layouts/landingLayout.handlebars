@@ -116,6 +116,57 @@
 
 
 
+    <!-- ========================Hs: Stuff From LowFitProt2====================== -->
+
+
+<div class="grid">
+
+
+{{#if messages.error}}
+<ul class="error">{{{messages.error}}}</ul>
+{{/if}}
+{{#if messages.success}}
+<ul class="success">{{{messages.success}}}</ul>
+{{/if}}
+{{#if messages.info}}
+<ul class="info">{{{messages.info}}}</ul>
+{{/if}}
+
+
+<div class="col_12">
+        <div class="col_9">
+            {{#if errors}}
+               {{#each errors}}
+                  <div class="notice error"><i class="icon-remove-sign icon-large"></i>
+                  {{msg}}
+                  <a href="#close" class="icon-remove"></a></div>
+               {{/each}}
+            {{/if}}
+
+
+        {{{body}}}
+        </div>
+
+        <div class="col_3">
+        {{>login}}
+        </div>
+        
+        <hr/>
+         
+        {{#if isHome}}
+          {{#unless user}}
+            {{>jobs}}
+          {{/unless}}
+        {{/if}}
+</div>
+
+</div><!-- END GRID -->      
+        
+     
+
+    <!-- End Dashboard -->
+
+</div>
 
 
 
