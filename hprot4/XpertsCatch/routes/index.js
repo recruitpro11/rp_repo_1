@@ -16,7 +16,7 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
      	 	console.log(err);
      	 	res.send(err);
     		} else {
-          req.app.locals.layout = 'layout';
+          req.app.locals.layout = 'expertsLayout';
           res.redirect('/tAs/');
     		} 
   		});
@@ -26,7 +26,7 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
         console.log(err);
         res.send(err);
         } else {
-          req.app.locals.layout = 'layout';
+          req.app.locals.layout = 'expertsLayout';
           res.redirect('/profs/');
         } 
       });
@@ -36,7 +36,8 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
         console.log(err);
         res.send(err);
         } else {
-          req.app.locals.layout = '';
+          //req.app.locals.layout = '';
+          req.app.locals.layout = 'expertsLayout';
           res.render('hs-dashboard');
         } 
       });
