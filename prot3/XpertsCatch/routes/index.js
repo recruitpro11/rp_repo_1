@@ -8,10 +8,8 @@ Job = require('../models/job');
 router.get('/', function(req, res, next) {
 console.log('isHiringManager: '+res.locals.isHiringManager);
 	if(res.locals.isHiringManager){
-    req.app.locals.layout =  'layout.handlebars';
 		res.redirect('/hiringManagers/');
 	} else if(res.locals.isTA){
-    req.app.locals.layout =  'layout.handlebars';
 		Job.getJobs(function(err, jobs){
     		if(err){
      	 	console.log(err);
@@ -26,7 +24,6 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
         console.log(err);
         res.send(err);
         } else {
-          req.app.locals.layout =  'layout.handlebars';
           res.redirect('/profs/');
         } 
       });
@@ -36,10 +33,7 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
         console.log(err);
         res.send(err);
         } else {
-          req.app.locals.layout =  'landingLayout.handlebars';
-          res.render('index');
-     //res.render('index', {'jobs': jobs, defaultLayout: 'landingLayout.handlebars'});
-     //res.render('index', {'jobs': jobs, layout: 'layout.handlebars'});
+          res.render('index', {layout: false});
         } 
       });
   }
