@@ -16,7 +16,7 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
      	 	console.log(err);
      	 	res.send(err);
     		} else {
-          req.app.locals.layout = 'layout';
+          req.app.locals.layout = 'xpert';
           res.redirect('/tAs/');
     		} 
   		});
@@ -26,7 +26,7 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
         console.log(err);
         res.send(err);
         } else {
-          req.app.locals.layout = 'layout';
+          req.app.locals.layout = 'xpert';
           res.redirect('/profs/');
         } 
       });
