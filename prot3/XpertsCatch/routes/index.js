@@ -31,10 +31,17 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
         } 
       });
   } else {
-    req.app.locals.layout =  'landingLayout.handlebars';
-    res.render('index', {'jobs': jobs});
+        Job.getJobs(function(err, jobs){
+        if(err){
+        console.log(err);
+        res.send(err);
+        } else {
+          req.app.locals.layout =  'landingLayout.handlebars';
+          res.render('index');
      //res.render('index', {'jobs': jobs, defaultLayout: 'landingLayout.handlebars'});
      //res.render('index', {'jobs': jobs, layout: 'layout.handlebars'});
+        } 
+      });
   }
 });
 

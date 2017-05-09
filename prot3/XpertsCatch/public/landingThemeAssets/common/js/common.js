@@ -1,66 +1,199 @@
-;$(function(){
+/**
+ * CLEAN UI THEME SETTINGS
+ */
 
-    // TYPING TEASER TEXT
-
-    $('#showcase-type').typed({
-        strings: ['Best Choice for Your Web App. Premium Quality', 'Ultimate Admin Template for All Your Needs', 'Clean Simple Responsive <br>Easy and Highly Customizable'],
-        typeSpeed: 30,
-        loop: true,
-        backDelay: 1000,
-        cursorChar: ''
-    });
+var cleanUI = {
+    hasTouch: (function() { return ('ontouchstart' in document.documentElement) })()
+};
 
 
-    // ROTATING 3D CUBE
 
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, 1110/900, 1, 10000);
+/**
+ * CLEAN UI TEMPLATE SCRIPTS
+ */
 
-    var renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(1110, 900);
-    renderer.setClearColor( 0xf2f5fa, 0);
-    document.getElementById('rotating-cube').appendChild(renderer.domElement);
-
-    var geometry = new THREE.BoxGeometry(700, 700, 700, 3, 2, 2);
-    var material = new THREE.MeshBasicMaterial({color: 0xdbe0e7, wireframe: true});
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-
-    camera.position.z = 1000;
-
-    function render() {
-        requestAnimationFrame(render);
-
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-
-        renderer.render(scene, camera);
-    };
-
-    render();
-
-    // MENU SCROLLTO
+$(function(){
     
-    $('.cwt__main-menu a').on('click', function(){
-        $('.cwt__main-menu a').removeClass('cwt__main-menu__link--active');
-        $(this).addClass('cwt__main-menu__link--active');
+    /////////////////////////////////////////////////////////////////////////////
+    // Slide toggle menu items on click
+
+    $('.left-menu .left-menu-list-submenu > a').on('click', function(){
+        var accessDenied = $('body').hasClass('menu-top') && $(window).width() > 768;
+
+        if (!accessDenied) {
+            var that = $(this).parent(),
+                opened = $('.left-menu .left-menu-list-opened');
+
+            if (!that.hasClass('left-menu-list-opened') && !that.parent().closest('.left-menu-list-submenu').length)
+                opened.removeClass('left-menu-list-opened').find('> ul').slideUp(200);
+
+            that.toggleClass('left-menu-list-opened').find('> ul').slideToggle(200);
+        }
     });
 
-    $('.cwt__js-click__preview').on('click', function(){
-        $.scrollTo($('.cwt__preview'), 1000);
+
+    /////////////////////////////////////////////////////////////////////////////
+    // Main menu scripts
+
+    if (!$('body').hasClass('menu-top')) {
+        if (!cleanUI.hasTouch) {
+            if (!cleanUI.hasTouch) {
+                $('nav.left-menu .scroll-pane').each(function() {
+                    $(this).jScrollPane({
+                        autoReinitialise: true,
+                        autoReinitialiseDelay: 100
+                    });
+                    var api = $(this).data('jsp'),
+                        throttleTimeout;
+                    $(window).bind('resize', function() {
+                        if (!throttleTimeout) {
+                            throttleTimeout = setTimeout(function() {
+                                api.reinitialise();
+                                throttleTimeout = null;
+                            }, 50);
+                        }
+                    });
+                });
+            }
+        }
+    }
+
+    if ($('body').hasClass('menu-top')) {
+
+        var translateSelector = $('nav.left-menu .left-menu-inner'),
+            startTranslateX = 0;
+
+        translateSelector.addClass('scrolled-to-left');
+
+        $(window).on('resize', function(){
+            startTranslateX = 0;
+            translateSelector.css('transform', 'translate3d(' + 0 + 'px, 0px, 0px)');
+        });
+
+        $('nav.left-menu').on('mousemove', function(e) {
+
+            if ($(window).width() > 751) {
+
+                console.log(e)
+
+                var menuWidth = $('nav.left-menu').width(),
+                    windowWidth = $(window).width(),
+                    boxedOffset = (windowWidth - menuWidth) / 2,
+                    innerWidth = (function() {
+                        var width = 0;
+                        $('nav.left-menu .left-menu-list-root > *').each(function(){
+                            width += $(this).width();
+                        });
+                        return width;
+                    })(),
+                    logoWidth = $('nav.left-menu .logo-container').outerWidth(),
+                    deltaWidth = menuWidth - logoWidth - innerWidth,
+                    hoverOffset = 100;
+
+                if (deltaWidth < 0) {
+
+                    if (e.clientX < windowWidth - menuWidth - boxedOffset + logoWidth + hoverOffset) {
+
+                        if (startTranslateX < 0 || startTranslateX < deltaWidth) {
+
+                            startTranslateX = startTranslateX - deltaWidth;
+                            translateSelector
+                                .removeClass('scrolled-to-right')
+                                .addClass('scrolled-to-left')
+                                .css('transform', 'translate3d(' + startTranslateX + 'px, 0px, 0px)')
+
+                        }
+
+                    }
+
+                    if (e.clientX > menuWidth + boxedOffset - hoverOffset) {
+
+                        if (startTranslateX >= 0 || startTranslateX > deltaWidth) {
+
+                            startTranslateX = deltaWidth;
+                            translateSelector
+                                .removeClass('scrolled-to-left')
+                                .addClass('scrolled-to-right')
+                                .css('transform', 'translate3d(' + startTranslateX + 'px, 0px, 0px)')
+
+                        }
+
+                    }
+                }
+
+            }
+
+        });
+
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////
+    // Toggle menu on viewport < 768px
+
+    $('.left-menu-toggle').on('click', function(){
+        $(this).toggleClass('active');
+        $('nav.left-menu').toggleClass('left-menu-showed');
+        $('.main-backdrop').toggleClass('main-backdrop-showed')
     });
 
-    $('.cwt__js-click__gallery').on('click', function(){
-        $.scrollTo($('.cwt__gallery'), 1000, {offset: -100});
+
+    /////////////////////////////////////////////////////////////////////////////
+    // Hide menu and backdrop on backdrop click
+
+    $('.main-backdrop').on('click', function(){
+        $('.left-menu-toggle').removeClass('active');
+        $('nav.left-menu').removeClass('left-menu-showed');
+        $('.main-backdrop').removeClass('main-backdrop-showed')
+    });
+    
+    $('nav.left-menu a.left-menu-link').on('click', function(){
+        if (!$(this).parent().hasClass('left-menu-list-submenu')) {
+            $('.left-menu-toggle').removeClass('active');
+            $('nav.left-menu').removeClass('left-menu-showed');
+            $('.main-backdrop').removeClass('main-backdrop-showed')
+        }
     });
 
-    $('.cwt__js-click__features').on('click', function(){
-        $.scrollTo($('.cwt__features'), 1000, {offset: -100});
-    });
+    //////////////////////////////////////////////////////////////////////////////
+    // Material Effects
 
-    $('.cwt__js-click__about').on('click', function(){
-        $.scrollTo($('.cwt__about'), 1000, {offset: -100});
-    });
+    if ($('body').hasClass('mode-material')) {
+        (function($) {
+            $("body").on('click', '.btn, .left-menu-link', function(e){
 
+                var rippler = $(this)
+
+                // Create .ink element if it doesn't exist
+                if(rippler.find("> .ink").length == 0) {
+                    $('.ink').remove();
+                    rippler.append("<span class='ink'></span>");
+                }
+
+                var ink = rippler.find("> .ink");
+
+                // Prevent quick double clicks
+                ink.removeClass("animate");
+
+                // Set .ink diameter
+                if(!ink.height() && !ink.width())
+                {
+                    var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
+                    ink.css({height: d, width: d});
+                }
+
+                // Get click coordinates
+                var x = e.pageX - rippler.offset().left - ink.width()/2;
+                var y = e.pageY - rippler.offset().top - ink.height()/2;
+
+                // Set .ink position and add class .animate
+                ink.css({
+                    top: y+'px',
+                    left:x+'px'
+                }).addClass("animate");
+
+            })
+        })(jQuery);
+    }
 
 });
