@@ -137,23 +137,47 @@
                     Login Form
                 </h3>
                 <br />
-                <form id="form-validation" name="form-validation" method="POST">
+                <form id="form-validation" name="form-validation" method="POST" action="/users/login">
+              <!--HS with validation      
+
                     <div class="form-group">
                         <input id="validation-email"
                                class="form-control"
                                placeholder="Email or Username"
-                               name="validation[email]"
+                               name="username"
                                type="text"
-                               data-validation="[EMAIL]">
-                    </div>
+                               data-validation="[EMAIL]"> <
+                    </div> 
+                -->
+                    <div class="form-group">
+                        <input id="validation-email"
+                               class="form-control"
+                               placeholder="Email or Username"
+                               name="username"
+                               type="text"
+                               data-validation=""> <
+                    </div> 
+                
+                <!--  hs password bigger than 6  
+
                     <div class="form-group">
                         <input id="validation-password"
                                class="form-control password"
-                               name="validation[password]"
+                               name="password"
                                type="password" data-validation="[L>=6]"
                                data-validation-message="$ must be at least 6 characters"
                                placeholder="Password">
-                    </div>
+                    </div> 
+                -->
+
+                     <div class="form-group">
+                        <input id="validation-password"
+                               class="form-control password"
+                               name="password"
+                               type="password" data-validation="[L>=1]"
+                               data-validation-message="$ must be at least 1 characters"
+                               placeholder="Password">
+                    </div> 
                     <div class="form-group">
                         <a href="javascript: void(0);" class="pull-right">Forgot Password?</a>
                         <div class="checkbox">
