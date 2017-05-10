@@ -37,8 +37,8 @@ console.log('isHiringManager: '+res.locals.isHiringManager);
         res.send(err);
         } else {
           //req.app.locals.layout = '';
-          req.app.locals.layout = 'expertsLayout';
-          res.render('hs-dashboard');
+          req.app.locals.layout = '';
+          res.render('index');
         } 
       });
   }
