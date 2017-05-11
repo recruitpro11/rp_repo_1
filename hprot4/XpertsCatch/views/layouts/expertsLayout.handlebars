@@ -16,16 +16,7 @@
     </head>
 
 
-
-
-
-
-
     <body class="x-dashboard-dark">
-
-
-
-
 
 
         <!-- START PAGE CONTAINER -->
@@ -39,11 +30,15 @@
 
 
 
-<!--HS: START of NAV BAR -->
+                    <!--HS: START of NAV BAR -->
                     <div class="x-hnavigation">
+                        <!--HS LOGO -->
                         <div class="x-hnavigation-logo">
                             <a href="/index.html">Atlant</a>
                         </div>
+                        <!--HS END LOGO -->
+                        
+                        <!--HS BUTTONS -->
                         <ul>
                             <li class="active">
                                 <a href="#">Home</a>
@@ -69,42 +64,60 @@
                             </li>
                             
                         </ul>
-                        
+                        <!--HS END BUTTONS -->
+
+
+
+                        <!--HS Features (nav) -->
                         <div class="x-features">
+
+
+                            <!--HS What is this? -->
                             <div class="x-features-nav-open">
                                 <span class="fa fa-bars"></span>
                             </div>
-                            <div class="pull-right">
-                                <div class="x-features-search">
-                                    <input type="text" name="search">
-                                    <input type="submit">
-                                </div>
+                            <!--HS END What is this? -->
+                            
+
+                            <div>
+
+                                <!-- Profile -->
                                 <div class="x-features-profile">
-                                    <img src="/atlantThemeAdmin/assets/images/users/avatar.jpg">
-                                    <ul class="xn-drop-left animated zoomIn">
-                                        <li><a href="pages-lock-screen.html"><span class="fa fa-lock"></span> Lock Screen</a></li>
-                                        <li><a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span> Sign Out</a></li>
-                                    </ul>
+                                        <img src="/atlantThemeAdmin/assets/images/users/avatar.jpg">
+                                        <ul class="xn-drop-left animated zoomIn">
+                                            <li><a href="pages-lock-screen.html"><span class="fa fa-lock"></span> Lock Screen</a></li>
+                                            <li><a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span> Sign Out</a></li>
+                                        </ul>
                                 </div>
+                                <!-- ENDProfile -->
+
                             </div>
-                        </div>                        
+                        
+
+                        </div>
+                        <!--HS END Features (nav) -->    
+
+
+                        <ul class="xn-icon-button pull-right last">
+                            <!-- Side bar tuggle -->
+                            <li class="xn-icon-button pull-right last">
+                                <a href="#" class="sidebar-toggle"><span class="fa fa-align-right"></span></a>           
+                            </li> 
+                            <!-- END Side bar tuggle -->
+                        </ul>
+
+                    
                     </div>
-<!--HS: end of NAV BAR -->
+                    <!--HS: end of NAV BAR -->
 
 
 
 
 
 
-
-
-
-{{{body}}}
-
-
-
-
-
+                    <!--HS: START of BODY tag for index -->
+                    {{{body}}}
+                    <!--HS: END of BODY tag for index -->
 
 
 
@@ -129,19 +142,141 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- MESSAGE BOX-->
+        <!--HS START SIDEBAR CONTENT-->
+        <div class="sidebar">            
+            <div class="sidebar-wrapper scroll">
+                
+                <div class="sidebar-tabs">
+                    <a href="#sidebar_1" class="sidebar-tab active"><span class="fa fa-comments"></span> Messages</a>
+                    <a href="#sidebar_2" class="sidebar-tab"><span class="fa fa-cog"></span> Settings</a>
+                </div>
+                
+                <div class="sidebar-tab-content active" id="sidebar_1">
+                    <div class="sidebar-title">You have <strong>3 new</strong> messages</div>
+                    
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="pages-address-book.html"><span class="status status-online"></span> John Doe</a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis sed mi sit amet porta? <a href="pages-messages.html">more...</a></p>
+                            <small class="text-muted">11:45 am</small>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="pages-address-book.html"><span class="status status-online"></span> Dmitry Ivaniuk</a>
+                            <p>Aliquam id eleifend turpis. Sed tincidunt purus laoreet luctus sollicitudin. <a href="pages-messages.html">more...</a></p>
+                            <small class="text-muted">10:14 am</small>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="pages-address-book.html"><span class="status status-offline"></span> Darth Vader</a>
+                            <p>Amet, consectetur adipiscing elit. Cras sagittis sed mi sit amet porta? <a href="pages-messages.html">more...</a></p>
+                            <small class="text-muted">09:31 am</small>
+                        </li>
+                    </ul>
+                    
+                    <div class="sidebar-title">Contacts: <strong>2 online</strong></div>
+                    <div class="list-group list-group-contacts">                            
+                        <a href="#" class="list-group-item">         
+                            <div class="list-group-status status-online"></div>
+                            <img src="assets/images/users/user2.jpg" class="pull-left" alt="John Doe">
+                            <span class="contacts-title">John Doe</span>
+                            <p>UI/UX Designer</p>                     
+                        </a>
+                        <a href="#" class="list-group-item">                                 
+                            <div class="list-group-status status-online"></div>
+                            <img src="assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk">
+                            <span class="contacts-title">Dmitry Ivaniuk</span>
+                            <p>Web Developer/Designer</p>                                                                        
+                        </a>                                
+                        <a href="#" class="list-group-item">                                    
+                            <div class="list-group-status status-away"></div>
+                            <img src="assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali">
+                            <span class="contacts-title">Nadia Ali</span>
+                            <p>Singer-Songwriter</p>                                    
+                        </a>                                                                                                                        
+                        <a href="#" class="list-group-item">                                    
+                            <div class="list-group-status status-offline"></div>
+                            <img src="assets/images/users/user6.jpg" class="pull-left" alt="Darth Vader">
+                            <span class="contacts-title">Darth Vader</span>
+                            <p>Project Manager</p>                                    
+                        </a>
+                    </div>
+                    
+                </div>
+                
+                <div class="sidebar-tab-content form-horizontal" id="sidebar_2">
+                    
+                    <div class="form-group">                        
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search..."/>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary btn-condensed"><span class="fa fa-cogs"></span></button>
+                                </div>
+                            </div>                            
+                        </div>                        
+                    </div>
+                    
+                    <div class="sidebar-title">Quick Settings</div>                    
+                    <div class="form-group">
+                        <label class="col-md-8 col-xs-8 control-label text-left">Wi-Fi</label>
+                        <div class="col-md-4 col-xs-4">
+                            <label class="switch">
+                                <input type="checkbox" class="switch" value="1" checked/>
+                                <span></span>
+                            </label>                                            
+                        </div>                        
+                    </div>                                    
+                    <div class="form-group">
+                        <label class="col-md-8 col-xs-8 control-label text-left">Location</label>
+                        <div class="col-md-4 col-xs-4">
+                            <label class="switch">
+                                <input type="checkbox" class="switch" value="1" checked/>
+                                <span></span>
+                            </label>
+                        </div>                                                              
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-8 col-xs-8 control-label text-left">Celluar</label>
+                        <div class="col-md-4 col-xs-4">
+                            <label class="switch">
+                                <input type="checkbox" class="switch" value="1"/>
+                                <span></span>
+                            </label>
+                        </div>                                                               
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-8 col-xs-8 control-label text-left">Find my Phone</label>
+                        <div class="col-md-4 col-xs-4">
+                            <label class="switch">
+                                <input type="checkbox" class="switch" value="1" checked/>
+                                <span></span>
+                            </label>
+                        </div>                                                                                                      
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-8 col-xs-8 control-label text-left">Sounds</label>
+                        <div class="col-md-4 col-xs-4">
+                            <label class="switch">
+                                <input type="checkbox" class="switch" value="1"/>
+                                <span></span>
+                            </label>
+                        </div>                                                                                                      
+                    </div>
+                    
+                    <div class="sidebar-title">Extra Tips</div>
+                    <div class="sidebar-block">
+                        <div class="owl-carousel">
+                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sagittis, sapien eget dapibus elementum, enim nunc varius ante, vitae euismod purus enim sed quam.</div>
+                            <div>Suspendisse volutpat scelerisque nibh, vel consectetur sapien pretium ac. Morbi vitae sapien scelerisque libero efficitur interdum.</div>
+                            <div>Vivamus eget libero eget metus laoreet gravida tempus vel nulla. Vivamus non enim leo. Pellentesque in molestie orci.</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>            
+        </div>
+        <!-- END SIDEBAR CONTENT -->        
+        
+        <!-- MESSAGE BOX CONTENT-->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
                 <div class="mb-middle">
@@ -152,14 +287,25 @@
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="/users/logout" class="btn btn-success btn-lg">Yes</a>
+                            <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
                             <button class="btn btn-default btn-lg mb-control-close">No</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- END MESSAGE BOX-->
+        <!-- END MESSAGE BOX CONTENT-->
+
+
+
+
+
+
+
+
+
+
+
 
 
 
