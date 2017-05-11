@@ -63,122 +63,202 @@
                     <!--HS: END of Summary widget-->
 
 
-<br>
-<br>
+                    <br>
+                    <br>
 
 
-                    <!-- START of ACCORDION -->           
+
+                    <!-- START ACCORDION -->           
                     <div class="panel panel-group panel-default accordion"> 
-                        
-                        <div class="panel-heading">
-                            
-                            <div class="panel-title-box">
-                                <h3>Your Referrals</h3>
+
+                        <div class="table-responsive">
+                
+                            <!-- START of pannel heading  -->      
+                            <div class="panel-heading">
+
+                                <div class="panel-title-box">
+                                    <h3>Your Referrals</h3>
+                                </div>
+
+                                <!--hs turn this into a widget-->
+                                <ul class="panel-controls" style="margin-top: 2px;">
+                                    <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                                            <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                                        </ul>                                        
+                                    </li>                                        
+                                </ul>
+                                <!--hs END turn this into a widget--> 
+                                               
                             </div>
+                            <!-- END of pannel heading  -->   
 
-                            <!--hs turn this into a widget-->
-                            <ul class="panel-controls" style="margin-top: 2px;">
-                                <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
-                                <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
-                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
-                                    </ul>                                        
-                                </li>                                        
-                            </ul>
-                            <!--hs END turn this into a widget--> 
+                            
+                            <!--hs START of Table--> 
+                            <table class="table table-condensed table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Project</th>
+                                        <th width="20%">Status</th>
+                                        <th width="30%">Activity</th>
+                                    </tr>
+                                </thead>
+                                    
+                                <!-- HS START of first row-->
+                                <tr>
 
+                                    <td>
+                                    <!-- START of First Element  -->  
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+
+                                                <div class="hs list-group list-group-contacts">
+                                                    <a href="#accOneColOne" class="list-group-item">
+                                                        <div class="list-group-status status-online"></div>
+                                                    
+                                                        <img src="/atlantThemeAdmin/assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali"/>
+                                                        
+                                                        <span class="contacts-title">Nadia Ali</span>
+                                                        
+                                                        <p>Singer-Songwriter</p>                                    
+                                                        
+                                                        <div class="list-group-controls">
+                                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
+                                                        </div>  
+                                                    </a>
+                                                </div>
+                                            </div>    
+
+                                            <div class="panel-body list-group list-group-contacts " id="accOneColOne"> 
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            </div>                                
+                                        </div>
+                                        <!-- END of First Element  -->
+                                    </td>
+
+                                    <!-- HS Second column-->
+                                    <td>
+                                        <span class="label label-danger">Developing</span>
+                                    </td>
+                                    <!-- HS Third column-->
+                                    <td>
+                                        <div class="progress progress-small progress-striped active">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 85%;">85%</div>
+                                        </div>
+                                    </td> 
+
+
+                                </tr>
+                                <!-- HS END of first row-->
+
+
+
+                                <!-- HS START of SECOND row-->
+                                <tr>
+                                    <td>
+                                        <!-- START of Second Element  -->  
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+
+                                                <div class="hs list-group list-group-contacts">
+                                                    <a href="#accOneColTwo" class="list-group-item">
+                                                        <div class="list-group-status status-online"></div>
+                                                    
+                                                        <img src="/atlantThemeAdmin/assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk"/>
+                                                    
+                                                        <span class="contacts-title">Dmitry Ivaniuk</span>
+                                                    
+                                                        <p>Web Developer/Designer</p>                                    
+                                                    
+                                                        <div class="list-group-controls">
+                                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
+                                                        </div>  
+                                                    </a>
+                                                </div>
+                                            </div>    
+
+                                            <div class="panel-body list-group list-group-contacts " id="accOneColTwo"> 
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            </div>                                
+                                        </div>
+                                        <!-- END of Second Element  -->  
+                                    </td>
+
+                                     <!-- HS Second column-->
+                                    <td>
+                                        <span class="label label-warning">Updating</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="progress progress-small progress-striped active">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 72%;">72%</div>
+                                        </div>
+                                    </td>
+                           
+                                    
+                                </tr>
+                                <!-- HS END of SECOND row-->
+
+
+                                <!-- HS START of THIRD row-->
+                                <tr>
+                                    <td>
+                                        <!-- START of Third Element  -->  
+                                        <div class="panel panel-warning">
+                                            <div class="panel-heading">
+
+                                                <div class="hs list-group list-group-contacts">
+                                                    <a href="#accOneColThree" class="list-group-item">
+                                                        <div class="list-group-status status-online"></div>
+                                                    
+                                                        <img src="/atlantThemeAdmin/assets/images/users/user2.jpg" class="pull-left" alt="John Doe"/>
+                                                    
+                                                        <span class="contacts-title">John Doe</span>
+                                                    
+                                                        <p>UI/UX Designer</p>                                     
+                                                    
+                                                        <div class="list-group-controls">
+                                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
+                                                        </div>  
+                                                    </a>
+                                                </div>
+                                            </div>    
+
+                                            <div class="panel-body list-group list-group-contacts " id="accOneColThree"> 
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            </div>                                
+                                        </div>
+                                        <!-- END of Third Element  -->  
+
+                                    </td>
+                                
+
+                                    <td>
+                                        <span class="label label-success">Support</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="progress progress-small progress-striped active">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <!-- HS END of THIRD row-->
+
+
+
+                            </table>
+                            <!--hs END of Table--> 
+            
                         </div>
-
-
-                        <!-- START of First Element  -->  
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-
-                                <div class="hs list-group list-group-contacts">
-                                    <a href="#accOneColOne" class="list-group-item">
-                                        <div class="list-group-status status-online"></div>
-                                    
-                                        <img src="/atlantThemeAdmin/assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali"/>
-                                        
-                                        <span class="contacts-title">Nadia Ali</span>
-                                        
-                                        <p>Singer-Songwriter</p>                                    
-                                        
-                                        <div class="list-group-controls">
-                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                        </div>  
-                                    </a>
-                                </div>
-                            </div>    
-
-                            <div class="panel-body list-group list-group-contacts " id="accOneColOne"> 
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>                                
-                        </div>
-                        <!-- END of First Element  -->  
-
-                        <!-- START of Second Element  -->  
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-
-                                <div class="hs list-group list-group-contacts">
-                                    <a href="#accOneColTwo" class="list-group-item">
-                                        <div class="list-group-status status-online"></div>
-                                    
-                                        <img src="/atlantThemeAdmin/assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk"/>
-                                    
-                                        <span class="contacts-title">Dmitry Ivaniuk</span>
-                                    
-                                        <p>Web Developer/Designer</p>                                    
-                                    
-                                        <div class="list-group-controls">
-                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                        </div>  
-                                    </a>
-                                </div>
-                            </div>    
-
-                            <div class="panel-body list-group list-group-contacts " id="accOneColTwo"> 
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>                                
-                        </div>
-                        <!-- END of Second Element  -->  
-
-                        <!-- START of Third Element  -->  
-                        <div class="panel panel-warning">
-                            <div class="panel-heading">
-
-                                <div class="hs list-group list-group-contacts">
-                                    <a href="#accOneColThree" class="list-group-item">
-                                        <div class="list-group-status status-online"></div>
-                                    
-                                        <img src="/atlantThemeAdmin/assets/images/users/user2.jpg" class="pull-left" alt="John Doe"/>
-                                    
-                                        <span class="contacts-title">John Doe</span>
-                                    
-                                        <p>UI/UX Designer</p>                                     
-                                    
-                                        <div class="list-group-controls">
-                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                        </div>  
-                                    </a>
-                                </div>
-                            </div>    
-
-                            <div class="panel-body list-group list-group-contacts " id="accOneColThree"> 
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>                                
-                        </div>
-                        <!-- END of Third Element  -->   
-                        
-
+                        <!--HS END Table responsive --> 
                     </div>
                     <!-- END ACCORDION --> 
-
-     
 
 
                 </div>                                        
@@ -188,8 +268,6 @@
         <!--HS: END Column ONE-->
 
   
-
-
 
 
 
@@ -249,450 +327,10 @@
     <div class="x-content-inner">
 
 
-        
-
-
-
-
-
-
-
-
-
-        <!-- START column --> 
-        <div class="col-md-10">
-
-            <!-- START ACCORDION -->           
-            <div class="panel panel-group panel-default accordion"> 
-                
-                <div class="panel-heading">
-                    
-                    <div class="panel-title-box">
-                        <h3>Your Referrals</h3>
-                    </div>
-
-                    <!--hs turn this into a widget-->
-                    <ul class="panel-controls" style="margin-top: 2px;">
-                        <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
-                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
-                            <ul class="dropdown-menu">
-                                <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
-                                <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
-                            </ul>                                        
-                        </li>                                        
-                    </ul>
-                    <!--hs END turn this into a widget--> 
-
-                </div>
-
-
-                <!-- START of First Element  -->  
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-
-                        <div class="hs list-group list-group-contacts">
-                            <a href="#accOneColOne" class="list-group-item">
-                                <div class="list-group-status status-online"></div>
-                            
-                                <img src="/atlantThemeAdmin/assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali"/>
-                                
-                                <span class="contacts-title">Nadia Ali</span>
-                                
-                                <p>Singer-Songwriter</p>                                    
-                                
-                                <div class="list-group-controls">
-                                    <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                </div>  
-                            </a>
-                        </div>
-                    </div>    
-
-                    <div class="panel-body list-group list-group-contacts " id="accOneColOne"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>                                
-                </div>
-                <!-- END of First Element  -->  
-
-                <!-- START of Second Element  -->  
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-
-                        <div class="hs list-group list-group-contacts">
-                            <a href="#accOneColTwo" class="list-group-item">
-                                <div class="list-group-status status-online"></div>
-                            
-                                <img src="/atlantThemeAdmin/assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk"/>
-                            
-                                <span class="contacts-title">Dmitry Ivaniuk</span>
-                            
-                                <p>Web Developer/Designer</p>                                    
-                            
-                                <div class="list-group-controls">
-                                    <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                </div>  
-                            </a>
-                        </div>
-                    </div>    
-
-                    <div class="panel-body list-group list-group-contacts " id="accOneColTwo"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>                                
-                </div>
-                <!-- END of Second Element  -->  
-
-                <!-- START of Third Element  -->  
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-
-                        <div class="hs list-group list-group-contacts">
-                            <a href="#accOneColThree" class="list-group-item">
-                                <div class="list-group-status status-online"></div>
-                            
-                                <img src="/atlantThemeAdmin/assets/images/users/user2.jpg" class="pull-left" alt="John Doe"/>
-                            
-                                <span class="contacts-title">John Doe</span>
-                            
-                                <p>UI/UX Designer</p>                                     
-                            
-                                <div class="list-group-controls">
-                                    <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                </div>  
-                            </a>
-                        </div>
-                    </div>    
-
-                    <div class="panel-body list-group list-group-contacts " id="accOneColThree"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>                                
-                </div>
-                <!-- END of Third Element  -->   
-                
-
-            </div>
-            <!-- END ACCORDION --> 
-
-        </div>
-        <!-- END column --> 
-
-
-
-
-
-            <!-- START PROJECTS BLOCK -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <div class="panel-title-box">
-                                        <h3>Projects</h3>
-                                        <span>Projects activity</span>
-                                    </div>                                    
-                                    <ul class="panel-controls" style="margin-top: 2px;">
-                                        <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
-                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
-                                                <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
-                                            </ul>                                        
-                                        </li>                                        
-                                    </ul>
-                                </div>
-                                <div class="panel-body panel-body-table">
-                                    
-                                    <div class="table-responsive">
-                                        <table class="table table-condensed table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th width="50%">Project</th>
-                                                    <th width="20%">Status</th>
-                                                    <th width="30%">Activity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><strong>Atlant</strong></td>
-                                                    <td><span class="label label-danger">Developing</span></td>
-                                                    <td>
-                                                        <div class="progress progress-small progress-striped active">
-                                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 85%;">85%</div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Gemini</strong></td>
-                                                    <td><span class="label label-warning">Updating</span></td>
-                                                    <td>
-                                                        <div class="progress progress-small progress-striped active">
-                                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">40%</div>
-                                                        </div>
-                                                    </td>
-                                                </tr>                                                
-                                                <tr>
-                                                    <td><strong>Taurus</strong></td>
-                                                    <td><span class="label label-warning">Updating</span></td>
-                                                    <td>
-                                                        <div class="progress progress-small progress-striped active">
-                                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 72%;">72%</div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Leo</strong></td>
-                                                    <td><span class="label label-success">Support</span></td>
-                                                    <td>
-                                                        <div class="progress progress-small progress-striped active">
-                                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Virgo</strong></td>
-                                                    <td><span class="label label-success">Support</span></td>
-                                                    <td>
-                                                        <div class="progress progress-small progress-striped active">
-                                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
-                                                        </div>
-                                                    </td>
-                                                </tr>                                                
-                                                <tr>
-                                                    <td><strong>Aquarius</strong></td>
-                                                    <td><span class="label label-success">Support</span></td>
-                                                    <td>
-                                                        <div class="progress progress-small progress-striped active">
-                                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <!-- END PROJECTS BLOCK -->
-
-
-   
-
-
-
-
-
-
-
-
-
-        <div class="row">
-            
-
-
-
-
-            <div class="col-md-6">
-
-                <div class="x-block">
-                    <div class="x-block-head">
-                        <h3>COMMENTS</h3>
-                        <div class="pull-right">                                                    
-                            <button class="btn btn-default">ACTIONS <span class="fa fa-angle-down" style="margin-left: 20px;"></span></button>
-                        </div>                                            
-                    </div>
-                    <div class="x-block-content">                                                                                                
-                        <table class="table x-table">
-                            <tr>
-                                <th><label class="check"><input type="checkbox" name="checkall" class="icheckbox"></label></th>
-                                <th width="30%">AUTHOR</th>
-                                <th width="40%">COMMENT</th>
-                                <th width="30%">THEME</th>                                                    
-                            </tr>
-                            <tr>
-                                <td><label class="check"><input type="checkbox" class="icheckbox"></label></td>
-                                <td>
-                                    <a href="#" class="x-user">
-                                        <img src="/atlantThemeAdmin/assets/images/users/user2.jpg">
-                                        <span>Roger Parker</span>
-                                    </a>
-                                    <span>16.09.2015 1:15 pm</span>
-                                </td>
-                                <td>Nice job with maecenas mi lorem, placerat eget dolor id, porta iaculis tortor. Nam suscipit tempus nisi, sed condimentum arcu. Vivamus elementum quam ut mattis porttitor.</td>
-                                <td>New design layout for ATLANT admin template</td>
-                            </tr>
-                            <tr>
-                                <td><label class="check"><input type="checkbox" class="icheckbox"></label></td>
-                                <td>
-                                    <a href="#" class="x-user">
-                                        <img src="/atlantThemeAdmin/assets/images/users/user3.jpg">
-                                        <span>Maria Jackson</span>
-                                    </a>
-                                    <span>16.09.2015 1:15 pm</span>
-                                </td>
-                                <td>It looks like maecenas mi lorem, placerat eget dolor id, porta iaculis tortor. Nam suscipit tempus nisi, sed condimentum arcu. Vivamus elementum quam ut mattis porttitor.</td>
-                                <td>New design layout for ATLANT admin template</td>
-                            </tr>
-                            <tr>
-                                <td><label class="check"><input type="checkbox" class="icheckbox"></label></td>
-                                <td>
-                                    <a href="#" class="x-user">
-                                        <img src="/atlantThemeAdmin/assets/images/users/user4.jpg">
-                                        <span>Douglas Cook</span>
-                                    </a>
-                                    <span>16.09.2015 1:15 pm</span>
-                                </td>
-                                <td>We need to add some praesent et erat ex. Maecenas mi lorem, placerat eget dolor id, porta iaculis tortor. Nam suscipit tempus nisi, sed condimentum arcu.</td>
-                                <td>New design layout for ATLANT admin template</td>
-                            </tr>
-                            <tr>
-                                <td><label class="check"><input type="checkbox" class="icheckbox"></label></td>
-                                <td>
-                                    <a href="#" class="x-user">
-                                        <img src="/atlantThemeAdmin/assets/images/users/user5.jpg">
-                                        <span>Brian Dawson</span>
-                                    </a>
-                                    <span>16.09.2015 1:15 pm</span>
-                                </td>
-                                <td>I’ve chacked this template and maecenas mi lorem, placerat eget dolor id, porta iaculis tortor. Nam suscipit tempus nisi, sed condimentum arcu. Vivamus elementum quam ut mattis porttitor.</td>
-                                <td>New design layout for ATLANT admin template</td>
-                            </tr>
-                            <tr>
-                                <td><label class="check"><input type="checkbox" class="icheckbox"></label></td>
-                                <td>
-                                    <a href="#" class="x-user">
-                                        <img src="/atlantThemeAdmin/assets/images/users/user2.jpg">
-                                        <span>Roger Parker</span>
-                                    </a>
-                                    <span>16.09.2015 1:15 pm</span>
-                                </td>
-                                <td>I’ve chacked this template and maecenas mi lorem, placerat eget dolor id, porta iaculis tortor. Nam suscipit tempus nisi, sed condimentum arcu. Vivamus elementum quam ut mattis porttitor.</td>
-                                <td>New design layout for ATLANT admin template</td>
-                            </tr>
-                        </table>                                                
-                    </div>
-                </div>
-
-                <ul class="pagination pagination-sm push-up-20">
-                    <li class="disabled"><a href="#">Previous</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-
-            </div>
-
-
-
-
-
-
-
-
-            <div class="col-md-6">
-
-                <div class="x-block">
-                    <div class="x-block-head">
-                        <h3>TO DO LIST</h3>
-                        <div class="pull-right">                                                    
-                            <button class="btn btn-default">ACTIONS <span class="fa fa-angle-down" style="margin-left: 20px;"></span></button>
-                        </div>                                            
-                    </div>
-                    <div class="x-block-content x-todo">
-                        <div class="x-todo-header">
-                            <label class="check"><input type="checkbox" class="icheckbox"></label>
-                            <h3>7 NEW TASKS FOR TODAY</h3>
-                            <button class="btn btn-default pull-right">TODAY: 14 SEP. 2015 <span class="fa fa-angle-down"></span></button>
-                        </div>
-                        <div class="x-todo-content scroll" style="height: 550px;">
-                            <div class="item">
-                                <div class="head">
-                                    <div class="pull-left"><span class="status status-high"></span> Priority: High</div>
-                                    <div class="pull-left">Project: ATLANT Template</div>
-                                    <div class="pull-right"><span class="fa fa-clock-o"></span> added few minutes ago</div>
-                                </div>
-                                <div class="title">
-                                    <label class="check"><input type="checkbox" class="icheckbox"></label>
-                                    <h4>MAKE NEW ATLANT DASHBOARD</h4>
-                                </div>
-                                <div class="content">
-                                    Donec porta suscipit odio et luctus. Mauris vel velit dignissim, lobortis mauris non, ultricies sapien
-                                </div>
-                            </div>                                                
-                            <div class="item">
-                                <div class="head">
-                                    <div class="pull-left"><span class="status status-low"></span> Priority: Low</div>
-                                    <div class="pull-left">Project: New awesome projec</div>
-                                    <div class="pull-right"><span class="fa fa-clock-o"></span> added 15 minutes ago</div>
-                                </div>
-                                <div class="title">
-                                    <label class="check"><input type="checkbox" class="icheckbox"></label>
-                                    <h4>CALL MARTIN PHILLIPS ABOUT NEW PROJECT </h4>
-                                </div>
-                                <div class="content">
-                                    Fusce eu nunc nisl. Duis tincidunt dui lectus. Suspendisse urna dolor, venenatis eu bibendum ut, placerat id sem. Nulla iaculis augue in nulla rutrum
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="head">
-                                    <div class="pull-left"><span class="status status-low"></span> Priority: Low</div>
-                                    <div class="pull-left">Project: Imaginary Shop</div>
-                                    <div class="pull-right"><span class="fa fa-clock-o"></span> added 3 hours ago</div>
-                                </div>
-                                <div class="title">
-                                    <label class="check"><input type="checkbox" class="icheckbox"></label>
-                                    <h4>PRINT THE INOVOISES FOR BRIAN DAWSON</h4>
-                                </div>
-                                <div class="content">
-                                    Donec porta suscipit odio et luctus. Mauris vel velit dignissim, lobortis mauris non, ultricies sapien
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="head">
-                                    <div class="pull-left"><span class="status status-medium"></span> Priority: Medium</div>
-                                    <div class="pull-left">Project: Landing page for Themeforest</div>
-                                    <div class="pull-right"><span class="fa fa-clock-o"></span> added 7 hours ago</div>
-                                </div>
-                                <div class="title">
-                                    <label class="check"><input type="checkbox" class="icheckbox"></label>
-                                    <h4>NEW ATLANT DASHBOARD</h4>
-                                </div>
-                                <div class="content">
-                                    Donec porta suscipit odio et luctus. Mauris vel velit dignissim, lobortis mauris non, ultricies sapien
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="head">
-                                    <div class="pull-left"><span class="status status-low"></span> Priority: Medium</div>
-                                    <div class="pull-left">Project: Shop for Themeforest</div>
-                                    <div class="pull-right"><span class="fa fa-clock-o"></span> added 8 hours ago</div>
-                                </div>
-                                <div class="title">
-                                    <label class="check"><input type="checkbox" class="icheckbox"></label>
-                                    <h4>OS-COMMERCE SHOP TEMPLATE</h4>
-                                </div>
-                                <div class="content">
-                                    Donec porta suscipit odio et luctus. Mauris vel velit dignissim, lobortis mauris non, ultricies sapien
-                                </div>
-                            </div>
-                        </div>
-                        <div class="x-todo-footer">
-                            <div class="pull-right">
-                                <a href="#"><span class="fa fa-plus"></span> Add new task</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-
-
-
-        </div>
     </div>   
-<!--HS: END of inner content layout-->
+    <!--HS: END of inner content layout-->
+
+
+
 
 </div>
