@@ -2,6 +2,10 @@
     .hsRecRank {
         font-size: 18px;
     }
+
+    .hsProgressBarPosition {
+        margin-top: 20px;
+    }
 </style>
 
 <div class="x-content">                                                
@@ -86,6 +90,7 @@
                                         <i class="fa fa-star-half-o"></i>
                                         <i class="fa fa-star-o"></i>
                                     </li>
+
                                    
                                 </div>
                                
@@ -95,12 +100,10 @@
                     <!--HS: END of Summary stuff-->
 
 
-                    <br>
-                    <br>
 
 
 
-                    <!-- START ACCORDION -->           
+                     <!-- START ACCORDION -->           
                     <div class="panel panel-group panel-default accordion"> 
 
                         <div class="table-responsive">
@@ -109,7 +112,7 @@
                             <div class="panel-heading">
 
                                 <div class="panel-title-box">
-                                    <h3>Your Referrals</h3>
+                                    <h3>Your Applicants</h3>
                                 </div>
 
                                 <!--hs turn this into a widget-->
@@ -131,14 +134,18 @@
 
                             
                             <!--hs START of Table--> 
-                            <table class="table table-condensed table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th width="50%">Project</th>
-                                        <th width="20%">Status</th>
-                                        <th width="30%">Activity</th>
-                                    </tr>
-                                </thead>
+                            <table class="table table-condensed table-striped">
+                           <thead>
+                                
+                                    <th width="20%"></th>
+                                    <th width="50%"></th>
+                                    <th width="30%"></th>
+                                 
+                            </thead>
+                        
+
+                              
+                                        
                                     
                                 <!-- HS START of first row-->
                                 <tr>
@@ -149,18 +156,14 @@
                                             <div class="panel-heading">
 
                                                 <div class="hs list-group list-group-contacts">
-                                                    <a href="#accOneColOne" class="list-group-item">
-                                                        <div class="list-group-status status-online"></div>
-                                                    
+                                                    <a href="#accOneColOne" class="list-group-item">                                                                    
                                                         <img src="/atlantThemeAdmin/assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali"/>
                                                         
                                                         <span class="contacts-title">Nadia Ali</span>
-                                                        
-                                                        <p>Singer-Songwriter</p>                                    
-                                                        
-                                                        <div class="list-group-controls">
-                                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
-                                                        </div>  
+
+                                                                                                           
+                                                          
+
                                                     </a>
                                                 </div>
                                             </div>    
@@ -174,12 +177,25 @@
 
                                     <!-- HS Second column-->
                                     <td>
-                                        <span class="label label-danger">Developing</span>
+                                        <div class="hsProgressBarPosition progress progress-striped active">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">85% Complete</div>
+                                        </div>
+
+                                          <!--   
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">45% Complete</div>
+                                        </div> 
+                                        -->
                                     </td>
                                     <!-- HS Third column-->
                                     <td>
-                                        <div class="progress progress-small progress-striped active">
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 85%;">85%</div>
+                                       <div class="list-group-item">
+
+                                            <button class="btn btn-primary btn-rounded"><span class="glyphicon glyphicon-hand-right">Refer</span></button>
+
+                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil">Edit</span></button>
+
+                                            <button class="btn btn-primary btn-rounded"><span class="glyphicon glyphicon-floppy-remove">Delete</span></button>
                                         </div>
                                     </td> 
 
@@ -198,16 +214,21 @@
 
                                                 <div class="hs list-group list-group-contacts">
                                                     <a href="#accOneColTwo" class="list-group-item">
-                                                        <div class="list-group-status status-online"></div>
-                                                    
+                                                                                                            
                                                         <img src="/atlantThemeAdmin/assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk"/>
                                                     
                                                         <span class="contacts-title">Dmitry Ivaniuk</span>
                                                     
-                                                        <p>Web Developer/Designer</p>                                    
+                                                         <span class="label label-warning">Referred</span>
                                                     
                                                         <div class="list-group-controls">
-                                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
+
+                                                            <button class="btn btn-primary btn-rounded"><span class="glyphicon glyphicon-hand-right">Refer</span></button>
+
+                                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil">Edit</span></button>
+
+                                                            <button class="btn btn-primary btn-rounded"><span class="glyphicon glyphicon-floppy-remove">Delete</span></button>
+
                                                         </div>  
                                                     </a>
                                                 </div>
@@ -245,16 +266,21 @@
 
                                                 <div class="hs list-group list-group-contacts">
                                                     <a href="#accOneColThree" class="list-group-item">
-                                                        <div class="list-group-status status-online"></div>
                                                     
                                                         <img src="/atlantThemeAdmin/assets/images/users/user2.jpg" class="pull-left" alt="John Doe"/>
                                                     
                                                         <span class="contacts-title">John Doe</span>
                                                     
-                                                        <p>UI/UX Designer</p>                                     
+                                                        <span class="label label-success">Hired</span>                                     
                                                     
                                                         <div class="list-group-controls">
-                                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil"></span></button>
+                                                            
+                                                            <button class="btn btn-primary btn-rounded"><span class="glyphicon glyphicon-hand-right">Refer</span></button>
+
+                                                            <button class="btn btn-primary btn-rounded"><span class="fa fa-pencil">Edit</span></button>
+
+                                                            <button class="btn btn-primary btn-rounded"><span class="glyphicon glyphicon-floppy-remove">Delete</span></button>
+
                                                         </div>  
                                                     </a>
                                                 </div>
@@ -290,7 +316,17 @@
                         </div>
                         <!--HS END Table responsive --> 
                     </div>
-                    <!-- END ACCORDION --> 
+            <!-- END ACCORDION --> 
+
+
+
+
+
+
+
+
+
+                    
 
 
                 </div>                                        
@@ -314,7 +350,6 @@
 
     <!--HS: START of inner content layout-->
     <div class="x-content-inner">
-
 
     </div>   
     <!--HS: END of inner content layout-->
