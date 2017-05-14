@@ -2,7 +2,7 @@
 
     .hsAddAppBut {
         padding: 1px 1px;
-        border: 3px solid #eee;
+        border: 2px solid #eee;
         border-radius: 1em;
         margin-right: 15px;
         width:100%;
@@ -53,126 +53,126 @@
 
     .pulse {
   animation: pulse 1s 1s forwards;
-	}
+  }
 
-	.jump {
-	  animation: jump 1s 2s forwards cubic-bezier(.84,-0.54,.31,1.19);
-	}
+  .jump {
+    animation: jump 1s 2s forwards cubic-bezier(.84,-0.54,.31,1.19);
+  }
 
-	.waggle {
-	  animation: waggle 1s 3s forwards ease-out;
-	}
+  .waggle {
+    animation: waggle 1s 3s forwards ease-out;
+  }
 
-	.sheen {
-	  position: relative;
-	  overflow: hidden;
-	}
+  .sheen {
+    position: relative;
+    overflow: hidden;
+  }
 
-	.sheen:after {
-	  animation: sheen 1s 4s forwards;
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  right: 0;
-	  bottom: 0;
-	  left: 0;
-	  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5) 50%, transparent);
-	  transform: rotateZ(60deg) translate(-1em, 4em);
-	}
+  .sheen:after {
+    animation: sheen 1s 4s forwards;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5) 50%, transparent);
+    transform: rotateZ(60deg) translate(-1em, 4em);
+  }
 
-	.spin {
-	  animation: spin 1.5s 5s forwards cubic-bezier(.56,-0.35,.22,1.5);
-	}
+  .spin {
+    animation: spin 1.5s 5s forwards cubic-bezier(.56,-0.35,.22,1.5);
+  }
 
-	.fade {
-	  animation: fade 1s 6.5s forwards;
-	}
+  .fade {
+    animation: fade 1s 6.5s forwards;
+  }
 
-	@keyframes pulse {
-	  0% {
-	    background-color: orange;
-	  }
-	  25% {
-	    background-color: red;
-	  }
-	  50 {
-	    background-color: orange;
-	  }
-	  75% {
-	    background-color: red;
-	  }
-	}
+  @keyframes pulse {
+    0% {
+      background-color: orange;
+    }
+    25% {
+      background-color: red;
+    }
+    50 {
+      background-color: orange;
+    }
+    75% {
+      background-color: red;
+    }
+  }
 
-	@keyframes jump {
-	  0% {
-	    transform: none;
-	  }
-	  50% {
-	    transform: translateY(-2em);
-	  }
-	}
+  @keyframes jump {
+    0% {
+      transform: none;
+    }
+    50% {
+      transform: translateY(-2em);
+    }
+  }
 
-	@keyframes waggle {
-	  0% {
-	    transform: none;
-	  }
-	  50% {
-	    transform: rotateZ(-20deg) scale(1.2);
-	  }
-	  60% {
-	    transform: rotateZ(25deg) scale(1.2);
-	  }
-	  67.5% {
-	    transform: rotateZ(-15deg) scale(1.2);
-	  }
-	  75% {
-	    transform: rotateZ(15deg) scale(1.2);
-	  }
-	  82.5% {
-	    transform: rotateZ(-12deg) scale(1.2);
-	  }
-	  85% {
-	    transform: rotateZ(0) scale(1.2);
-	  }
-	  100% {
-	    transform: rotateZ(0) scale(1);
-	  }
-	}
+  @keyframes waggle {
+    0% {
+      transform: none;
+    }
+    50% {
+      transform: rotateZ(-20deg) scale(1.2);
+    }
+    60% {
+      transform: rotateZ(25deg) scale(1.2);
+    }
+    67.5% {
+      transform: rotateZ(-15deg) scale(1.2);
+    }
+    75% {
+      transform: rotateZ(15deg) scale(1.2);
+    }
+    82.5% {
+      transform: rotateZ(-12deg) scale(1.2);
+    }
+    85% {
+      transform: rotateZ(0) scale(1.2);
+    }
+    100% {
+      transform: rotateZ(0) scale(1);
+    }
+  }
 
-	@keyframes sheen {
-	  100% {
-	    transform: rotateZ(60deg) translate(0, -4em);
-	  }
-	}
+  @keyframes sheen {
+    100% {
+      transform: rotateZ(60deg) translate(0, -4em);
+    }
+  }
 
-	@keyframes spin {
-	  50% {
-	    transform: rotateZ(-20deg);
-	    animation-timing-function: ease;
-	  }
-	  100% {
-	    transform: rotateZ(360deg);
-	  }
-	}
+  @keyframes spin {
+    50% {
+      transform: rotateZ(-20deg);
+      animation-timing-function: ease;
+    }
+    100% {
+      transform: rotateZ(360deg);
+    }
+  }
 
-	@keyframes fade {
-	  25% {
-	    opacity: 0.25;
-	  }
-	  50% {
-	    opacity: 1;
-	  }
-	  75% {
-	    opacity: 0.25;
-	  }
-	  100% {
-	    opacity: 1;
-	  }
-	}
+  @keyframes fade {
+    25% {
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0.25;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
-	.start-now, .start-now:after {
-	  animation-delay: 0;
-	}
+  .start-now, .start-now:after {
+    animation-delay: 0;
+  }
 
 </style>
 
@@ -193,31 +193,35 @@
             <div class="x-chart-widget">                                    
                 <div class="x-chart-widget-content">
                     <div class="row">
-
+                    
 
                         <div class="col-md-3">
 
-                            <div class="widget widget-warning widget-carousel">
+                            <div class="widget widget-carousel hsAddAppBut">
                                 <div class="owl-carousel" id="owl-example">
-                                    <div>                                    
-                                        <div class="widget-title">Total Visitors</div>                                                                        
-                                        <div class="widget-subtitle">27/08/2015 15:23</div>
-                                        <div class="widget-int">3,548</div>
+                                    <div align="center">                                    
+                                                                                                                
+                                        <div class="widget-title">Each referral could be</div>
+                                        <div class="widget-int">$500</div>
+                                        <div class="widget-title">in your pocket</div>
+
+                                        <button style="background: #3fbae4"  class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
                                     </div>
-                                    <div>                                    
-                                        <div class="widget-title">Returned</div>
-                                        <div class="widget-subtitle">Visitors</div>
-                                        <div class="widget-int">1,695</div>
+                                    <div align="center">                                    
+                                        <div class="widget-title">Each referral takes less than</div>
+                                        <div class="widget-int">30</div>
+                                        <div class="widget-title">seconds</div>
+
+                                        <button style="background: #3fbae4"  class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
+                                        
                                     </div>
-                                    <div>                                    
-                                        <div class="widget-title">New</div>
-                                        <div class="widget-subtitle">Visitors</div>
-                                        <div class="widget-int">1,977</div>
+                                    <div align="center">                                    
+                                        <div class="widget-title">MORE REFERRALS MEANS</div>
+                                        <div class="widget-title">MORE CHANCE OF MAKING</div>
+                                        <div class="widget-int">$$$</div>
+                                        <button style="background: #3fbae4;" class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
                                     </div>
-                                </div>                            
-                                <div class="widget-controls">                                
-                                    <a href="#" class="widget-control-right"><span class="fa fa-times"></span></a>
-                                </div>                             
+                                </div>                                                     
                             </div>
 
                         </div>
@@ -231,30 +235,31 @@
                                     
                                     <div style="padding: 0px 0px;" class="col-md-3">                        
                                         <div style="font-size: 15px;" class="tile tile-primary">
-                                            10
                                             <p style="font-size: 15px;">Introduced Applicants</p>
+                                            10
                                         </div>
                                     </div>
 
                                     <div style="padding: 0px 0px" class="col-md-3">                        
                                         <div style="font-size: 15px;" class="tile tile-primary">
-                                            7
                                             <p style="font-size: 15px;">Referred Applicants</p>
+                                            7
                                         </div>
                                     </div>
                                     
                                     <div style="padding: 0px 0px" class="col-md-3">                        
                                         <div style="font-size: 15px;" class="tile tile-primary">
-                                            2
                                             <p style="font-size: 15px;">Hired Applicants</p>
+                                            2
                                         </div>
                                     </div>
 
                                     <div style="padding: 0px 0px" class="col-md-3">
                                                            
                                         <div style="font-size: 15px;" class="tile tile-primary">
+                                        <p style="font-size: 15px;">Earned Commissions</p>
                                             $ <span style="font-size: 15px;" data-toggle="counter" data-to="1564">1,564</span>
-                                            <p style="font-size: 15px;">Earned Commissions</p>
+                                            
                                         </div>
                                     </div>
                                
@@ -767,10 +772,10 @@ $('button').click(function() {
   element.removeClass();
 
   
-  	setInterval(function() {
-	    element.offsetWidth = element.offsetWidth;
-	    element.addClass(tmpClass).addClass('start-now');
-  	}, 10);
+    setInterval(function() {
+      element.offsetWidth = element.offsetWidth;
+      element.addClass(tmpClass).addClass('start-now');
+    }, 10);
   
 });
 
