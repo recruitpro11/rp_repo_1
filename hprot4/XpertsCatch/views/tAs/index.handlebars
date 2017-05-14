@@ -1,31 +1,46 @@
 <style>
-
     .hsAddAppWidget {
         background: #313f4d;
+        margin-bottom: 0px;
     }
 
     .hsSummeryWidgets {
         background: #313f4d;
-        padding: 10px 0px;
+        
+        padding-top: 10px;
+        padding-bottom: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
         
         margin-top: 0px;
         margin-bottom: 0px;
-        margin-left:  40px;
+        margin-left:  0px;
         
         width: 100%;
         float: left;
-        min-height: 110px;
+        min-height: 100px;
     }
 
     .hsRecRankWidget {
         background: #313f4d;
-        padding: 10px 0px;
-        min-height: 110px;
-        margin-bottom: 20px;
-        margin-left:  80px;
+        
+        padding-top: 10px;
+        padding-bottom: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+        
+        min-height: 100px;
+        margin-bottom: 0px;
+
+        /*bottom margin of lower two sum wigets*/
+        
+        
+        
 
         /*
+        margin-left:  80px;
         min-height: 186px;
+        margin-bottom: 20px;
         */
     }
 
@@ -204,71 +219,78 @@
             <!--HS: start of Chart Layout-->
             <div class="x-chart-widget">                                    
                 <div class="x-chart-widget-content">
-                    <div class="row">
+                    <div style="margin-bottom: 40px" class="row">
                     
 
                         <div class="col-md-3">
 
                             <div class="widget widget-carousel hsAddAppWidget">
                                 <div class="owl-carousel" id="owl-example">
-                                    <div align="center">                                    
+                                    
+                                    <div style="min-height: 178px" align="center">                                    
                                                                                                                 
                                         <div class="widget-title">Each referral could be</div>
                                         <div class="widget-int">$500</div>
-                                        <div class="widget-title">in your pocket</div>
+                                        <div style="margin-bottom: 35px" class="widget-title">in your pocket</div>
 
-                                        <button style="background: #3fbae4"  class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
+                                        <div  class="widget-title">
+                                        <button style="background: #3fbae4; padding: 12px 12px"  class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
+                                        </div>
                                     </div>
-                                    <div align="center">                                    
+
+                                    <div style="min-height: 178px" align="center">                                    
                                         <div class="widget-title">Each referral takes less than</div>
                                         <div class="widget-int">30</div>
-                                        <div class="widget-title">seconds</div>
+                                        <div style="margin-bottom: 35px" class="widget-title">seconds</div>
 
-                                        <button style="background: #3fbae4"  class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
+                                        <button style="background: #3fbae4;padding: 12px 12px"  class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
                                         
                                     </div>
-                                    <div align="center">                                    
+                                    <div style="min-height: 178px" align="center">                                    
                                         <div class="widget-title">MORE REFERRALS MEANS</div>
                                         <div class="widget-title">MORE CHANCE OF MAKING</div>
-                                        <div class="widget-int">$$$</div>
-                                        <button style="background: #3fbae4;" class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
+                                        <div style="margin-bottom: 30px" class="widget-int">$$$</div>
+                                        <button style="background: #3fbae4;padding: 12px 12px" class="btn btn-primary btn-lg sheen"><strong>ADD A NEW APPLICANT NOW</strong></button>
                                     </div>
+ 
                                 </div>                                                     
                             </div>
 
                         </div>
 
+                        <!--HS: START of Column 8-->
+                        <div class="col-md-8">
+
+                            <div style="margin-left: 40px" class="col-md-3">
+
+                                <div class="widget hsSummeryWidgets">
+
+                                        <div align="center">                                    
+                                                                                                                    
+                                            <div class="widget-title">Referred Applicants</div>
+                                            <div class="widget-int">7</div>
+                                        </div>                                                   
+                                </div>
+
+                            </div>
 
 
+                            <div style="margin-left: 10px" class="col-md-3">
 
-                        <div class="col-md-2">
+                                <div class="widget hsSummeryWidgets">
 
-                            <div class="widget hsSummeryWidgets">
+                                        <div align="center">                                    
+                                                                                                                    
+                                            <div class="widget-title">Hired Applicants</div>
+                                            <div class="widget-int">2</div>
+                                        </div>                                                   
+                                </div>
 
-                                    <div align="center">                                    
-                                                                                                                
-                                        <div class="widget-title">Referred Applicants</div>
-                                        <div class="widget-int">7</div>
-                                    </div>                                                   
                             </div>
 
                         </div>
 
-
-                        <div class="col-md-2">
-
-                            <div class="widget hsSummeryWidgets">
-
-                                    <div align="center">                                    
-                                                                                                                
-                                        <div class="widget-title">Hired Applicants</div>
-                                        <div class="widget-int">2</div>
-                                    </div>                                                   
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-2">
+                        <div style="margin-left: 40px;margin-top: 10px" class="col-md-2">
 
                             <div class="widget hsSummeryWidgets">
 
@@ -280,9 +302,10 @@
                             </div>
 
                         </div>
+                        <!--HS: END of Column 8-->
 
 
-                        <div class="col-md-2">
+                        <div style="margin-left: 10px;margin-top: 10px" class="col-md-2">
                    
                                  <div class="widget hsRecRankWidget">
                                         <div align="center">                                    
