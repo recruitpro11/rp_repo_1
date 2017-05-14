@@ -1,6 +1,8 @@
 <style>
     .hsRecRank {
         font-size: 18px;
+        margin-left: 15px;
+        float: none;
     }
 
     .hsProgressBarPosition {
@@ -20,7 +22,168 @@
         margin: 5px;
     }
 
+    .hsAddAppBut {
+        font-size: 18px;
+        margin: 0px;
+    }
+
+    .hsWidth {
+        width:90%;
+    }
+
+      
+
+    .pulse {
+  animation: pulse 1s 1s forwards;
+	}
+
+	.jump {
+	  animation: jump 1s 2s forwards cubic-bezier(.84,-0.54,.31,1.19);
+	}
+
+	.waggle {
+	  animation: waggle 1s 3s forwards ease-out;
+	}
+
+	.sheen {
+	  position: relative;
+	  overflow: hidden;
+	}
+
+	.sheen:after {
+	  animation: sheen 1s 4s forwards;
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5) 50%, transparent);
+	  transform: rotateZ(60deg) translate(-1em, 4em);
+	}
+
+	.spin {
+	  animation: spin 1.5s 5s forwards cubic-bezier(.56,-0.35,.22,1.5);
+	}
+
+	.fade {
+	  animation: fade 1s 6.5s forwards;
+	}
+
+	@keyframes pulse {
+	  0% {
+	    background-color: orange;
+	  }
+	  25% {
+	    background-color: red;
+	  }
+	  50 {
+	    background-color: orange;
+	  }
+	  75% {
+	    background-color: red;
+	  }
+	}
+
+	@keyframes jump {
+	  0% {
+	    transform: none;
+	  }
+	  50% {
+	    transform: translateY(-2em);
+	  }
+	}
+
+	@keyframes waggle {
+	  0% {
+	    transform: none;
+	  }
+	  50% {
+	    transform: rotateZ(-20deg) scale(1.2);
+	  }
+	  60% {
+	    transform: rotateZ(25deg) scale(1.2);
+	  }
+	  67.5% {
+	    transform: rotateZ(-15deg) scale(1.2);
+	  }
+	  75% {
+	    transform: rotateZ(15deg) scale(1.2);
+	  }
+	  82.5% {
+	    transform: rotateZ(-12deg) scale(1.2);
+	  }
+	  85% {
+	    transform: rotateZ(0) scale(1.2);
+	  }
+	  100% {
+	    transform: rotateZ(0) scale(1);
+	  }
+	}
+
+	@keyframes sheen {
+	  100% {
+	    transform: rotateZ(60deg) translate(0, -4em);
+	  }
+	}
+
+	@keyframes spin {
+	  50% {
+	    transform: rotateZ(-20deg);
+	    animation-timing-function: ease;
+	  }
+	  100% {
+	    transform: rotateZ(360deg);
+	  }
+	}
+
+	@keyframes fade {
+	  25% {
+	    opacity: 0.25;
+	  }
+	  50% {
+	    opacity: 1;
+	  }
+	  75% {
+	    opacity: 0.25;
+	  }
+	  100% {
+	    opacity: 1;
+	  }
+	}
+
+	.start-now, .start-now:after {
+	  animation-delay: 0;
+	}
+
+	html {
+	  background: black;
+	}
+
+
+
+	button {
+	  border: 3px solid #eee;
+	  border-radius: 1em;
+	  margin-right: 15px;
+	  padding: 0px 0px;
+	}
+
+	button:active {
+	  border-color: #aaa;
+	}
+
+	button:focus {
+	  outline: none;
+	}
+
+
+
 </style>
+
+
+
+
 
 <div class="x-content">                                                
    
@@ -34,13 +197,33 @@
             <!--HS: start of Chart Layout-->
             <div class="x-chart-widget">                                    
                 <div class="x-chart-widget-content">
-                    
-                    <!--HS: start of Summary stuff-->
-                    <div class="x-chart-widget-content-head">
-                        <h4>SUMMARY</h4>                                            
-                    </div>
-                    
                     <div class="row">
+
+
+	                    <div class="col-md-4">
+	                        <button style="padding: 0px 0px" class="btn btn-primary bt-sm waggle" id="hsAddApId">
+ 
+	                            <div class="widget widget-primary widget-item-icon hsAddAppBut">
+	      
+
+	                                <div class="widget-item-left">
+	                                    <span class="fa fa-user"></span>
+	                                </div>
+	                                
+	                                <div class="widget-data">
+	                                    <div class="widget-int num-count">$$$</div>
+	                                    <div class="widget-title">Add a New Applicant</div>
+	                                </div>
+	                                   
+	                            </div>
+
+	                            <span class="clearfix"></span>  
+
+	                        </button>
+	                    </div>
+
+
+
                         <div class="col-md-6">
 
                             <!--HS: START of Informer widget-->
@@ -80,19 +263,11 @@
                                 </div>
                             </div>
                             <!--HS: END of Informer widget-->
-
                         </div>
 
 
-
+                        <div class="col-md-2">
                    
-
-
-                        <div class="col-md-6">
-                            <div class="buttons-panel">
-                
-                               
-
                                 <span class="clearfix"></span>                 
                                 
                                 <div class="tile tile-primary hsRecRank">
@@ -104,12 +279,12 @@
                                         <i class="fa fa-star-half-o"></i>
                                         <i class="fa fa-star-o"></i>
                                     </li>
-
                                    
                                 </div>
-                               
-                            </div>
+                             
                         </div>
+
+
                     </div>
                     <!--HS: END of Summary stuff-->
 
@@ -167,9 +342,9 @@
 
                                                     <div class="hs list-group list-group-contacts">
                                                         <a href="#accOneColOne" class="hs list-group list-group-contacts list-group-item">                                                                    
-                                                            <img src="/atlantThemeAdmin/assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali"/>
+                                                            <img src="/atlantThemeAdmin/assets/images/users/no-image.jpg" class="pull-left" alt="Nadia Ali"/>
                                                             
-                                                            <span class="contacts-title">Nadia Ali  <span class="glyphicon glyphicon-hand-up"></span></span>
+                                                            <span class="contacts-title">Nadia Ali  <span class="glyphicon glyphicon-menu-down"></span></span>
 
                                                         </a>
                                                     </div>
@@ -182,7 +357,7 @@
                                     <td>
                                         <div class="hsProgressOutline list-group-item">
                                             <div class="hsProgressBarPosition progress progress-striped active">
-                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">Is being reviewed</div>
+                                                <div class="progress-bar progress-bar-progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">is being reviewed</div>
                                             </div>
                                         </div>
                                     </td>
@@ -191,11 +366,11 @@
                                     <td>
                                        <div class="hsButtonOutline list-group-item">
 
-                                            <button class="hsButton btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Refer applicant to a job or person"><span><strong>Refer</strong></span></button>
+                                           <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Refer applicant to a job or person"><span class="fa fa-users"><strong></strong></span></button>
 
-                                            <button class="hsButton btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Edit applicant's skills"><span class="glyphicon glyphicon-edit"></span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Edit applicant's skills"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                                            <button class="hsButton btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Delete applicant"><span class="glyphicon glyphicon-trash"></span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Delete applicant"><span class="glyphicon glyphicon-trash"></span></button>
                                         </div>
                                     </td> 
 
@@ -233,7 +408,7 @@
                                                         <a href="#accOneColTwo" class="hs list-group list-group-contacts list-group-item">                                                                    
                                                             <img src="/atlantThemeAdmin/assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk"/>
                                                             
-                                                            <span class="contacts-title">Dmitry Ivaniuk <span class="glyphicon glyphicon-hand-down"></span></span>
+                                                            <span class="contacts-title">Dmitry Ivaniuk <span class="glyphicon glyphicon-menu-down"></span></span>
 
                                                         </a>
                                                     </div>
@@ -255,11 +430,11 @@
                                     <td>
                                        <div class="hsButtonOutline list-group-item">
 
-                                            <button class="hsButton btn btn-primary btn-rounded btn-lg"><span>&nbspRefer&nbsp</span></button>
+                                           <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Refer applicant to a job or person"><span class="fa fa-users"><strong></strong></span></button>
 
-                                            <button class="hsButton btn btn-primary btn-rounded btn-lg"><span>&nbsp&nbspEdit&nbsp&nbsp&nbsp</span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Edit applicant's skills"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                                            <button class="hsButton btn btn-primary btn-rounded btn-lg"><span>Delete</span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Delete applicant"><span class="glyphicon glyphicon-trash"></span></button>
                                         </div>
                                     </td> 
 
@@ -297,7 +472,7 @@
                                                         <a href="#accOneColThree" class="hs list-group list-group-contacts list-group-item">                                                                    
                                                             <img src="/atlantThemeAdmin/assets/images/users/user2.jpg" class="pull-left" alt="John Doe"/>
                                                     
-                                                            <span class="contacts-title">John Doe <span class="glyphicon glyphicon-list"></span></span>
+                                                            <span class="contacts-title">John Doe <span class="glyphicon glyphicon-menu-down"></span></span>
 
                                                         </a>
                                                     </div>
@@ -319,11 +494,11 @@
                                     <td>
                                        <div class="hsButtonOutline list-group-item">
 
-                                            <button class="hsButton btn btn-primary"><span>Refer</span></button>
+                                           <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Refer applicant to a job or person"><span class="fa fa-users"><strong></strong></span></button>
 
-                                            <button class="hsButton btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Edit applicant's skills"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                                            <button class="hsButton btn btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Delete applicant"><span class="glyphicon glyphicon-trash"></span></button>
                                         </div>
                                     </td> 
 
@@ -361,7 +536,7 @@
                                                         <a href="#accOneColFour" class="hs list-group list-group-contacts list-group-item">                                                                    
                                                             <img src="/atlantThemeAdmin/assets/images/users/user4.jpg" class="pull-left" alt="Darth Vador"/>
                                                             
-                                                            <span class="contacts-title">Darth Vador <span class="glyphicon glyphicon-resize-full"></span></span>
+                                                            <span class="contacts-title">Darth Vador <span class="glyphicon glyphicon-menu-down"></span></span>
 
                                                         </a>
                                                     </div>
@@ -383,11 +558,11 @@
                                     <td>
                                        <div class="hsButtonOutline list-group-item">
 
-                                             <button class="hsButton btn btn-primary"><span>Refer</span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Refer applicant to a job or person"><span class="fa fa-users"><strong></strong></span></button>
 
-                                            <button class="hsButton btn btn-primary"><span>Edit</span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Edit applicant's skills"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                                            <button class="hsButton btn btn-primary"><span>Delete</span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Delete applicant"><span class="glyphicon glyphicon-trash"></span></button>
                                         </div>
                                     </td> 
 
@@ -447,11 +622,11 @@
                                     <td>
                                        <div class="hsButtonOutline list-group-item">
 
-                                            <button class="hsButton btn btn-primary btn-lg"><span>Refer</span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Refer applicant to a job or person"><span class="fa fa-users"><strong></strong></span></button>
 
-                                            <button class="hsButton btn btn-primary btn-lg"><span>Edit</span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Edit applicant's skills"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                                            <button class="hsButton btn btn-primary btn-lg"><span>Delete</span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Delete applicant"><span class="glyphicon glyphicon-trash"></span></button>
                                         </div>
                                     </td> 
 
@@ -489,7 +664,7 @@
                                                         <a href="#accOneColSix" class="hs list-group list-group-contacts list-group-item">                                                                    
                                                             <img src="/atlantThemeAdmin/assets/images/users/user6.jpg" class="pull-left" alt="Hooman Shariati"/>
                                                             
-                                                            <span class="contacts-title">Hooman Shariati  <span class="glyphicon glyphicon-triangle-bottom"></span></span>
+                                                            <span class="contacts-title">Hooman Shariati  <span class="glyphicon glyphicon-menu-down"></span></span>
 
                                                         </a>
                                                     </div>
@@ -511,11 +686,11 @@
                                     <td>
                                        <div class="hsButtonOutline list-group-item">
 
-                                            <button class="hsButton btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Refer applicant to a job or person"><span class="fa fa-users"><strong></strong></span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Refer applicant to a job or person"><span class="fa fa-users"><strong></strong></span></button>
 
-                                            <button class="hsButton btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Edit applicant's skills"><span class="glyphicon glyphicon-pencil"></span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Edit applicant's skills"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                                            <button class="hsButton btn btn-primary btn-lg" data-toggle="tooltip" data-placement="top" title="Delete applicant"><span class="glyphicon glyphicon-trash"></span></button>
+                                            <button class="hsButton btn btn-primary btn-lg btn-condensed" data-toggle="tooltip" data-placement="top" title="Delete applicant"><span class="glyphicon glyphicon-trash"></span></button>
                                         </div>
                                     </td> 
 
@@ -577,3 +752,31 @@
 
 
 </div>
+
+
+<script type="text/javascript">
+
+/*var myVar = setInterval(myTimer, 1000);
+
+function myTimer() {
+    var d = new Date();
+    document.getElementById("hsAddApId").innerHTML = d.toLocaleTimeString();
+}*/
+
+
+$('button').click(function() {
+  var element = $(this);
+  var tmpClass = element.attr('class');
+  element.removeClass();
+
+  
+  	setInterval(function() {
+	    element.offsetWidth = element.offsetWidth;
+	    element.addClass(tmpClass).addClass('start-now');
+  	}, 10);
+  
+});
+
+
+
+</script>
