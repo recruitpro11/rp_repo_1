@@ -1,8 +1,29 @@
 <style>
+
+    .hsAddAppBut {
+
+        /*
+        font-size: 18px;
+        margin: 0px;
+        */
+      
+        padding: 1px 1px;
+        border: 3px solid #eee;
+        border-radius: 1em;
+        margin-right: 15px;
+        width:100%;
+    }
+
     .hsRecRank {
         font-size: 18px;
-        margin-left: 15px;
+        margin-left: 20px;
+        padding-bottom: 19px;
+        padding-top: 19px;
         float: none;
+    }
+
+    .hsSummery .tile {
+        margin-bottom: 38px;
     }
 
     .hsProgressBarPosition {
@@ -22,24 +43,8 @@
         margin: 5px;
     }
 
-    .hsAddAppBut {
 
-        /*        font-size: 18px;
-        margin: 0px;*/
-      
-      padding: 1px 1px;
 
-      border: 3px solid #eee;
-	  border-radius: 1em;
-	  margin-right: 15px;
-    }
-
-    .hsWidth {
-        width:90%;
-    }
-    }
-
-      
 
     .pulse {
   animation: pulse 1s 1s forwards;
@@ -186,8 +191,10 @@
 
 
 	                    <div class="col-md-4">
+
+                        <div style="padding:0px 0px" class="tile tile-primary">
 	                        
-	                        <button class="btn btn-primary bt-sm hsAddAppBut" id="hsAddApId">
+	                        <button class="btn btn-primary hsAddAppBut" id="hsAddApId">
 	                            
 	                            <div style="font-size: 18px;margin: 0px;" class="widget widget-primary widget-item-icon">
 
@@ -205,6 +212,7 @@
 	                            <span class="clearfix"></span>  
 
 	                        </button>
+                        </div>
 
 	                    </div>
 
@@ -213,8 +221,7 @@
                         <div class="col-md-6">
 
                             <!--HS: START of Informer widget-->
-                            <div class="x-chart-widget-informer">
-                                <div class="row">
+                            <div style="margin-left: 10px;" class="x-chart-widget-informer hsSummery">
                                     
                                     <div class="col-md-3">                        
                                         <div class="tile tile-primary">
@@ -244,9 +251,7 @@
                                             <p>Earned Commissions</p>
                                         </div>
                                     </div>
-                                    
-                        
-                                </div>
+                               
                             </div>
                             <!--HS: END of Informer widget-->
                         </div>
