@@ -23,12 +23,20 @@
     }
 
     .hsAddAppBut {
-        font-size: 18px;
-        margin: 0px;
+
+        /*        font-size: 18px;
+        margin: 0px;*/
+      
+      padding: 1px 1px;
+
+      border: 3px solid #eee;
+	  border-radius: 1em;
+	  margin-right: 15px;
     }
 
     .hsWidth {
         width:90%;
+    }
     }
 
       
@@ -156,29 +164,6 @@
 	  animation-delay: 0;
 	}
 
-	html {
-	  background: black;
-	}
-
-
-
-	button {
-	  border: 3px solid #eee;
-	  border-radius: 1em;
-	  margin-right: 15px;
-	  padding: 0px 0px;
-	}
-
-	button:active {
-	  border-color: #aaa;
-	}
-
-	button:focus {
-	  outline: none;
-	}
-
-
-
 </style>
 
 
@@ -201,10 +186,10 @@
 
 
 	                    <div class="col-md-4">
-	                        <button style="padding: 0px 0px" class="btn btn-primary bt-sm waggle" id="hsAddApId">
- 
-	                            <div class="widget widget-primary widget-item-icon hsAddAppBut">
-	      
+	                        
+	                        <button class="btn btn-primary bt-sm hsAddAppBut" id="hsAddApId">
+	                            
+	                            <div style="font-size: 18px;margin: 0px;" class="widget widget-primary widget-item-icon">
 
 	                                <div class="widget-item-left">
 	                                    <span class="fa fa-user"></span>
@@ -220,6 +205,7 @@
 	                            <span class="clearfix"></span>  
 
 	                        </button>
+
 	                    </div>
 
 
