@@ -1,28 +1,48 @@
 <style>
 
-    .hsAddAppBut {
-        padding: 1px 1px;
-        border: 2px solid #eee;
-        border-radius: 1em;
-        margin-right: 15px;
-        width:100%;
+    .hsAddAppWidget {
+        background: #313f4d;
+        min-height: 156.800px;
+        
         /*
-        font-size: 18px;
-        margin: 0px;
+        height: 50%
         */
     }
 
-    .hsRecRank {
+    .hsSummeryWidgets {
+        background: #313f4d;
+        padding: 10px 0px;
+        
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left:  40px;
+        
+        width: 100%;
+        float: left;
+        min-height: 110px;
+    }
+
+    .hsRecRankWidget {
+        background: #313f4d;
+        padding: 10px 0px;
+        min-height: 186px;
+        margin-bottom: 20px;
+        margin-left:  80px;
+
+        /*
         margin-left: 70px;
         float: none;
+        min-height: 156.800px;
+
+        */
     }
 
-    .hsFontSize {
-        font-size: 18px;
+    .hsRecRankStarts {
+        font-size: 25px; 
+        line-height: 44px;
     }
 
-    .hsSummery .tile {
-    }
+
 
     .hsPad {
         padding: 11px;
@@ -197,7 +217,7 @@
 
                         <div class="col-md-3">
 
-                            <div style="background: #313f4d; height: 50%" class="widget widget-carousel">
+                            <div class="widget widget-carousel hsAddAppWidget">
                                 <div class="owl-carousel" id="owl-example">
                                     <div align="center">                                    
                                                                                                                 
@@ -228,51 +248,63 @@
 
 
 
-                        <div style="width:45%;" class="col-md-6">
 
-                            <!--HS: START of Informer widget-->
+                        <div class="col-md-2">
 
-                                    <div style="padding: 0px 0px; margin-left: 34px;"" class="col-md-3">                        
-                                        <div style="font-size: 18px;" class="tile tile-primary">
-                                            <p style="font-size: 18px;">Referred Applicants</p>
-                                            7
-                                        </div>
-                                    </div>
-                                    
-                                    <div style="padding: 0px 0px" class="col-md-3">                        
-                                        <div style="font-size: 18px;" class="tile tile-primary">
-                                            <p style="font-size: 18px;">Hired Applicants</p>
-                                            2
-                                        </div>
-                                    </div>
+                            <div class="widget hsSummeryWidgets">
 
-                                    <div style="padding: 0px 0px" class="col-md-3">
-                                                           
-                                        <div style="font-size: 18px;" class="tile tile-primary">
-                                        <p style="font-size: 18px;">Earned Commissions</p>
-                                            $ <span style="font-size: 18px;" data-toggle="counter" data-to="1564">1,564</span>
-                                            
-                                        </div>
-                                    </div>
-                               
-                            
-                            <!--HS: END of Informer widget-->
+                                    <div align="center">                                    
+                                                                                                                
+                                        <div class="widget-title">Referred Applicants</div>
+                                        <div class="widget-int">7</div>
+                                    </div>                                                   
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-2">
+
+                            <div class="widget hsSummeryWidgets">
+
+                                    <div align="center">                                    
+                                                                                                                
+                                        <div class="widget-title">Hired Applicants</div>
+                                        <div class="widget-int">2</div>
+                                    </div>                                                   
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <div class="widget hsSummeryWidgets">
+
+                                    <div align="center">                                    
+                                                                                                                
+                                        <div class="widget-title">Earned Commissions</div>
+                                        <div class="widget-int">$1,564</div>
+                                    </div>                                                   
+                            </div>
+
                         </div>
 
 
                         <div class="col-md-2">
                    
-                                <span class="clearfix"></span>                 
-                                
-                                <div  style="font-size: 20px;" class="tile tile-primary hsRecRank">
-                                    Your Recruiter Rank
-                                    <li>
-                                        <i style="font-size: 25px; line-height: 44px;" class="fa fa-star"></i>
-                                        <i style="font-size: 25px; line-height: 44px;" class="fa fa-star"></i>
-                                        <i style="font-size: 25px; line-height: 44px;" class="fa fa-star-o"></i>
-                                        <i style="font-size: 25px; line-height: 44px;" class="fa fa-star-half-o"></i>
-                                        <i style="font-size: 25px; line-height: 44px;" class="fa fa-star-o"></i>
-                                    </li>
+                                 <div class="widget hsRecRankWidget">
+                                        <div align="center">                                    
+                                                                                                                
+                                            <div class="widget-title">Your Recruiter's Rank</div>
+                                            <li>
+                                                <i class="fa fa-star hsRecRankStarts"></i>
+                                                <i class="fa fa-star hsRecRankStarts"></i>
+                                                <i class="fa fa-star-o hsRecRankStarts"></i>
+                                                <i class="fa fa-star-half-o hsRecRankStarts"></i>
+                                                <i class="fa fa-star-o hsRecRankStarts"></i>
+                                            </li>
+                            
+                                        </div> 
                                    
                                 </div>
                              
